@@ -6,7 +6,7 @@
   .login_wrapper {
     background: var(--bg-secondary);
     display: block;
-    width: 110vw;
+    width: 100vw;
     margin: 0 auto;
   }
 }
@@ -31,6 +31,7 @@
   text-align: center;
   display: block;
   margin: 0 auto;
+  color: var(--dark-bg-third);
 }
 
 @media only screen and (max-width: 380px) {
@@ -94,4 +95,39 @@
 }
 .sign_extra {
   font-size: 15px;
+}
+
+@media only screen and (min-width: 850px) {
+  .login_wrap {
+    display: flex;
+    align-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .login_1 {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin-bottom: 15vh;
+  }
+
+  .login_1 span {
+    text-align: left;
+    font-size: 28px;
+  }
+
+  .login_1 img {
+    width: 300px;
+    margin-left: -32px;
+  }
+
+  .login_2_wrap {
+    width: 400px;
+  }
+
+  .input_wrap {
+    width: 360px !important;
+  }
 }
