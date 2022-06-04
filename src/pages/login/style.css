@@ -2,20 +2,48 @@
   background: var(--bg-secondary);
 }
 
+@media only screen and (max-width: 380px) {
+  .login_wrapper {
+    background: var(--bg-secondary);
+    display: block;
+    width: 110vw;
+    margin: 0 auto;
+  }
+}
+
 .login_wrap {
   height: 78vh;
   color: var(--color-primary);
 }
+
+@media only screen and (max-width: 380px) {
+  .login_wrap {
+    height: 82vh;
+  }
+}
+
 .login_1 {
   width: 300px;
   margin: 0 auto;
 }
 .login_1 span {
   font-size: 20px;
+  text-align: center;
+  display: block;
+  margin: 0 auto;
 }
+
+@media only screen and (max-width: 380px) {
+  .login_1 span {
+    padding: 0 10px;
+  }
+}
+
 .login_2 {
   text-align: center;
+  margin: 0 10px;
 }
+
 .login_2_wrap {
   display: flex;
   flex-direction: column;
@@ -31,6 +59,13 @@
   user-select: none;
   border-radius: 10px;
 }
+
+@media only screen and (max-width: 380px) {
+  .login_2_wrap {
+    width: 300px;
+  }
+}
+
 .login_2_wrap button {
   width: 100%;
   height: 50px;
