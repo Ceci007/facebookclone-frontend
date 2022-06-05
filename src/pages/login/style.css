@@ -123,7 +123,8 @@
   padding: 7px 0;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  align-items: center;
+  width: 100%;
 }
 .reg_col {
   position: relative;
@@ -266,13 +267,49 @@
   .login_footer {
     height: 18vh;
   }
+
+  .register {
+    margin: 15px auto;
+  }
+
+  .reg_grid select,
+  .reg_grid label {
+    width: 93px;
+    margin: 0 auto;
+  }
+
+  .register_header {
+    padding: 0 10px;
+  }
+
+  .reg_infos {
+    padding: 0 10px;
+  }
 }
 
 @media only screen and (min-width: 539px) {
   .login_footer_wrap {
     max-width: 520px;
   }
+
+  .register {
+    width: 400px;
+  }
+
+  .reg_line {
+    flex-direction: row;
+  }
+
+  .reg_grid select,
+  .reg_grid label {
+    width: 110px;
+  }
+
+  .reg_grid .input_error {
+    width: 350px;
+  }
 }
+
 @media only screen and (min-width: 650px) {
   .login_footer_wrap {
     max-width: 650px;
