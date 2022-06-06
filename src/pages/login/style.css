@@ -186,6 +186,17 @@
   margin: 20px 0 10px 0;
 }
 /*------- Register --------*/
+/*------ Date and Gender --------*/
+.reg_grid .input_error {
+  width: 300px;
+  position: absolute;
+  top: 68px;
+}
+.input_error_select_large {
+  left: -97%;
+  top: 15px !important;
+}
+/*------ Date and Gender --------*/
 /*------- Footer --------*/
 .login_footer {
   height: 22vh;
@@ -303,6 +314,10 @@
   .reg_grid select,
   .reg_grid label {
     width: 110px;
+  }
+
+  .reg_grid .input_error {
+    width: 350px;
   }
 
   .reg_grid .input_error {
