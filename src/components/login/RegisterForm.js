@@ -17,7 +17,7 @@ const override = css`
   border-color: red;
 `;
 
-export default function RegisterForm() {
+export default function RegisterForm({ setVisible }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -91,6 +91,7 @@ export default function RegisterForm() {
 
   const registerSubmit = async () => {
     try {
+      setLoading(true);
       const { data } = await axios.post(
         `${process.env.REACT_APP_BACKEND_URL}/register`,
         {
@@ -107,6 +108,7 @@ export default function RegisterForm() {
 
       setError("");
       setSuccess(data.message);
+      setLoading(false);
 
       const { message, ...rest } = data;
       setTimeout(() => {
@@ -125,7 +127,7 @@ export default function RegisterForm() {
     <div className="blur">
       <div className="register">
         <div className="register_header">
-          <i className="exit_icon"></i>
+          <i className="exit_icon" onClick={() => setVisible(false)}></i>
           <span>Sign Up</span>
           <span>it's quick and easy</span>
         </div>
