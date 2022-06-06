@@ -197,6 +197,15 @@
   top: 15px !important;
 }
 /*------ Date and Gender --------*/
+/*------ Error and Success messages --------*/
+.error_text {
+  color: #d94a4b;
+}
+
+.success_text {
+  color: var(--green-color);
+}
+/*------ Error and Success messages --------*/
 /*------- Footer --------*/
 .login_footer {
   height: 22vh;

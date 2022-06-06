@@ -1,11 +1,26 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import RegisterInput from "../inputs/registerInput";
 import DateOfBirthSelect from "../../components/login/DateOfBirthSelect";
 import GenderSelect from "./GenderSelect";
+import DotLoader from "react-spinners/DotLoader";
+import { css } from "@emotion/react";
+import axios from "axios";
+import Cookies from "js-cookie";
+
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+`;
 
 export default function RegisterForm() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const userInfos = {
     first_name: "",
     last_name: "",
@@ -70,6 +85,41 @@ export default function RegisterForm() {
   });
   const [dateError, setDateError] = useState("");
   const [genderError, setGenderError] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const registerSubmit = async () => {
+    try {
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/register`,
+        {
+          first_name,
+          last_name,
+          email,
+          password,
+          bYear,
+          bMonth,
+          bDay,
+          gender,
+        }
+      );
+
+      setError("");
+      setSuccess(data.message);
+
+      const { message, ...rest } = data;
+      setTimeout(() => {
+        dispatch({ type: "LOGIN", payload: rest });
+        Cookies.set("user", JSON.stringify(rest));
+        navigate("/");
+      }, 2000);
+    } catch (error) {
+      setLoading(false);
+      setSuccess("");
+      setError(error.response.data.message);
+    }
+  };
 
   return (
     <div className="blur">
@@ -114,6 +164,7 @@ export default function RegisterForm() {
             } else {
               setDateError("");
               setGenderError("");
+              registerSubmit();
             }
           }}
         >
@@ -182,6 +233,14 @@ export default function RegisterForm() {
               <div className="reg_btn_wrapper">
                 <button className="blue_btn open_signup">Sign Up</button>
               </div>
+              <DotLoader
+                color="#1876f2"
+                loading={loading}
+                css={override}
+                size={30}
+              />
+              {error && <div className="error_text">{error}</div>}
+              {success && <div className="success_text">{success}</div>}
             </Form>
           )}
         </Formik>
