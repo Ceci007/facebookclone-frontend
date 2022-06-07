@@ -66,3 +66,13 @@ a {
   z-index: 99;
   overflow-y: auto;
 }
+
+/*--------- Hovers ----------*/
+.hover1:hover {
+  background: var(--bg-secondary);
+}
+
+.hover2:hover {
+  background: var(--bg-third);
+}
+/*--------- Hovers ----------*/
