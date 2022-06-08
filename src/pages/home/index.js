@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-import { ref } from "yup";
 import Header from "../../components/header";
 import useClickOutside from "../../helpers/clickOutside";
 
@@ -14,7 +13,6 @@ export default function Home() {
   return (
     <div>
       <Header />
-      {visible && <div className="card" ref={el}></div>}
     </div>
   );
 }
