@@ -625,3 +625,12 @@ header {
   }
 }
 /*----------- Responsive ------------*/
+/*-------- Active Header ---------*/
+.active_header {
+  background: var(--light-blue-color);
+}
+
+.active_header svg {
+  fill: var(--blue-color);
+}
+/*-------- Active Header ---------*/

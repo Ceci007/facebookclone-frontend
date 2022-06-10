@@ -77,7 +77,7 @@ export default function Header() {
           </Link>
           <div>
             <div
-              className="circle_icon hover1"
+              className={`circle_icon hover1 ${showAllMenu && "active_header"}`}
               onClick={() => {
                 setShowAllMenu((prev) => !prev);
               }}
@@ -95,7 +95,9 @@ export default function Header() {
           </div>
           <div>
             <div
-              className="circle_icon hover1"
+              className={`circle_icon hover1 ${
+                showUserMenu && "active_header"
+              }`}
               onClick={() => setShowUserMenu((prev) => !prev)}
             >
               <ArrowDown />
