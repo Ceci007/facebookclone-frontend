@@ -509,19 +509,19 @@ header {
 }
 /*---------- User Menu -----------*/
 /*----------- Responsive ------------*/
-@media (max-width: 1295px) {
+@media only screen and (max-width: 1295px) {
   .middle_icon {
     width: 90px;
   }
 }
 
-@media (max-width: 1130px) {
+@media only screen and (max-width: 1130px) {
   .middle_icon {
     width: 70px;
   }
 }
 
-@media (max-width: 1040px) {
+@media only screen and (max-width: 1040px) {
   .search1 {
     width: 40px;
     height: 40px;
@@ -536,13 +536,13 @@ header {
   }
 }
 
-@media (max-width: 945px) {
+@media only screen and (max-width: 945px) {
   .header_middle {
     transform: translateX(-22%);
   }
 }
 
-@media (max-width: 850px) {
+@media only screen and (max-width: 850px) {
   .header_middle {
     transform: translateX(-30%);
   }
@@ -551,7 +551,7 @@ header {
   }
 }
 
-@media (max-width: 770px) {
+@media only screen and (max-width: 770px) {
   .header_middle {
     transform: translateX(-37%);
   }
@@ -560,14 +560,14 @@ header {
   }
 }
 
-@media (max-width: 720px) {
+@media only screen and (max-width: 720px) {
   .middle_icon:nth-child(3) {
     display: none;
   }
 }
 
 /*----------- Responsive ------------*/
-@media (max-width: 620px) {
+@media only screen and (max-width: 620px) {
   .profile_link {
     display: none;
   }
@@ -579,7 +579,7 @@ header {
   }
 }
 
-@media (max-width: 550px) {
+@media only screen and (max-width: 550px) {
   .middle_icon:nth-child(1) {
     display: none;
   }
@@ -588,7 +588,7 @@ header {
   }
 }
 
-@media (max-width: 505px) {
+@media only screen and (max-width: 505px) {
   .all_menu {
     width: 340px;
     right: -9rem;
@@ -610,7 +610,7 @@ header {
   }
 }
 
-@media (max-width: 400px) {
+@media only screen and (max-width: 400px) {
   .header_right .circle_icon:nth-child(3) {
     display: none;
   }
@@ -619,7 +619,7 @@ header {
   }
 }
 
-@media (max-width: 320px) {
+@media only screen and (max-width: 320px) {
   .all_menu {
     right: -17px;
   }
