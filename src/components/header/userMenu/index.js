@@ -1,5 +1,7 @@
 import React, { useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import Cookies from "js-cookie";
 import SettingsPrivacy from "./SettingsPrivacy";
 import HelpSupport from "./HelpSupport";
 import DisplayAccessibility from "./DisplayAccessibility";
@@ -8,9 +10,18 @@ import useClickOutside from "../../../helpers/clickOutside";
 export default function userMenu({ user }) {
   const [visible, setVisible] = useState(0);
   const usermenu = useRef();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   useClickOutside(usermenu, () => {
     usermenu.current.style.display = "none";
   });
+
+  const logout = () => {
+    Cookies.set("user", "");
+    dispatch({ type: "LOGOUT" });
+    navigate("/login");
+  };
 
   return (
     <>
@@ -65,7 +76,7 @@ export default function userMenu({ user }) {
                   <i className="right_icon"></i>
                 </div>
               </div>
-              <div className="menu_item hover3">
+              <div className="menu_item hover3" onClick={() => logout()}>
                 <div className="small_circle">
                   <i className="logout_filled_icon"></i>
                 </div>
