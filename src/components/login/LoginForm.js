@@ -106,7 +106,9 @@ export default function LoginForm({ setVisible }) {
               </Form>
             )}
           </Formik>
-          <Link to="/forgot">Forgotten password?</Link>
+          <Link to="/reset" className="forgot_password">
+            Forgotten password?
+          </Link>
           <div className="sign_splitter"></div>
           <DotLoader
             color="#1876f2"
