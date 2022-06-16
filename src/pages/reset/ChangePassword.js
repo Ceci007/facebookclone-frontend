@@ -3,26 +3,37 @@ import { Form, Formik } from "formik";
 import { Link } from "react-router-dom";
 import LoginInput from "../../components/inputs/loginInput";
 
-export default function CodeVerification({ code, setCode, error }) {
+export default function ChangePassword({
+  password,
+  setPassword,
+  confirmPassword,
+  setConfirmPassword,
+  error,
+}) {
   return (
-    <div className="reset_form">
-      <div className="reset_form_header">Code verification</div>
-      <div className="reset_form_text">
-        Please enter code that been sent to your email.
-      </div>
+    <div className="reset_form" style={{ height: "310px" }}>
+      <div className="reset_form_header">Change Password</div>
+      <div className="reset_form_text">Pick a strong password.</div>
       <Formik
         enableReinitialize
         initialValues={{
-          code,
+          password,
+          confirmPassword,
         }}
       >
         {(formik) => (
           <Form>
             <LoginInput
               type="text"
-              name="code"
-              onChange={(e) => setCode(e.target.value)}
-              placeholder="Code"
+              name="password"
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="New password"
+            />
+            <LoginInput
+              type="text"
+              name="conf_password"
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              placeholder="Confirm new password"
             />
             {error && <div className="error_text">{error}</div>}
             <div className="reset_form_btns">

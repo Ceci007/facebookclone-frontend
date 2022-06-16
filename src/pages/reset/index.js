@@ -5,6 +5,7 @@ import Cookies from "js-cookie";
 import SearchAccount from "./SearchAccount";
 import SendEmail from "./SendEmail";
 import CodeVerification from "./CodeVerification";
+import ChangePassword from "./ChangePassword";
 import Footer from "../../components/login/Footer";
 import "./style.css";
 
@@ -14,8 +15,10 @@ export default function Reset() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
-  const { code, setCode } = useState("");
-  const [visible, setVisible] = useState(1);
+  const [code, setCode] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [visible, setVisible] = useState(0);
 
   const logout = () => {
     Cookies.set("user", "");
@@ -53,6 +56,15 @@ export default function Reset() {
             user={user}
             code={code}
             setCode={setCode}
+            error={error}
+          />
+        )}
+        {visible === 3 && (
+          <ChangePassword
+            password={password}
+            setPassword={setPassword}
+            confirmPassword={confirmPassword}
+            setConfirmPassword={setConfirmPassword}
             error={error}
           />
         )}
