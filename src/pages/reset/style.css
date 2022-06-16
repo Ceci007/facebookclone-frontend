@@ -143,7 +143,7 @@
 }
 
 .err_res_password .error_arrow_left {
-  transform: translateY(19px);
+  transform: translateY(15px);
 }
 /*---- Media Queries ----*/
 @media only screen and (max-width: 350px) {

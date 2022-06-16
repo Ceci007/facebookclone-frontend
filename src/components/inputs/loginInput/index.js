@@ -5,8 +5,13 @@ import "./style.css";
 
 export default function LoginInput({ placeholder, bottom, ...props }) {
   const [field, meta] = useField(props);
-  const destktopView = useMediaQuery({
+
+  const desktopView = useMediaQuery({
     query: "(min-width: 850px)",
+  });
+
+  const view1050 = useMediaQuery({
+    query: "(max-width: 1050px)",
   });
 
   return (
@@ -14,14 +19,18 @@ export default function LoginInput({ placeholder, bottom, ...props }) {
       {meta.touched && meta.error && !bottom && (
         <div
           className={
-            destktopView ? "input_error input_error_desktop" : "input_error"
+            desktopView && view1050 && field.name === "password"
+              ? "input_error input_error_desktop err_res_password"
+              : desktopView
+              ? "input_error input_error_desktop"
+              : "input_error"
           }
           style={{ transform: "translateY(3px)" }}
         >
           {meta.touched && meta.error && <ErrorMessage name={field.name} />}
           {meta.touched && meta.error && (
             <div
-              className={destktopView ? "error_arrow_left" : "error_arrow_top"}
+              className={desktopView ? "error_arrow_left" : "error_arrow_top"}
             ></div>
           )}
         </div>
@@ -37,15 +46,21 @@ export default function LoginInput({ placeholder, bottom, ...props }) {
       {meta.touched && meta.error && bottom && (
         <div
           className={
-            destktopView ? "input_error input_error_desktop" : "input_error"
+            desktopView && view1050 && field.name === "conf_password"
+              ? "input_error conf_password_error"
+              : desktopView
+              ? "input_error input_error_desktop"
+              : "input_error"
           }
-          style={{ transform: "translateY(2px)" }}
+          style={{
+            transform: "translateY(2px)",
+          }}
         >
           {meta.touched && meta.error && <ErrorMessage name={field.name} />}
           {meta.touched && meta.error && (
             <div
               className={
-                destktopView ? "error_arrow_left" : "error_arrow_bottom"
+                desktopView ? "error_arrow_left" : "error_arrow_bottom"
               }
             ></div>
           )}
@@ -55,7 +70,7 @@ export default function LoginInput({ placeholder, bottom, ...props }) {
       {meta.touched && meta.error && (
         <i
           className="error_icon"
-          style={{ top: `${!bottom && !destktopView ? "63%" : ""}` }}
+          style={{ top: `${!bottom && !desktopView ? "63%" : "15px"}` }}
         ></i>
       )}
     </div>

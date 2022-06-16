@@ -1,9 +1,17 @@
 import React from "react";
 import { Form, Formik } from "formik";
+import * as Yup from "yup";
 import { Link } from "react-router-dom";
 import LoginInput from "../../components/inputs/loginInput";
 
 export default function CodeVerification({ code, setCode, error }) {
+  const validateCode = Yup.object({
+    code: Yup.string()
+      .required("Code is required.")
+      .min(5, "Code must be 5 characters.")
+      .max(5, "Code must be 5 characters."),
+  });
+
   return (
     <div className="reset_form">
       <div className="reset_form_header">Code verification</div>
@@ -15,6 +23,7 @@ export default function CodeVerification({ code, setCode, error }) {
         initialValues={{
           code,
         }}
+        validationSchema={validateCode}
       >
         {(formik) => (
           <Form>

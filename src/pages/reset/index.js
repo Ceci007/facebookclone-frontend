@@ -17,8 +17,8 @@ export default function Reset() {
   const [error, setError] = useState("");
   const [code, setCode] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [visible, setVisible] = useState(0);
+  const [conf_password, setConf_password] = useState("");
+  const [visible, setVisible] = useState(3);
 
   const logout = () => {
     Cookies.set("user", "");
@@ -62,10 +62,9 @@ export default function Reset() {
         {visible === 3 && (
           <ChangePassword
             password={password}
+            conf_password={conf_password}
+            setConf_password={setConf_password}
             setPassword={setPassword}
-            confirmPassword={confirmPassword}
-            setConfirmPassword={setConfirmPassword}
-            error={error}
           />
         )}
       </div>
