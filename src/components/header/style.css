@@ -176,7 +176,7 @@ header {
   box-shadow: 0 12px 12px var(--shadow-1), inset 0 0 0 0 var(--shadow-inset);
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-  transition: all 0.2s;
+  transition: all 0.3s;
   -webkit-font-smoothing: antialiased;
   z-index: 1;
   min-height: 70vh;
@@ -263,6 +263,7 @@ header {
   box-shadow: -2px 1px 5px 2px var(--shadow-1);
   user-select: none;
   z-index: 100;
+  transition: all 0.3s;
 }
 
 .all_menu_header {
@@ -396,7 +397,7 @@ header {
 .menu {
   padding: 0 0.3rem;
   position: absolute;
-  top: 100%;
+  top: calc(100% + 20px);
   right: 0;
   width: 360px;
   border-radius: 10px;
@@ -404,6 +405,7 @@ header {
   box-shadow: 2px 2px 2px var(--shadow-1);
   user-select: none;
   padding: 10px;
+  z-index: 100;
 }
 
 .menu_header {

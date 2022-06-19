@@ -1,20 +1,24 @@
 import React, { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { motion, AnimatePresence } from "framer-motion";
 import Cookies from "js-cookie";
 import SettingsPrivacy from "./SettingsPrivacy";
 import HelpSupport from "./HelpSupport";
 import DisplayAccessibility from "./DisplayAccessibility";
 import useClickOutside from "../../../helpers/clickOutside";
 
-export default function userMenu({ user }) {
+export default function userMenuRef({ user, setUserMenuActive }) {
   const [visible, setVisible] = useState(0);
-  const usermenu = useRef();
+  const userMenuRef = useRef();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  useClickOutside(usermenu, () => {
-    usermenu.current.style.display = "none";
+  useClickOutside(userMenuRef, () => {
+    userMenuRef.current.style.display = "none";
+    if (userMenuRef.current.style.display === "none") {
+      setUserMenuActive(false);
+    }
   });
 
   const logout = () => {
@@ -24,11 +28,27 @@ export default function userMenu({ user }) {
   };
 
   return (
-    <>
+    <AnimatePresence>
       {user ? (
-        <div className="menu" ref={usermenu}>
+        <motion.div
+          initial={{ height: "0" }}
+          animate={{
+            height: "auto",
+            transition: { duration: 0.3 },
+          }}
+          exit={{ height: "0", transition: { duration: 0.3 } }}
+          className="menu"
+          ref={userMenuRef}
+        >
           {visible === 0 && (
-            <div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{
+                opacity: 1,
+                transition: { delay: 0.2, duration: 0.3 },
+              }}
+              exit={{ opacity: 0, transition: { duration: 0.3 } }}
+            >
               <Link to="/profile" className="menu_header hover3">
                 <img src={user.picture} alt="" />
                 <div className="menu_col">
@@ -82,13 +102,13 @@ export default function userMenu({ user }) {
                 </div>
                 <span>Logout</span>
               </div>
-            </div>
+            </motion.div>
           )}
           {visible === 1 && <SettingsPrivacy setVisible={setVisible} />}
           {visible === 2 && <HelpSupport setVisible={setVisible} />}
           {visible === 3 && <DisplayAccessibility setVisible={setVisible} />}
-        </div>
+        </motion.div>
       ) : null}
-    </>
+    </AnimatePresence>
   );
 }

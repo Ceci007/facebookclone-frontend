@@ -22,16 +22,26 @@ import UserMenu from "./userMenu";
 export default function Header() {
   const { user } = useSelector((user) => ({ ...user }));
   const color = "#65676b";
-  const [showSearchMenu, setShowSearchMenu] = useState(false);
   const [allMenuActive, setAllMenuActive] = useState(false);
+  const [userMenuActive, setUserMenuActive] = useState(false);
 
   const allMenuRef = useRef();
   const searchMenuRef = useRef();
+
   const [showUserMenu, setShowUserMenu] = useState(false);
 
   const handleAllMenuActive = () => {
     allMenuRef.current.toggle();
     setAllMenuActive((prev) => !prev);
+  };
+
+  const handleUserMenuActive = () => {
+    setShowUserMenu((prev) => !prev);
+    if (!showUserMenu) {
+      setUserMenuActive(true);
+    } else {
+      setUserMenuActive(false);
+    }
   };
 
   return (
@@ -101,15 +111,21 @@ export default function Header() {
             <div>
               <div
                 className={`circle_icon hover1 ${
-                  showUserMenu && "active_header"
+                  userMenuActive ? "active_header" : ""
                 }`}
-                onClick={() => setShowUserMenu((prev) => !prev)}
+                onClick={handleUserMenuActive}
               >
                 <div style={{ transform: "translateY(2px)" }}>
                   <ArrowDown />
                 </div>
               </div>
-              {showUserMenu && <UserMenu user={user} />}
+              {showUserMenu && (
+                <UserMenu
+                  user={user}
+                  setUserMenuActive={setUserMenuActive}
+                  setShowUserMenu={setShowUserMenu}
+                />
+              )}
             </div>
           </div>
         ) : null}
