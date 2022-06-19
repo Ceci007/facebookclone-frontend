@@ -22,8 +22,6 @@ export default function Reset() {
   const [loading, setLoading] = useState(false);
   const [userInfos, setUserInfos] = useState("");
 
-  console.log(userInfos);
-
   const logout = () => {
     Cookies.set("user", "");
     dispatch({ type: "LOGOUT" });

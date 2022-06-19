@@ -236,10 +236,25 @@ header {
 }
 /*---------- Search Menu ----------*/
 /*------ Search All Menu ------*/
+.transparent-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: transparent;
+  z-index: 99;
+  overflow-y: auto;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
 .all_menu {
   position: absolute;
   right: 0;
-  top: 45px;
+  top: 65px;
   background: var(--bg-secondary);
   border-radius: 10px;
   height: 90vh;
@@ -247,6 +262,7 @@ header {
   padding: 10px 1rem;
   box-shadow: -2px 1px 5px 2px var(--shadow-1);
   user-select: none;
+  z-index: 100;
 }
 
 .all_menu_header {
