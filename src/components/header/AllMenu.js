@@ -23,13 +23,12 @@ const AllMenu = forwardRef((props, ref) => {
             onClick={() => setVisible(false)}
           />
           <motion.div
-            initial={{ opacity: 0, height: "0" }}
+            initial={{ height: "0" }}
             animate={{
-              opacity: 1,
               height: "90vh",
-              transition: { delay: 0.1, duration: 0.3 },
+              transition: { duration: 0.3 },
             }}
-            exit={{ opacity: 0, height: "0", transition: { duration: 0.3 } }}
+            exit={{ height: "0", transition: { duration: 0.3 } }}
             className="all_menu"
           >
             <div className="all_menu_header">Menu</div>
@@ -119,17 +118,44 @@ const AllMenu = forwardRef((props, ref) => {
                   ))}
                 </div>
               </div>
-              <div className="all_right">
-                <div className="all_right_header">Create</div>
+              <motion.div
+                initial={{ height: "0" }}
+                animate={{
+                  height: "550px",
+                  transition: { delay: 0.2, duration: 0.3 },
+                }}
+                exit={{ height: "0", transition: { duration: 0.3 } }}
+                className="all_right"
+              >
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{
+                    opacity: 1,
+                    transition: { delay: 0.3, duration: 0.3 },
+                  }}
+                  exit={{ opacity: 0, transition: { duration: 0.3 } }}
+                  className="all_right_header"
+                >
+                  Create
+                </motion.div>
                 {create.map((item, i) => (
-                  <div className="all_right_item hover1" key={i}>
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{
+                      opacity: 1,
+                      transition: { delay: 0.3, duration: 0.3 },
+                    }}
+                    exit={{ opacity: 0, transition: { duration: 0.3 } }}
+                    className="all_right_item hover1"
+                    key={i}
+                  >
                     <div className="all_right_circle">
                       <i className={item.icon}></i>
                     </div>
                     {item.name}
-                  </div>
+                  </motion.div>
                 ))}
-              </div>
+              </motion.div>
             </div>
           </motion.div>
         </>

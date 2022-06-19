@@ -24,7 +24,9 @@ export default function Header() {
   const color = "#65676b";
   const [showSearchMenu, setShowSearchMenu] = useState(false);
   const [allMenuActive, setAllMenuActive] = useState(false);
+
   const allMenuRef = useRef();
+  const searchMenuRef = useRef();
   const [showUserMenu, setShowUserMenu] = useState(false);
 
   const handleAllMenuActive = () => {
@@ -43,9 +45,7 @@ export default function Header() {
           </Link>
           <div
             className="search search1"
-            onClick={() => {
-              setShowSearchMenu(true);
-            }}
+            onClick={() => searchMenuRef.current.open()}
           >
             <Search color={color} />
             <input
@@ -55,9 +55,6 @@ export default function Header() {
             />
           </div>
         </div>
-        {showSearchMenu && (
-          <SearchMenu color={color} setShowSearchMenu={setShowSearchMenu} />
-        )}
         <div className="header_middle">
           <Link to="/" className="middle_icon active">
             <HomeActive />
@@ -118,6 +115,7 @@ export default function Header() {
         ) : null}
       </header>
       <AllMenu ref={allMenuRef} />
+      <SearchMenu color={color} ref={searchMenuRef} />
     </>
   );
 }

@@ -1,57 +1,88 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  forwardRef,
+  useImperativeHandle,
+} from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Return, Search } from "../../svg";
-import useClickOutside from "../../helpers/clickOutside";
 
-export default function searchMenu({ color, setShowSearchMenu }) {
+const SearchMenu = forwardRef(({ color }, ref) => {
   const [iconVisible, setIconVisible] = useState(true);
-  const menu = useRef(null);
-  const input = useRef(null);
+  const inputRef = useRef(null);
+  const [visible, setVisible] = useState(false);
+  const [isFocus, setIsFocus] = useState(false);
 
-  useClickOutside(menu, () => {
-    setShowSearchMenu(false);
+  const focusInput = () => {
+    setIsFocus(true);
+  };
+
+  useImperativeHandle(ref, () => {
+    return {
+      open: () => setVisible(true),
+      close: () => setVisible(false),
+    };
   });
 
   useEffect(() => {
-    input.current.focus();
-  }, []);
+    if (isFocus) {
+      inputRef.current.focus();
+    }
+  }, [isFocus]);
 
   return (
-    <div className="header_left search_area scrollbar" ref={menu}>
-      <div className="search_wrap">
-        <div className="header_logo">
+    <AnimatePresence>
+      {visible && (
+        <>
           <div
-            className="circle hover1"
-            onClick={() => setShowSearchMenu(false)}
-          >
-            <Return color={color} />
-          </div>
-        </div>
-        <div
-          className="search"
-          onClick={() => {
-            input.current.focus();
-          }}
-        >
-          {iconVisible && (
-            <div>
-              <Search color={color} />
-            </div>
-          )}
-          <input
-            type="text"
-            placeholder="Search Facebook"
-            ref={input}
-            onFocus={() => setIconVisible(false)}
-            onBlur={() => setIconVisible(true)}
+            className="transparent-backdrop"
+            onClick={() => setVisible(false)}
           />
-        </div>
-      </div>
-      <div className="search_history_header">
-        <span>Recent searches</span>
-        <a>Edit</a>
-      </div>
-      <div className="search_history"></div>
-      <div className="search_results scrollbar"></div>
-    </div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{
+              opacity: 1,
+              transition: { duration: 0.3 },
+            }}
+            exit={{ opacity: 0, transition: { duration: 0.3 } }}
+            className="header_left search_area scrollbar"
+          >
+            <div className="search_wrap">
+              <div className="header_logo">
+                <div
+                  className="circle hover1"
+                  onClick={() => setVisible(false)}
+                >
+                  <Return color={color} />
+                </div>
+              </div>
+              <div className="search" onClick={focusInput}>
+                {iconVisible && (
+                  <div>
+                    <Search color={color} />
+                  </div>
+                )}
+                <input
+                  type="text"
+                  ref={inputRef}
+                  placeholder="Search Facebook"
+                  onFocus={() => setIconVisible(false)}
+                  onBlur={() => setIconVisible(true)}
+                />
+              </div>
+            </div>
+            <div className="search_history_header">
+              <span>Recent searches</span>
+              <a>Edit</a>
+            </div>
+            <div className="search_history"></div>
+            <div className="search_results scrollbar"></div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
   );
-}
+});
+
+export default SearchMenu;

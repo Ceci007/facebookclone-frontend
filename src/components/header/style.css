@@ -179,9 +179,9 @@ header {
   transition: all 0.2s;
   -webkit-font-smoothing: antialiased;
   z-index: 1;
-  min-height: 400px;
   min-height: 70vh;
   padding: 8px 16px 10px 6px;
+  z-index: 100;
 }
 
 .search_wrap {
