@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, forwardRef, useImperativeHandle } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
+import { motion, AnimatePresence } from "framer-motion";
 import RegisterInput from "../inputs/registerInput";
 import DateOfBirthSelect from "../../components/login/DateOfBirthSelect";
 import GenderSelect from "./GenderSelect";
@@ -17,9 +18,18 @@ const override = css`
   border-color: red;
 `;
 
-export default function RegisterForm({ setVisible }) {
+const RegisterForm = forwardRef((props, ref) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const [visible, setVisible] = useState(false);
+
+  useImperativeHandle(ref, () => {
+    return {
+      open: () => setVisible(true),
+      close: () => setVisible(false),
+    };
+  });
 
   const userInfos = {
     first_name: "",
@@ -124,129 +134,147 @@ export default function RegisterForm({ setVisible }) {
   };
 
   return (
-    <div className="blur">
-      <div className="register">
-        <div className="register_header">
-          <i className="exit_icon" onClick={() => setVisible(false)}></i>
-          <span>Sign Up</span>
-          <span>it's quick and easy</span>
-        </div>
-        <Formik
-          enableReinitialize
-          initialValues={{
-            first_name,
-            last_name,
-            email,
-            password,
-            bYear,
-            bMonth,
-            bDay,
-            gender,
-          }}
-          validationSchema={registerValidation}
-          onSubmit={() => {
-            let current_date = new Date();
-            let picked_date = new Date(bYear, bMonth - 1, bDay);
-            let atleast14 = new Date(1970 + 14, 0, 1);
-            let noMoreThan70 = new Date(1970 + 70, 0, 1);
-            if (current_date - picked_date < atleast14) {
-              setDateError(
-                "it looks like you've enetered the wrong info.Please make sure that you use your real date of birth."
-              );
-            } else if (current_date - picked_date > noMoreThan70) {
-              setDateError(
-                "it looks like you've enetered the wrong info.Please make sure that you use your real date of birth."
-              );
-            } else if (gender === "") {
-              setDateError("");
-              setGenderError(
-                "Please choose a gender. You can change who can see this later."
-              );
-              console.log("not gender selected.");
-            } else {
-              setDateError("");
-              setGenderError("");
-              registerSubmit();
-            }
-          }}
-        >
-          {(formik) => (
-            <Form className="register_form">
-              <div className="reg_line">
-                <RegisterInput
-                  type="text"
-                  placeholder="First name"
-                  name="first_name"
-                  onChange={handleRegisterChange}
-                />
-                <RegisterInput
-                  type="text"
-                  placeholder="Surname"
-                  name="last_name"
-                  onChange={handleRegisterChange}
-                />
-              </div>
-              <div className="reg_line">
-                <RegisterInput
-                  type="text"
-                  placeholder="Mobile number or email address"
-                  name="email"
-                  onChange={handleRegisterChange}
-                />
-              </div>
-              <div className="reg_line">
-                <RegisterInput
-                  type="password"
-                  placeholder="New password"
-                  name="password"
-                  onChange={handleRegisterChange}
-                />
-              </div>
-              <div className="reg_col">
-                <div className="reg_line_header">
-                  Date of birth <i className="info_icon"></i>
-                </div>
-                <DateOfBirthSelect
-                  bYear={bYear}
-                  bMonth={bMonth}
-                  bDay={bDay}
-                  days={days}
-                  months={months}
-                  years={years}
-                  handleRegisterChange={handleRegisterChange}
-                  dateError={dateError}
-                />
-              </div>
-              <div className="reg_col">
-                <div className="reg_line_header">
-                  Gender <i className="info_icon"></i>
-                </div>
-                <GenderSelect
-                  handleRegisterChange={handleRegisterChange}
-                  genderError={genderError}
-                />
-              </div>
-              <div className="reg_infos">
-                By clicking Sign Up, you agree to our{" "}
-                <span>Terms, Data Policy &nbsp;</span>
-                and <span>Cookie Policy.</span> You may receive SMS
-                notifications from us and can opt out at any time.
-              </div>
-              <div className="reg_btn_wrapper">
-                <button className="blue_btn open_signup">Sign Up</button>
-              </div>
-              <DotLoader
-                color="#1876f2"
-                loading={loading}
-                css={override}
-                size={30}
-              />
-              {error && <div className="error_text">{error}</div>}
-              {success && <div className="success_text">{success}</div>}
-            </Form>
-          )}
-        </Formik>
-      </div>
-    </div>
+    <AnimatePresence>
+      {visible && (
+        <>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1, transition: { duration: 0.4 } }}
+            exit={{ opacity: 0, transition: { delay: 0.3 } }}
+            className="blur"
+            onClick={() => setVisible(false)}
+          />
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1, transition: { duration: 0.4 } }}
+            exit={{ scale: 0, transition: { delay: 0.3 } }}
+            className="register"
+          >
+            <div className="register_header">
+              <i className="exit_icon" onClick={() => setVisible(false)}></i>
+              <span>Sign Up</span>
+              <span>it's quick and easy</span>
+            </div>
+            <Formik
+              enableReinitialize
+              initialValues={{
+                first_name,
+                last_name,
+                email,
+                password,
+                bYear,
+                bMonth,
+                bDay,
+                gender,
+              }}
+              validationSchema={registerValidation}
+              onSubmit={() => {
+                let current_date = new Date();
+                let picked_date = new Date(bYear, bMonth - 1, bDay);
+                let atleast14 = new Date(1970 + 14, 0, 1);
+                let noMoreThan70 = new Date(1970 + 70, 0, 1);
+                if (current_date - picked_date < atleast14) {
+                  setDateError(
+                    "it looks like you've enetered the wrong info.Please make sure that you use your real date of birth."
+                  );
+                } else if (current_date - picked_date > noMoreThan70) {
+                  setDateError(
+                    "it looks like you've enetered the wrong info.Please make sure that you use your real date of birth."
+                  );
+                } else if (gender === "") {
+                  setDateError("");
+                  setGenderError(
+                    "Please choose a gender. You can change who can see this later."
+                  );
+                  console.log("not gender selected.");
+                } else {
+                  setDateError("");
+                  setGenderError("");
+                  registerSubmit();
+                }
+              }}
+            >
+              {(formik) => (
+                <Form className="register_form">
+                  <div className="reg_line">
+                    <RegisterInput
+                      type="text"
+                      placeholder="First name"
+                      name="first_name"
+                      onChange={handleRegisterChange}
+                    />
+                    <RegisterInput
+                      type="text"
+                      placeholder="Surname"
+                      name="last_name"
+                      onChange={handleRegisterChange}
+                    />
+                  </div>
+                  <div className="reg_line">
+                    <RegisterInput
+                      type="text"
+                      placeholder="Mobile number or email address"
+                      name="email"
+                      onChange={handleRegisterChange}
+                    />
+                  </div>
+                  <div className="reg_line">
+                    <RegisterInput
+                      type="password"
+                      placeholder="New password"
+                      name="password"
+                      onChange={handleRegisterChange}
+                    />
+                  </div>
+                  <div className="reg_col">
+                    <div className="reg_line_header">
+                      Date of birth <i className="info_icon"></i>
+                    </div>
+                    <DateOfBirthSelect
+                      bYear={bYear}
+                      bMonth={bMonth}
+                      bDay={bDay}
+                      days={days}
+                      months={months}
+                      years={years}
+                      handleRegisterChange={handleRegisterChange}
+                      dateError={dateError}
+                    />
+                  </div>
+                  <div className="reg_col">
+                    <div className="reg_line_header">
+                      Gender <i className="info_icon"></i>
+                    </div>
+                    <GenderSelect
+                      handleRegisterChange={handleRegisterChange}
+                      genderError={genderError}
+                    />
+                  </div>
+                  <div className="reg_infos">
+                    By clicking Sign Up, you agree to our{" "}
+                    <span>Terms, Data Policy &nbsp;</span>
+                    and <span>Cookie Policy.</span> You may receive SMS
+                    notifications from us and can opt out at any time.
+                  </div>
+                  <div className="reg_btn_wrapper">
+                    <button className="blue_btn open_signup">Sign Up</button>
+                  </div>
+                  <DotLoader
+                    color="#1876f2"
+                    loading={loading}
+                    css={override}
+                    size={30}
+                  />
+                  {error && <div className="error_text">{error}</div>}
+                  {success && <div className="success_text">{success}</div>}
+                </Form>
+              )}
+            </Formik>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
   );
-}
+});
+
+export default RegisterForm;

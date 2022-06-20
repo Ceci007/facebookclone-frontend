@@ -21,7 +21,7 @@ const loginInfos = {
   password: "",
 };
 
-export default function LoginForm({ setVisible }) {
+export default function LoginForm({ registerFormRef }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -119,7 +119,7 @@ export default function LoginForm({ setVisible }) {
           {error && <div className="error_text">{error}</div>}
           <button
             className="blue_btn open_signup"
-            onClick={() => setVisible(true)}
+            onClick={() => registerFormRef.current.open()}
           >
             Create Account
           </button>

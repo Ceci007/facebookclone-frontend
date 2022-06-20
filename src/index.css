@@ -82,6 +82,10 @@ a {
   background: rgba(255, 255, 255, 0.768);
   z-index: 99;
   overflow-y: auto;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /*--------- Hovers ----------*/
