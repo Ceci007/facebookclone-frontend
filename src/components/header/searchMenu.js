@@ -69,6 +69,7 @@ const SearchMenu = forwardRef(({ color }, ref) => {
                   placeholder="Search Facebook"
                   onFocus={() => setIconVisible(false)}
                   onBlur={() => setIconVisible(true)}
+                  autoFocus
                 />
               </div>
             </div>

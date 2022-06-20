@@ -30,17 +30,21 @@ export default function Header() {
 
   const [showUserMenu, setShowUserMenu] = useState(false);
 
-  const handleAllMenuActive = () => {
-    allMenuRef.current.toggle();
-    setAllMenuActive((prev) => !prev);
-  };
-
   const handleUserMenuActive = () => {
     setShowUserMenu((prev) => !prev);
     if (!showUserMenu) {
       setUserMenuActive(true);
     } else {
       setUserMenuActive(false);
+    }
+  };
+
+  const handleAllMenuActive = () => {
+    setAllMenuActive((prev) => !prev);
+    if (!allMenuActive === true) {
+      allMenuRef.current.open();
+    } else if (allMenuActive === false) {
+      allMenuActive.current.close();
     }
   };
 
@@ -92,7 +96,7 @@ export default function Header() {
             <div>
               <div
                 className={`circle_icon hover1 ${
-                  allMenuActive && "active_header"
+                  allMenuActive ? "active_header" : ""
                 }`}
                 onClick={handleAllMenuActive}
               >
@@ -130,7 +134,11 @@ export default function Header() {
           </div>
         ) : null}
       </header>
-      <AllMenu ref={allMenuRef} />
+      <AllMenu
+        ref={allMenuRef}
+        allMenuActive={allMenuActive}
+        setAllMenuActive={setAllMenuActive}
+      />
       <SearchMenu color={color} ref={searchMenuRef} />
     </>
   );

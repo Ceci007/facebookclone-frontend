@@ -400,6 +400,7 @@ header {
   top: calc(100% + 20px);
   right: 0;
   width: 360px;
+  height: auto;
   border-radius: 10px;
   background: var(--bg-primary);
   box-shadow: 2px 2px 2px var(--shadow-1);
@@ -493,7 +494,6 @@ header {
   height: fit-content;
   border-radius: 10px;
   background: var(--bg-primary);
-  box-shadow: 2px 2px 2px var(--shadow-1);
   user-select: none;
   padding: 10px;
 }
@@ -624,7 +624,8 @@ header {
     margin-bottom: 1rem;
   }
   .all_menu {
-    right: 10px;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
 
@@ -639,7 +640,9 @@ header {
 
 @media only screen and (max-width: 320px) {
   .all_menu {
-    right: -17px;
+    width: 300px;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
 /*----------- Responsive ------------*/

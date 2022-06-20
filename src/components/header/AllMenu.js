@@ -3,14 +3,19 @@ import { motion, AnimatePresence } from "framer-motion";
 import { menu, create } from "../../data/allMenu";
 import AllMenuItem from "./AllMenuItem";
 
-const AllMenu = forwardRef((props, ref) => {
+const AllMenu = forwardRef(({ allMenuActive, setAllMenuActive }, ref) => {
   const [visible, setVisible] = useState(false);
 
   useImperativeHandle(ref, () => {
     return {
-      open: () => setVisible(true),
-      close: () => setVisible(false),
-      toggle: () => setVisible((prev) => !prev),
+      open: () => {
+        setVisible(true);
+        setAllMenuActive(true);
+      },
+      close: () => {
+        setVisible(false);
+        setAllMenuActive(false);
+      },
     };
   });
 
@@ -23,12 +28,13 @@ const AllMenu = forwardRef((props, ref) => {
             onClick={() => setVisible(false)}
           />
           <motion.div
-            initial={{ height: "0" }}
+            initial={{ height: "0", opacity: 1 }}
             animate={{
               height: "90vh",
+              opacity: 1,
               transition: { duration: 0.3 },
             }}
-            exit={{ height: "0", transition: { duration: 0.3 } }}
+            exit={{ height: "0", opacity: 0, transition: { duration: 0.3 } }}
             className="all_menu"
           >
             <div className="all_menu_header">Menu</div>

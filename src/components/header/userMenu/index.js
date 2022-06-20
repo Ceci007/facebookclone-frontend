@@ -36,7 +36,7 @@ export default function userMenuRef({ user, setUserMenuActive }) {
             height: "auto",
             transition: { duration: 0.3 },
           }}
-          exit={{ height: "0", transition: { duration: 0.3 } }}
+          exit={{ height: "0", transition: { delay: 0.1, duration: 0.3 } }}
           className="menu"
           ref={userMenuRef}
         >
