@@ -25,9 +25,9 @@ export default function Header() {
   const [allMenuActive, setAllMenuActive] = useState(false);
   const [userMenuActive, setUserMenuActive] = useState(false);
 
-  const allMenuRef = useRef();
   const searchMenuRef = useRef();
 
+  const [showAllMenu, setShowAllMenu] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
 
   const handleUserMenuActive = () => {
@@ -40,11 +40,11 @@ export default function Header() {
   };
 
   const handleAllMenuActive = () => {
-    setAllMenuActive((prev) => !prev);
-    if (!allMenuActive === true) {
-      allMenuRef.current.open();
-    } else if (allMenuActive === false) {
-      allMenuActive.current.close();
+    setShowAllMenu((prev) => !prev);
+    if (!allMenuActive) {
+      setAllMenuActive(true);
+    } else {
+      setAllMenuActive(false);
     }
   };
 
@@ -104,6 +104,13 @@ export default function Header() {
                   <Menu />
                 </div>
               </div>
+              {showAllMenu && (
+                <AllMenu
+                  setAllMenuActive={setAllMenuActive}
+                  setShowAllMenu={setShowAllMenu}
+                  showAllMenu={showAllMenu}
+                />
+              )}
             </div>
             <div className="circle_icon hover1">
               <Messenger />
@@ -134,11 +141,6 @@ export default function Header() {
           </div>
         ) : null}
       </header>
-      <AllMenu
-        ref={allMenuRef}
-        allMenuActive={allMenuActive}
-        setAllMenuActive={setAllMenuActive}
-      />
       <SearchMenu color={color} ref={searchMenuRef} />
     </>
   );

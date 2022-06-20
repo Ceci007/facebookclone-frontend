@@ -1,31 +1,26 @@
-import React, { useState, forwardRef, useImperativeHandle } from "react";
+import React, { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import useClickOutside from "../../helpers/clickOutside";
 import { menu, create } from "../../data/allMenu";
 import AllMenuItem from "./AllMenuItem";
 
-const AllMenu = forwardRef(({ allMenuActive, setAllMenuActive }, ref) => {
-  const [visible, setVisible] = useState(false);
+const AllMenu = ({ setAllMenuActive, setShowAllMenu, showAllMenu }) => {
+  const allMenuRef = useRef();
 
-  useImperativeHandle(ref, () => {
-    return {
-      open: () => {
-        setVisible(true);
-        setAllMenuActive(true);
-      },
-      close: () => {
-        setVisible(false);
-        setAllMenuActive(false);
-      },
-    };
+  useClickOutside(allMenuRef, () => {
+    allMenuRef.current.style.display = "none";
+    if (allMenuRef.current.style.display === "none") {
+      setAllMenuActive(false);
+    }
   });
 
   return (
     <AnimatePresence>
-      {visible && (
+      {showAllMenu && (
         <>
           <div
             className="transparent-backdrop"
-            onClick={() => setVisible(false)}
+            onClick={() => setShowAllMenu(false)}
           />
           <motion.div
             initial={{ height: "0", opacity: 1 }}
@@ -36,6 +31,7 @@ const AllMenu = forwardRef(({ allMenuActive, setAllMenuActive }, ref) => {
             }}
             exit={{ height: "0", opacity: 0, transition: { duration: 0.3 } }}
             className="all_menu"
+            ref={allMenuRef}
           >
             <div className="all_menu_header">Menu</div>
             <div className="all_menu_wrap scrollbar">
@@ -168,6 +164,6 @@ const AllMenu = forwardRef(({ allMenuActive, setAllMenuActive }, ref) => {
       )}
     </AnimatePresence>
   );
-});
+};
 
 export default AllMenu;
