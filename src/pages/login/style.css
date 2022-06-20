@@ -203,10 +203,22 @@
 /*------ Error and Success messages --------*/
 .error_text {
   color: #d94a4b;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .success_text {
   color: var(--green-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  text-align: center;
 }
 /*------ Error and Success messages --------*/
 /*------- Footer --------*/
