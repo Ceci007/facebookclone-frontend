@@ -41,8 +41,6 @@ export default function CodeVerification({
     }
   };
 
-  console.log(email);
-
   return (
     <div className="reset_form">
       <div className="reset_form_header">Code verification</div>
