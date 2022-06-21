@@ -79,6 +79,12 @@ export default function Reset() {
             code={code}
             setCode={setCode}
             error={error}
+            setError={setError}
+            loading={loading}
+            setLoading={setLoading}
+            setUserInfos={setUserInfos}
+            setVisible={setVisible}
+            userInfos={userInfos}
           />
         )}
         {visible === 3 && (
