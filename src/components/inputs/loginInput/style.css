@@ -80,3 +80,9 @@
   right: -10px;
   top: 13px;
 }
+
+@media only screen and (max-width: 400px) {
+  .input_wrap {
+    width: 86vw;
+  }
+}

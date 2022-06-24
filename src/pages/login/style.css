@@ -304,12 +304,17 @@
   }
 
   .register {
+    width: 98vw;
     margin: 15px auto;
+  }
+
+  .reg_col {
+    margin-left: -12px;
   }
 
   .reg_grid select,
   .reg_grid label {
-    width: 93px;
+    width: 90px;
     margin: 0 auto;
   }
 
