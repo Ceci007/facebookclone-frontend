@@ -75,7 +75,7 @@ const SearchMenu = forwardRef(({ color }, ref) => {
             </div>
             <div className="search_history_header">
               <span>Recent searches</span>
-              <a>Edit</a>
+              <button className="edit_link">Edit</button>
             </div>
             <div className="search_history"></div>
             <div className="search_results scrollbar"></div>

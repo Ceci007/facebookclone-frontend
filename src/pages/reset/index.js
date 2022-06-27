@@ -35,7 +35,10 @@ export default function Reset() {
         {user ? (
           <div className="right_reset">
             <Link to="/profile">
-              <img src={user.picture} alt="user photo" />
+              <img
+                src={user.picture}
+                alt={`${user.first_name} ${user.last_name}`}
+              />
             </Link>
             <button className="blue_btn" onClick={() => logout()}>
               Logout

@@ -13,7 +13,10 @@ export default function LeftHome({ user }) {
     <div className="left_home scrollbar">
       {user ? (
         <Link to="/profile" className="left_link hover1">
-          <img src={user.picture} alt="user picture" />
+          <img
+            src={user.picture}
+            alt={`${user.first_name} ${user.last_name}`}
+          />
           <span>
             {user.first_name} {user.last_name}
           </span>

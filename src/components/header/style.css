@@ -51,6 +51,17 @@ header {
   transform: translateY(-1px);
 }
 
+.edit_link {
+  border: none;
+  background: transparent;
+  color: var(--blue-color);
+  cursor: pointer;
+}
+
+.edit_link:hover {
+  text-decoration: underline;
+}
+
 .header_middle {
   display: flex;
   align-items: center;

@@ -12,12 +12,7 @@ export default function DateOfBirthSelect(props) {
     handleRegisterChange,
     dateError,
   } = props;
-  const view1 = useMediaQuery({
-    query: "(min-width: 539px)",
-  });
-  const view2 = useMediaQuery({
-    query: "(max-width: 539px)",
-  });
+
   const view3 = useMediaQuery({
     query: "(min-width: 1170px)",
   });

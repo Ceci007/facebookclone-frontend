@@ -8,10 +8,12 @@
   flex-direction: column;
   border-radius: 10px;
 }
-.send_verification a {
+.send_verification .send_link {
+  border: none;
+  background: transparent;
   color: var(--blue-color);
   cursor: pointer;
 }
-.send_verification a:hover {
+.send_verification .send_link:hover {
   text-decoration: underline;
 }

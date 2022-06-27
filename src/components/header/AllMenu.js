@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import useClickOutside from "../../helpers/clickOutside";
 import { menu, create } from "../../data/allMenu";
