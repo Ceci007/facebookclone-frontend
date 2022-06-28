@@ -15,7 +15,6 @@ function App() {
 
   return (
     <div>
-      {/**    <CreatePostPopup user={user} /> */}
       <CreatePostPopup user={user} />
       <Routes>
         <Route element={<LoggedInRoutes />}>

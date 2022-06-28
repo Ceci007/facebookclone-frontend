@@ -5,7 +5,7 @@ import ImagePreview from "./ImagePreview";
 import "./style.css";
 
 export default function CreatePostPopup({ user }) {
-  const [showPrev, setShowPrev] = useState(true);
+  const [showPrev, setShowPrev] = useState(false);
   const [text, setText] = useState("");
   const [images, setImages] = useState([]);
 
@@ -49,9 +49,10 @@ export default function CreatePostPopup({ user }) {
                 setText={setText}
                 images={images}
                 setImages={setImages}
+                setShowPrev={setShowPrev}
               />
             )}
-            <AddToYourPost />
+            <AddToYourPost setShowPrev={setShowPrev} />
             <button className="post_submit">Post</button>
           </div>
         </div>
