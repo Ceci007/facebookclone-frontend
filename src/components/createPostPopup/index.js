@@ -8,6 +8,7 @@ export default function CreatePostPopup({ user }) {
   const [showPrev, setShowPrev] = useState(false);
   const [text, setText] = useState("");
   const [images, setImages] = useState([]);
+  const [background, setBackground] = useState("");
 
   return (
     <>
@@ -40,6 +41,8 @@ export default function CreatePostPopup({ user }) {
                   user={user}
                   text={text}
                   setText={setText}
+                  background={background}
+                  setBackground={setBackground}
                 />
               </>
             ) : (
