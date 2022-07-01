@@ -1,5 +1,7 @@
 import React, { useState, useRef } from "react";
 import { createPost } from "../../functions/post";
+import dataURItoBlob from "../../helpers/dataURItoBlob";
+import { uploadImages } from "../../functions/uploadImages";
 import PulseLoader from "react-spinners/PulseLoader";
 import useClickOutside from "../../helpers/clickOutside";
 import EmojiPickerBackgrounds from "./EmojiPickerBackgrounds";
@@ -48,6 +50,48 @@ export default function CreatePostPopup({ user, setVisible }) {
       } else {
         setError(response);
       }
+    } else if (images && images.length) {
+      setLoading(true);
+      const postImages = images.map((img, i) => {
+        return dataURItoBlob(img);
+      });
+
+      const path = `${user.username}/postImages`;
+      let formData = new FormData();
+      formData.append("path", path);
+
+      postImages.forEach((image) => {
+        formData.append("file", image);
+      });
+
+      const response = await uploadImages(formData, path, user.token);
+      await createPost(null, null, text, response, user.id, user.token);
+      setLoading(false);
+      setBackground("");
+      setText("");
+      setImages([]);
+      setVisible(false);
+    } else if (text) {
+      setLoading(true);
+      const response = await createPost(
+        null,
+        null,
+        text,
+        null,
+        user.id,
+        user.token
+      );
+      setLoading(false);
+
+      if (response === "Ok") {
+        setBackground("");
+        setText("");
+        setVisible(false);
+      } else {
+        setError(response);
+      }
+    } else {
+      console.log("nothing");
     }
   };
 
