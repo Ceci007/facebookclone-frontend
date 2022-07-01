@@ -64,13 +64,25 @@ export default function CreatePostPopup({ user, setVisible }) {
         formData.append("file", image);
       });
 
-      const response = await uploadImages(formData, path, user.token);
-      await createPost(null, null, text, response, user.id, user.token);
+      const response1 = await uploadImages(formData, path, user.token);
+      const response2 = await createPost(
+        null,
+        null,
+        text,
+        response1,
+        user.id,
+        user.token
+      );
       setLoading(false);
-      setBackground("");
-      setText("");
-      setImages([]);
-      setVisible(false);
+
+      if (response2 === "Ok") {
+        setBackground("");
+        setText("");
+        setImages([]);
+        setVisible(false);
+      } else {
+        setError(response2);
+      }
     } else if (text) {
       setLoading(true);
       const response = await createPost(
@@ -139,6 +151,7 @@ export default function CreatePostPopup({ user, setVisible }) {
                 images={images}
                 setImages={setImages}
                 setShowPrev={setShowPrev}
+                setError={setError}
               />
             )}
             <AddToYourPost setShowPrev={setShowPrev} />
