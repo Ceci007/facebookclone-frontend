@@ -5,6 +5,7 @@ import useClickOutside from "../../helpers/clickOutside";
 import EmojiPickerBackgrounds from "./EmojiPickerBackgrounds";
 import AddToYourPost from "./AddToYourPost";
 import ImagePreview from "./ImagePreview";
+import PostError from "./postError";
 import { css } from "@emotion/react";
 import "./style.css";
 
@@ -18,6 +19,7 @@ export default function CreatePostPopup({ user, setVisible }) {
   const popup = useRef(null);
   const [showPrev, setShowPrev] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const [text, setText] = useState("");
   const [images, setImages] = useState([]);
   const [background, setBackground] = useState("");
@@ -29,7 +31,7 @@ export default function CreatePostPopup({ user, setVisible }) {
   const postSubmit = async () => {
     if (background) {
       setLoading(true);
-      const res = await createPost(
+      const response = await createPost(
         null,
         background,
         text,
@@ -38,9 +40,14 @@ export default function CreatePostPopup({ user, setVisible }) {
         user.token
       );
       setLoading(false);
-      setBackground("");
-      setText("");
-      setVisible(false);
+
+      if (response === "Ok") {
+        setBackground("");
+        setText("");
+        setVisible(false);
+      } else {
+        setError(response);
+      }
     }
   };
 
@@ -49,6 +56,7 @@ export default function CreatePostPopup({ user, setVisible }) {
       {user && (
         <div className="blur">
           <div className="postBox" ref={popup}>
+            {error && <PostError error={error} setError={setError} />}
             <div className="box_header">
               <div className="small_circle" onClick={() => setVisible(false)}>
                 <i className="exit_icon"></i>
