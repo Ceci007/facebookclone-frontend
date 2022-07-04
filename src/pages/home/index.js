@@ -6,6 +6,7 @@ import RightHome from "../../components/home/right";
 import Stories from "../../components/home/stories";
 import CreatePost from "../../components/createPost";
 import SendVerification from "../../components/home/sendVerification";
+import Post from "../../components/post";
 import "./style.css";
 
 export default function Home({ setVisible, posts }) {
@@ -19,11 +20,11 @@ export default function Home({ setVisible, posts }) {
         <Stories />
         {user.verified === false && <SendVerification user={user} />}
         <CreatePost user={user} setVisible={setVisible} />
-        {posts.map((post) => (
-          <div className="post" key={post._id}>
-            {post._id}
-          </div>
-        ))}
+        <div className="posts">
+          {posts.map((post) => (
+            <Post key={post._id} post={post} />
+          ))}
+        </div>
       </div>
       <RightHome user={user} />
     </div>
