@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import Moment from "react-moment";
 import { Link } from "react-router-dom";
 import { Public, Dots } from "../../svg";
+import ReactsPopup from "./ReactsPopup";
 import "./style.css";
 
 export default function Post({ post }) {
+  const [visible, setVisible] = useState(false);
+
   return (
     <div className="post">
       <div className="post_header">
@@ -94,7 +97,20 @@ export default function Post({ post }) {
         </div>
       </div>
       <div className="post_actions">
-        <div className="post_action hover1">
+        <ReactsPopup visible={visible} setVisible={setVisible} />
+        <div
+          className="post_action hover1"
+          onMouseOver={() =>
+            setTimeout(() => {
+              setVisible(true);
+            }, 500)
+          }
+          onMouseLeave={() =>
+            setTimeout(() => {
+              setVisible(false);
+            }, 500)
+          }
+        >
           <i className="like_icon"></i>
           <span>Like</span>
         </div>
