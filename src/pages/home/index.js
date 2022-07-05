@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Header from "../../components/header";
 import LeftHome from "../../components/home/left";
@@ -11,12 +11,17 @@ import "./style.css";
 
 export default function Home({ setVisible, posts }) {
   const { user } = useSelector((state) => ({ ...state }));
+  const middle = useRef(null);
+  const [height, setHeight] = useState();
+  useEffect(() => {
+    setHeight(middle.current.clientHeight);
+  }, []);
 
   return (
-    <div className="home">
+    <div className="home" style={{ height: `${height + 150}px !important` }}>
       <Header />
       <LeftHome user={user} />
-      <div className="home_middle">
+      <div className="home_middle" ref={middle}>
         <Stories />
         {user.verified === false && <SendVerification user={user} />}
         <CreatePost user={user} setVisible={setVisible} />
