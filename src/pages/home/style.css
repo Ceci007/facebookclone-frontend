@@ -1,7 +1,7 @@
 .home {
-  background: var(--bg-secondary);
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  background: var(--bg-secondary);
 }
 
 .home_middle {
@@ -135,7 +135,7 @@
     width: 110%;
   }
   .stories {
-    width: 113%;
+    width: 112%;
   }
   .home_middle {
     margin-left: 9%;
@@ -144,7 +144,7 @@
 
 @media only screen and (max-width: 805px) {
   .stories {
-    grid-template-columns: repeat(6, 13vw);
+    grid-template-columns: repeat(6, 12.7vw);
   }
   .story_profile_name,
   .story_create_text {

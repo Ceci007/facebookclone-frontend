@@ -18,7 +18,7 @@ export default function Home({ setVisible, posts }) {
   }, []);
 
   return (
-    <div className="home" style={{ height: `${height + 150}px !important` }}>
+    <div className="home" style={{ height: `${height + 150}px` }}>
       <Header />
       <LeftHome user={user} />
       <div className="home_middle" ref={middle}>
@@ -27,7 +27,7 @@ export default function Home({ setVisible, posts }) {
         <CreatePost user={user} setVisible={setVisible} />
         <div className="posts">
           {posts.map((post) => (
-            <Post key={post._id} post={post} />
+            <Post key={post._id} post={post} user={user} />
           ))}
         </div>
       </div>

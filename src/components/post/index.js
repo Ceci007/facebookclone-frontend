@@ -3,9 +3,10 @@ import Moment from "react-moment";
 import { Link } from "react-router-dom";
 import { Public, Dots } from "../../svg";
 import ReactsPopup from "./ReactsPopup";
+import CreateComment from "./CreateComment";
 import "./style.css";
 
-export default function Post({ post }) {
+export default function Post({ post, user }) {
   const [visible, setVisible] = useState(false);
 
   return (
@@ -121,6 +122,11 @@ export default function Post({ post }) {
         <div className="post_action hover1">
           <i className="share_icon"></i>
           <span>Share</span>
+        </div>
+      </div>
+      <div className="comments_wrap">
+        <div className="comments_order">
+          <CreateComment user={user} />
         </div>
       </div>
     </div>
