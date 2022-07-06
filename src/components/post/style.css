@@ -153,7 +153,7 @@
 /* ---------- Post Menu ---------- */
 .post_menu {
   background: var(--bg-primary);
-  width: 300px;
+  width: 310px;
   box-shadow: 1px 0 2px var(--shadow-1);
   border-radius: 10px;
   position: absolute;
@@ -184,6 +184,7 @@
 .menu_post_col {
   font-size: 12px;
   color: #65676b;
+  font-weight: normal;
 }
 
 .line {

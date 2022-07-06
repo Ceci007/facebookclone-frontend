@@ -1,12 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import MenuItem from "./MenuItem";
+import useClickOutside from "../../helpers/clickOutside";
 
-export default function PostMenu({ userId, postUserId, imagesLength }) {
+export default function PostMenu({
+  userId,
+  postUserId,
+  imagesLength,
+  setShowMenu,
+}) {
   const [test, setTest] = useState(userId === postUserId);
-  console.log(userId, postUserId);
+  const menuRef = useRef(null);
+
+  useClickOutside(menuRef, () => {
+    menuRef.current.style.display = "none";
+  });
 
   return (
-    <ul className="post_menu">
+    <ul className="post_menu" ref={menuRef}>
       {test && <MenuItem icon="pin_icon" title="Pin Post" />}
       <MenuItem
         icon="save_icon"
@@ -15,6 +25,12 @@ export default function PostMenu({ userId, postUserId, imagesLength }) {
       />
       <div className="line"></div>
       {test && <MenuItem icon="edit_icon" title="Edit Post" />}
+      {!test && (
+        <MenuItem
+          icon="turnOnNotification_icon"
+          title="Turn on notifications for this post"
+        />
+      )}
       {imagesLength && <MenuItem icon="download_icon" title="Download" />}
       {imagesLength && (
         <MenuItem icon="fullscreen_icon" title="Enter Fullscreen" />
@@ -27,6 +43,26 @@ export default function PostMenu({ userId, postUserId, imagesLength }) {
         />
       )}
       {test && <MenuItem icon="delete_icon" title="Turn off translations" />}
+      {test && <MenuItem icon="date_icon" title="Edit Date" />}
+      {test && (
+        <MenuItem icon="refresh_icon" title="Refresh share attachment" />
+      )}
+      {test && <MenuItem icon="archive_icon" title="Move to archive" />}
+      {test && (
+        <MenuItem
+          icon="trash_icon"
+          title="Move to trash"
+          subtitle="Items in your trash are deleted after 30 days"
+        />
+      )}
+      {!test && <div className="line"></div>}
+      {!test && (
+        <MenuItem
+          img="../../../icons/report.png"
+          title="Repost Post"
+          subtitle="I'm concerned about this post"
+        />
+      )}
     </ul>
   );
 }
