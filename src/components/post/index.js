@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Public, Dots } from "../../svg";
 import ReactsPopup from "./ReactsPopup";
 import CreateComment from "./CreateComment";
+import PostMenu from "./PostMenu";
 import "./style.css";
 
 export default function Post({ post, user }) {
@@ -129,6 +130,11 @@ export default function Post({ post, user }) {
           <CreateComment user={user} />
         </div>
       </div>
+      <PostMenu
+        userId={user.id}
+        postUserId={post.user._id}
+        imagesLength={post && post.images && post.images.length > 0}
+      />
     </div>
   );
 }
