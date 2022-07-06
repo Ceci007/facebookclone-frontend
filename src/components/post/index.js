@@ -9,7 +9,7 @@ import "./style.css";
 
 export default function Post({ post, user }) {
   const [visible, setVisible] = useState(false);
-  const [showMenu, setShowMenu] = useState(false);
+  const [showPostMenu, setShowPostMenu] = useState(false);
 
   return (
     <div className="post">
@@ -46,7 +46,7 @@ export default function Post({ post, user }) {
         </Link>
         <div
           className="post_header_right hover1"
-          onClick={() => setShowMenu((prev) => !prev)}
+          onClick={() => setShowPostMenu((prev) => !prev)}
         >
           <Dots color="#828387" />
         </div>
@@ -134,12 +134,12 @@ export default function Post({ post, user }) {
           <CreateComment user={user} />
         </div>
       </div>
-      {showMenu && (
+      {showPostMenu && (
         <PostMenu
           userId={user.id}
           postUserId={post.user._id}
           imagesLength={post && post.images && post.images.length > 0}
-          setShowMenu={setShowMenu}
+          setShowPostMenu={setShowPostMenu}
         />
       )}
     </div>

@@ -2,21 +2,16 @@ import React, { useState, useRef } from "react";
 import MenuItem from "./MenuItem";
 import useClickOutside from "../../helpers/clickOutside";
 
-export default function PostMenu({
-  userId,
-  postUserId,
-  imagesLength,
-  setShowMenu,
-}) {
+export default function PostMenu({ userId, postUserId, imagesLength }) {
   const [test, setTest] = useState(userId === postUserId);
-  const menuRef = useRef(null);
+  const postMenuRef = useRef(null);
 
-  useClickOutside(menuRef, () => {
-    menuRef.current.style.display = "none";
+  useClickOutside(postMenuRef, () => {
+    postMenuRef.current.style.display = "none";
   });
 
   return (
-    <ul className="post_menu" ref={menuRef}>
+    <ul className="post_menu" ref={postMenuRef}>
       {test && <MenuItem icon="pin_icon" title="Pin Post" />}
       <MenuItem
         icon="save_icon"
