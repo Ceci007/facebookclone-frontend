@@ -64,7 +64,10 @@ function App() {
     } catch (error) {
       dispatch({
         type: "POSTS_ERROR",
-        payload: error.response.data.message,
+        payload:
+          error && error.response && error.response.data
+            ? error.response.data.message
+            : "",
       });
     }
   };
