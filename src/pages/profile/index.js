@@ -3,6 +3,9 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { profileReducer } from "../../functions/reducers";
+import Header from "../../components/header";
+import Cover from "./Cover";
+import "./style.css";
 
 export default function Profile() {
   const { username } = useParams();
@@ -56,5 +59,14 @@ export default function Profile() {
 
   console.log(profile);
 
-  return <div>hello {userName}</div>;
+  return (
+    <div className="profile">
+      <Header page="profile" />
+      <div className="profile_top">
+        <div className="profile_container">
+          <Cover cover={profile.cover} />
+        </div>
+      </div>
+    </div>
+  );
 }

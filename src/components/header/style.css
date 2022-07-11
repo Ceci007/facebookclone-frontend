@@ -537,6 +537,10 @@ header {
   height: 20px;
 }
 /*---------- User Menu -----------*/
+.active_link {
+  background: var(--light-blue-color);
+  color: var(--blue-color);
+}
 /*----------- Responsive ------------*/
 @media only screen and (max-width: 1295px) {
   .middle_icon {

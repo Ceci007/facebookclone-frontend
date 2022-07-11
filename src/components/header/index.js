@@ -5,6 +5,7 @@ import {
   Friends,
   Gaming,
   HomeActive,
+  Home,
   Logo,
   Market,
   Menu,
@@ -19,7 +20,7 @@ import React, { useRef, useState } from "react";
 import AllMenu from "./AllMenu";
 import UserMenu from "./userMenu";
 
-export default function Header() {
+export default function Header({ page }) {
   const { user } = useSelector((user) => ({ ...user }));
   const color = "#65676b";
   const [allMenuActive, setAllMenuActive] = useState(false);
@@ -70,8 +71,11 @@ export default function Header() {
           </div>
         </div>
         <div className="header_middle">
-          <Link to="/" className="middle_icon active">
-            <HomeActive />
+          <Link
+            to="/"
+            className={`middle_icon ${page === "home" ? "active" : ""}`}
+          >
+            {page === "home" ? <HomeActive /> : <Home color={color} />}
           </Link>
           <Link to="/" className="middle_icon hover1">
             <Friends color={color} />
@@ -89,7 +93,12 @@ export default function Header() {
         </div>
         {user ? (
           <div className="header_right">
-            <Link to="/profile" className="profile_link hover1">
+            <Link
+              to="/profile"
+              className={`profile_link hover1 ${
+                page === "profile" ? "active_link" : ""
+              }`}
+            >
               <img src={user.picture} alt="" />
               <span>{user.first_name}</span>
             </Link>
