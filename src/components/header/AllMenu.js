@@ -1,19 +1,9 @@
-import React, { useRef } from "react";
+import React, { forwardRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import useClickOutside from "../../helpers/clickOutside";
 import { menu, create } from "../../data/allMenu";
 import AllMenuItem from "./AllMenuItem";
 
-const AllMenu = ({ setAllMenuActive, setShowAllMenu, showAllMenu }) => {
-  const allMenuRef = useRef();
-
-  useClickOutside(allMenuRef, () => {
-    allMenuRef.current.style.display = "none";
-    if (allMenuRef.current.style.display === "none") {
-      setAllMenuActive(false);
-    }
-  });
-
+const AllMenu = ({ setShowAllMenu, showAllMenu }) => {
   return (
     <AnimatePresence>
       {showAllMenu && (
@@ -31,7 +21,6 @@ const AllMenu = ({ setAllMenuActive, setShowAllMenu, showAllMenu }) => {
             }}
             exit={{ height: "0", opacity: 0, transition: { duration: 0.3 } }}
             className="all_menu"
-            ref={allMenuRef}
           >
             <div className="all_menu_header">Menu</div>
             <div className="all_menu_wrap scrollbar">

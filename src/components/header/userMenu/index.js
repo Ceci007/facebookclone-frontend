@@ -10,7 +10,7 @@ import useClickOutside from "../../../helpers/clickOutside";
 
 export default function userMenuRef({ user, setUserMenuActive }) {
   const [visible, setVisible] = useState(0);
-  const userMenuRef = useRef();
+  const userMenuRef = useRef(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

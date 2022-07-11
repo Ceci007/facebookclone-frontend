@@ -19,6 +19,7 @@ import SearchMenu from "./SearchMenu";
 import React, { useRef, useState } from "react";
 import AllMenu from "./AllMenu";
 import UserMenu from "./userMenu";
+import useClickOutside from "../../helpers/clickOutside";
 
 export default function Header({ page }) {
   const { user } = useSelector((user) => ({ ...user }));
@@ -26,28 +27,18 @@ export default function Header({ page }) {
   const [allMenuActive, setAllMenuActive] = useState(false);
   const [userMenuActive, setUserMenuActive] = useState(false);
 
-  const searchMenuRef = useRef();
+  const searchMenuRef = useRef(null);
+  const allMenuRef = useRef(null);
 
   const [showAllMenu, setShowAllMenu] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
 
-  const handleUserMenuActive = () => {
-    setShowUserMenu((prev) => !prev);
-    if (!showUserMenu) {
-      setUserMenuActive(true);
-    } else {
-      setUserMenuActive(false);
-    }
-  };
-
-  const handleAllMenuActive = () => {
-    setShowAllMenu((prev) => !prev);
-    if (!allMenuActive) {
-      setAllMenuActive(true);
-    } else {
+  useClickOutside(allMenuRef, () => {
+    setShowAllMenu(false);
+    if (showAllMenu === false) {
       setAllMenuActive(false);
     }
-  };
+  });
 
   return (
     <>
@@ -107,19 +98,12 @@ export default function Header({ page }) {
                 className={`circle_icon hover1 ${
                   allMenuActive ? "active_header" : ""
                 }`}
-                onClick={handleAllMenuActive}
+                onClick={() => setShowAllMenu((prev) => !prev)}
               >
                 <div style={{ transform: "translateY(2px)" }}>
                   <Menu />
                 </div>
               </div>
-              {showAllMenu && (
-                <AllMenu
-                  setAllMenuActive={setAllMenuActive}
-                  setShowAllMenu={setShowAllMenu}
-                  showAllMenu={showAllMenu}
-                />
-              )}
             </div>
             <div className="circle_icon hover1">
               <Messenger />
@@ -133,7 +117,7 @@ export default function Header({ page }) {
                 className={`circle_icon hover1 ${
                   userMenuActive ? "active_header" : ""
                 }`}
-                onClick={handleUserMenuActive}
+                onClick={() => setShowUserMenu((prev) => !prev)}
               >
                 <div style={{ transform: "translateY(2px)" }}>
                   <ArrowDown />
@@ -151,6 +135,13 @@ export default function Header({ page }) {
         ) : null}
       </header>
       <SearchMenu color={color} ref={searchMenuRef} />
+      {showAllMenu && (
+        <AllMenu
+          setShowAllMenu={setShowAllMenu}
+          showAllMenu={showAllMenu}
+          ref={allMenuRef}
+        />
+      )}
     </>
   );
 }
