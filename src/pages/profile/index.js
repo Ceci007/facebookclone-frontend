@@ -6,7 +6,8 @@ import { profileReducer } from "../../functions/reducers";
 import Header from "../../components/header";
 import Cover from "./Cover";
 import ProfilePictureInfos from "./ProfilePictureInfos";
-import ProfileMenu from "./profileMenu";
+import ProfileMenu from "./ProfileMenu";
+import PplYouMayKnow from "./PplYouMayKnow";
 import "./style.css";
 
 export default function Profile() {
@@ -59,8 +60,6 @@ export default function Profile() {
     }
   };
 
-  console.log(profile);
-
   return (
     <div className="profile">
       <Header page="profile" />
@@ -69,6 +68,13 @@ export default function Profile() {
           <Cover cover={profile.cover} />
           <ProfilePictureInfos profile={profile} />
           <ProfileMenu />
+        </div>
+      </div>
+      <div className="profile_bottom">
+        <div className="profile_container">
+          <div className="bottom_container">
+            <PplYouMayKnow />
+          </div>
         </div>
       </div>
     </div>
