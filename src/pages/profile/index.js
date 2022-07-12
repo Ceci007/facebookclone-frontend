@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 import { profileReducer } from "../../functions/reducers";
 import Header from "../../components/header";
 import Cover from "./Cover";
+import ProfilePictureInfos from "./ProfilePictureInfos";
+import ProfileMenu from "./profileMenu";
 import "./style.css";
 
 export default function Profile() {
@@ -65,6 +67,8 @@ export default function Profile() {
       <div className="profile_top">
         <div className="profile_container">
           <Cover cover={profile.cover} />
+          <ProfilePictureInfos profile={profile} />
+          <ProfileMenu />
         </div>
       </div>
     </div>
