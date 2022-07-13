@@ -154,3 +154,10 @@ select,
 a {
   -webkit-tap-highlight-color: transparent;
 }
+/*---- Filters ----*/
+.filter_blue {
+  filter: invert(39%) sepia(57%) saturate(200%) saturate(200%) saturate(200%)
+    saturate(200%) saturate(200%) saturate(147.75%) hue-rotate(202deg)
+    brightness(97%) contrast(96%);
+}
+/*---- Filters ----*/

@@ -189,6 +189,42 @@
   margin-left: 2px;
 }
 /* ---------- Menu ---------- */
+.profile_grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 10px;
+}
+
+.left_header_grid {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr) !important;
+  font-size: 14px;
+}
+
+.grid2 .active {
+  color: var(--blue-color);
+}
+
+.view_type {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-weight: 600;
+  color: var(--color-secondary);
+}
 /* ---------- People You May Know ---------- */
 .profile_bottom {
   margin-top: 1px;
@@ -286,5 +322,12 @@
 
   .pplumayknow {
     display: none;
+  }
+
+  .profile_grid {
+    grid-template-columns: 1fr;
+    width: 95%;
+    margin: 0 auto;
+    margin-left: -5px;
   }
 }
