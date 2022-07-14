@@ -1,4 +1,5 @@
 import React, { useEffect, useReducer } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -11,6 +12,8 @@ import PplYouMayKnow from "./PplYouMayKnow";
 import CreatePost from "../../components/createPost";
 import GridPost from "./GridPost";
 import Post from "../../components/post";
+import Photos from "./Photos";
+import Friends from "./Friends";
 import "./style.css";
 
 export default function Profile({ setVisible }) {
@@ -30,7 +33,6 @@ export default function Profile({ setVisible }) {
   }, [userName]);
 
   const visitor = !(userName === user.username);
-  console.log(visitor);
 
   const getProfile = async () => {
     try {
@@ -83,7 +85,28 @@ export default function Profile({ setVisible }) {
           <div className="bottom_container">
             <PplYouMayKnow />
             <div className="profile_grid">
-              <div className="profile_left"></div>
+              <div className="profile_left">
+                <Photos username={userName} token={user.token} />
+                {profile && profile.friends && (
+                  <Friends friends={profile.friends} />
+                )}
+                <div className="relative_fb_copyright">
+                  <Link to="/">Privacy </Link>
+                  <span>. </span>
+                  <Link to="/">Terms </Link>
+                  <span>. </span>
+                  <Link to="/">Advertising </Link>
+                  <span>. </span>
+                  <Link to="/">
+                    Ad Choices <i className="ad_choices_icon"></i>{" "}
+                  </Link>
+                  <span>. </span>
+                  <Link to="/"></Link>Cookies <span>. </span>
+                  <Link to="/">More </Link>
+                  <span>. </span> <br />
+                  Meta © 2022
+                </div>
+              </div>
               <div className="profile_right">
                 {!visitor && (
                   <CreatePost user={user} profile setVisible={setVisible} />
@@ -92,7 +115,7 @@ export default function Profile({ setVisible }) {
                 <div className="posts">
                   {profile && profile.posts && profile.posts.length > 0 ? (
                     profile.posts.map((post) => (
-                      <Post post={post} user={user} key={post._id} />
+                      <Post post={post} user={user} profile key={post._id} />
                     ))
                   ) : (
                     <div className="no_posts">No posts available</div>
