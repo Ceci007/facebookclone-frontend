@@ -134,6 +134,20 @@
   filter: invert(100%);
 }
 
+.othername {
+  color: var(--color-secondary);
+  font-size: 20px;
+}
+
+.no_posts {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--color-secondary);
+}
+
 /* ---------- Menu ---------- */
 .profile_menu_wrap {
   position: relative;
@@ -314,6 +328,7 @@
 
   .profile_name {
     padding-bottom: 10px;
+    flex-direction: column;
   }
 
   .profile_menu_wrap {
