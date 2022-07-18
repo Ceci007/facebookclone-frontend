@@ -144,7 +144,7 @@ a {
   justify-content: center;
   margin-right: 11px;
   background: var(--bg-third);
-  cursor: pointer;
+  cursor: pointer !important;
 }
 /*------- Circles -------*/
 input,
