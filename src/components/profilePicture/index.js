@@ -1,11 +1,15 @@
 import React, { useRef, useState } from "react";
 import UpdateProfilePicture from "./UpdateProfilePicture";
+import useClickOutside from "../../helpers/clickOutside";
 import "./style.css";
 
-export default function ProfilePicture() {
+export default function ProfilePicture({ setShow, pRef }) {
+  const popup = useRef(null);
   const inputRef = useRef(null);
   const [image, setImage] = useState("");
   const [error, setError] = useState("");
+
+  useClickOutside(popup, () => setShow(false));
 
   const handleImage = (e) => {
     let file = e.target.files[0];
@@ -42,9 +46,9 @@ export default function ProfilePicture() {
         onChange={handleImage}
         accept="image/jpeg,image/png,image/webp,image/gif"
       />
-      <div className="postBox pictureBox">
+      <div className="postBox pictureBox" ref={popup}>
         <div className="box_header">
-          <div className="small_circle">
+          <div className="small_circle" onClick={() => setShow(false)}>
             <i className="exit_icon"></i>
           </div>
           <span>Update profile picture</span>
@@ -78,6 +82,8 @@ export default function ProfilePicture() {
           image={image}
           error={error}
           setError={setError}
+          setShow={setShow}
+          pRef={pRef}
         />
       )}
     </div>

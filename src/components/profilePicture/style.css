@@ -1,6 +1,7 @@
 .pictureBox {
   width: 700px !important;
   height: 62vh;
+  cursor: default;
 }
 
 .box_header {
