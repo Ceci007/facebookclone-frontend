@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
@@ -19,6 +19,7 @@ import "./style.css";
 export default function Profile({ setVisible }) {
   const { username } = useParams();
   const { user } = useSelector((state) => ({ ...state }));
+  const [photos, setPhotos] = useState({});
   const navigate = useNavigate();
   const userName = username === undefined ? user.username : username;
 
@@ -33,6 +34,9 @@ export default function Profile({ setVisible }) {
   }, [userName]);
 
   const visitor = !(userName === user.username);
+  const path = `${userName}/*`;
+  const max = 30;
+  const sort = "desc";
 
   const getProfile = async () => {
     try {
@@ -52,6 +56,22 @@ export default function Profile({ setVisible }) {
       if (data.ok === false) {
         navigate("/profile");
       } else {
+        try {
+          const images = await axios.post(
+            `${process.env.REACT_APP_BACKEND_URL}/listImages`,
+            { path, sort, max },
+            {
+              headers: {
+                Authorization: `Bearer ${user.token}`,
+              },
+            }
+          );
+
+          setPhotos(images.data);
+        } catch (error) {
+          console.log(error);
+        }
+
         dispatch({
           type: "PROFILE_SUCCESS",
           payload: data,
@@ -74,7 +94,11 @@ export default function Profile({ setVisible }) {
       <div className="profile_top">
         <div className="profile_container">
           <Cover cover={profile.cover} visitor={visitor} />
-          <ProfilePictureInfos profile={profile} visitor={visitor} />
+          <ProfilePictureInfos
+            profile={profile}
+            visitor={visitor}
+            photos={photos.resources}
+          />
           <ProfileMenu />
         </div>
       </div>
@@ -84,7 +108,11 @@ export default function Profile({ setVisible }) {
             <PplYouMayKnow />
             <div className="profile_grid">
               <div className="profile_left">
-                <Photos username={userName} token={user.token} />
+                <Photos
+                  username={userName}
+                  token={user.token}
+                  photos={photos}
+                />
                 {profile && profile.friends && (
                   <Friends friends={profile.friends} />
                 )}
