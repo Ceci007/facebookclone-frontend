@@ -17,6 +17,8 @@ export default function Home({ setVisible, posts }) {
     setHeight(middle.current.clientHeight);
   }, []);
 
+  console.log(posts);
+
   return (
     <div className="home" style={{ height: `${height + 150}px` }}>
       <Header page="home" />
