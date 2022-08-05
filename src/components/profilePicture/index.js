@@ -52,6 +52,14 @@ export default function ProfilePicture({ setShow, pRef, photos }) {
         onChange={handleImage}
         accept="image/jpeg,image/png,image/webp,image/gif"
       />
+      {error && (
+        <div className="postError comment_error">
+          <div className="postError_error">{error}</div>
+          <button className="blue_btn" onClick={() => setError("")}>
+            Try again
+          </button>
+        </div>
+      )}
       <div className="postBox pictureBox" ref={popupRef}>
         <div className="box_header">
           <div className="small_circle" onClick={() => setShow(false)}>

@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function GridPost() {
+export default function GridPosts() {
   return (
     <div className="createPost">
       <div

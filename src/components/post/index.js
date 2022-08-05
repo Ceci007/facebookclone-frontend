@@ -13,44 +13,46 @@ export default function Post({ post, user, profile }) {
 
   return (
     <div className="post" style={{ width: `${profile && "100%"}` }}>
-      <div className="post_header">
-        <Link
-          to={`/profile/${post.user.username}`}
-          className="post_header_left"
-        >
-          <img
-            src={post.user.picture}
-            alt={`${post.user.first_name} ${post.user.last_name}`}
-          />
-          <div className="header_col">
-            <div className="post_profile_name">
-              {post.user.first_name} {post.user.last_name}
-              <div className="updated_p">
-                {post.type === "profilePicture" &&
-                  `updated ${
-                    post.user.gender === "male" ? "his" : "her"
-                  } profile picture`}
-                {post.type === "cover" &&
-                  `updated ${
-                    post.user.gender === "male" ? "his" : "her"
-                  } cover picture`}
+      {post && post.user && post.user.username && (
+        <div className="post_header">
+          <Link
+            to={`/profile/${post.user.username}`}
+            className="post_header_left"
+          >
+            <img
+              src={post.user.picture}
+              alt={`${post.user.first_name} ${post.user.last_name}`}
+            />
+            <div className="header_col">
+              <div className="post_profile_name">
+                {post.user.first_name} {post.user.last_name}
+                <div className="updated_p">
+                  {post.type === "profilePicture" &&
+                    `updated ${
+                      post.user.gender === "male" ? "his" : "her"
+                    } profile picture`}
+                  {post.type === "cover" &&
+                    `updated ${
+                      post.user.gender === "male" ? "his" : "her"
+                    } cover picture`}
+                </div>
+              </div>
+              <div className="post_profile_privacy_date">
+                <Moment fromNow interval={30}>
+                  {post.createdAt}
+                </Moment>
+                . <Public color="#828387" />
               </div>
             </div>
-            <div className="post_profile_privacy_date">
-              <Moment fromNow interval={30}>
-                {post.createdAt}
-              </Moment>
-              . <Public color="#828387" />
-            </div>
+          </Link>
+          <div
+            className="post_header_right hover1"
+            onClick={() => setShowPostMenu((prev) => !prev)}
+          >
+            <Dots color="#828387" />
           </div>
-        </Link>
-        <div
-          className="post_header_right hover1"
-          onClick={() => setShowPostMenu((prev) => !prev)}
-        >
-          <Dots color="#828387" />
         </div>
-      </div>
+      )}
       {post.background ? (
         <div
           className="post_bg"
@@ -83,15 +85,16 @@ export default function Post({ post, user, profile }) {
                   className={`img-${i}`}
                 />
               ))}
-              {post.images.length > 5 && (
-                <div className="more-pics-shadow">
-                  +{post.images.length - 5}
-                </div>
-              )}
+              {post.images.length >
+                5(
+                  <div className="more-pics-shadow">
+                    +{post.images.length - 5}
+                  </div>
+                )}
             </div>
           )}
         </>
-      ) : post.type == "profilePicture" ? (
+      ) : post.type == "profilePicture" && post.user.cover ? (
         <div className="post_profile_wrap">
           <div className="post_updated_bg">
             <img src={post.user.cover} alt="" />
