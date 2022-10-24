@@ -85,16 +85,15 @@ export default function Post({ post, user, profile }) {
                   className={`img-${i}`}
                 />
               ))}
-              {post.images.length >
-                5(
-                  <div className="more-pics-shadow">
-                    +{post.images.length - 5}
-                  </div>
-                )}
+              {post.images.length > 5 && (
+                <div className="more-pics-shadow">
+                  +{post.images.length - 5}
+                </div>
+              )}
             </div>
           )}
         </>
-      ) : post.type == "profilePicture" && post.user.cover ? (
+      ) : post.type == "profilePicture" ? (
         <div className="post_profile_wrap">
           <div className="post_updated_bg">
             <img src={post.user.cover} alt="" />
@@ -102,7 +101,7 @@ export default function Post({ post, user, profile }) {
           <img src={post.images[0].url} className="post_updated_picture" />
         </div>
       ) : (
-        <div className="post_cover_wrap">cover</div>
+        <div className="post_cover_wrap"></div>
       )}
       <div className="post_infos">
         <div className="reacts_count">

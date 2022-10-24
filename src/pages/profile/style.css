@@ -19,12 +19,15 @@
   background: var(--bg-secondary);
 }
 .udpate_cover_wrapper {
-  position: absolute;
+  position: relative;
   bottom: 1rem;
   right: 1rem;
 }
 .open_cover_update {
   background: #fff;
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
   padding: 7px 15px;
   display: flex;
   align-items: center;
@@ -42,13 +45,14 @@
 .open_cover_menu {
   background: var(--bg-primary);
   position: absolute;
-  right: 0;
+  right: 20px;
+  bottom: -90px;
   padding: 10px;
   width: 300px;
   border-radius: 10px;
   box-shadow: 0 12px 28px 0 var(--shadow-1), 0 2px 4px 0 var(--shadow-2),
     inset 0 0 0 px var(--shadow-inset);
-  z-index: 99;
+  z-index: 99999;
 }
 .open_cover_menu_item {
   display: flex;
@@ -75,6 +79,7 @@
 }
 .profile_w_img {
   position: relative;
+  z-index: 9999;
 }
 .profile_w_bg {
   width: 180px;

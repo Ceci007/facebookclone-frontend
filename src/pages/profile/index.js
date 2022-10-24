@@ -6,7 +6,7 @@ import { profileReducer } from "../../functions/reducers";
 import Header from "../../components/header";
 import "./style.css";
 import Cover from "./Cover";
-import ProfielPictureInfos from "./ProfilePictureInfos";
+import ProfilePictureInfos from "./ProfilePictureInfos";
 import ProfileMenu from "./ProfileMenu";
 import PplYouMayKnow from "./PplYouMayKnow";
 import CreatePost from "../../components/createPost";
@@ -77,13 +77,14 @@ export default function Profile({ setVisible }) {
       });
     }
   };
+
   return (
     <div className="profile">
       <Header page="profile" />
       <div className="profile_top">
         <div className="profile_container">
           <Cover cover={profile.cover} visitor={visitor} />
-          <ProfielPictureInfos
+          <ProfilePictureInfos
             profile={profile}
             visitor={visitor}
             photos={photos.resources}

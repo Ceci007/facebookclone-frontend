@@ -1,5 +1,7 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useCallback, useRef } from "react";
 import useClickOutside from "../../helpers/clickOutside";
+import Cropper from "react-easy-crop";
+import getCroppedImg from "../../helpers/getCroppedImg";
 
 export default function Cover({ cover, visitor }) {
   const [showCoverMenu, setShowCoverMenu] = useState(false);
@@ -7,6 +9,9 @@ export default function Cover({ cover, visitor }) {
   const menuRef = useRef(null);
   const refInput = useRef(null);
   const [error, setError] = useState("");
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [zoom, setZoom] = useState(1);
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
 
   useClickOutside(menuRef, () => setShowCoverMenu(false));
 
@@ -36,16 +41,59 @@ export default function Cover({ cover, visitor }) {
     };
   };
 
-  console.log(coverPicture);
+  const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
+    setCroppedAreaPixels(croppedAreaPixels);
+  }, []);
+
+  const getCroppedImage = useCallback(
+    async (show) => {
+      try {
+        const img = await getCroppedImg(coverPicture, croppedAreaPixels);
+        if (show) {
+          setZoom(1);
+          setCrop({ x: 0, y: 0 });
+          setCoverPicture(img);
+        } else {
+          return img;
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    [croppedAreaPixels]
+  );
 
   return (
-    <div
-      className="profile_cover"
-      ref={menuRef}
-      hidden
-      accept="image/jpeg,image/png,image/webp,image/gif"
-    >
-      <input type="file" ref={refInput} onChange={handleImage} />
+    <div className="profile_cover" ref={menuRef}>
+      <input
+        type="file"
+        hidden
+        ref={refInput}
+        onChange={handleImage}
+        accept="image/jpeg,image/png,image/webp,image/gif"
+      />
+      {error && (
+        <div className="postError comment_error">
+          <div className="postError_error">{error}</div>
+          <button className="blue_btn" onClick={() => setError("")}>
+            Try again
+          </button>
+        </div>
+      )}
+      {coverPicture && (
+        <div className="cover_cropper">
+          <Cropper
+            image={coverPicture}
+            crop={crop}
+            zoom={zoom}
+            aspect={1 / 1}
+            cropShape="round"
+            onCropChange={setCrop}
+            onCropComplete={onCropComplete}
+            onZoomChange={setZoom}
+          />
+        </div>
+      )}
       {cover && <img src={cover} className="cover" alt="" />}
       {!visitor && (
         <div className="update_cover_wrapper">
