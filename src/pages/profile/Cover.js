@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef } from "react";
+import React, { useState, useCallback, useRef, useEffect } from "react";
 import useClickOutside from "../../helpers/clickOutside";
 import Cropper from "react-easy-crop";
 import getCroppedImg from "../../helpers/getCroppedImg";
@@ -6,14 +6,13 @@ import getCroppedImg from "../../helpers/getCroppedImg";
 export default function Cover({ cover, visitor }) {
   const [showCoverMenu, setShowCoverMenu] = useState(false);
   const [coverPicture, setCoverPicture] = useState("");
-  const menuRef = useRef(null);
   const refInput = useRef(null);
   const [error, setError] = useState("");
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
 
-  useClickOutside(menuRef, () => setShowCoverMenu(false));
+  //useClickOutside(menuRef, () => setShowCoverMenu(false));
 
   const handleImage = (e) => {
     let file = e.target.files[0];
@@ -63,8 +62,27 @@ export default function Cover({ cover, visitor }) {
     [croppedAreaPixels]
   );
 
+  const coverRef = useRef(null);
+  const [width, setWidth] = useState();
+
+  useEffect(() => {
+    setWidth(coverRef.current.clientWidth);
+  }, [window.innerWidth]);
+
   return (
-    <div className="profile_cover" ref={menuRef}>
+    <div className="profile_cover" ref={coverRef}>
+      {coverPicture && (
+        <div className="save_changes_cover">
+          <div className="save_changes_left">
+            <i className="public_icon"></i>
+            Your Cover Photo is public
+          </div>
+          <div className="save_changes_right">
+            <button className="blue_btn opacity_btn">Cancel</button>
+            <button className="blue_btn">Save changes</button>
+          </div>
+        </div>
+      )}
       <input
         type="file"
         hidden
@@ -86,11 +104,12 @@ export default function Cover({ cover, visitor }) {
             image={coverPicture}
             crop={crop}
             zoom={zoom}
-            aspect={1 / 1}
-            cropShape="round"
+            aspect={width / 350}
             onCropChange={setCrop}
             onCropComplete={onCropComplete}
             onZoomChange={setZoom}
+            showGrid={true}
+            objectFit="horizontal-cover"
           />
         </div>
       )}
