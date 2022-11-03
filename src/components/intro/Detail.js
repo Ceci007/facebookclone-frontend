@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Bio from "./Bio";
 
 export default function Detail({
-  header,
   img,
   value,
   placeholder,
@@ -11,12 +10,12 @@ export default function Detail({
   updateDetails,
   infos,
   text,
+  rel,
 }) {
   const [show, setShow] = useState(false);
 
   return (
     <div>
-      <div className="details_header">{header}</div>
       <div
         className="add_details_flex no_underline"
         onClick={() => setShow(true)}
@@ -43,6 +42,7 @@ export default function Detail({
           infos={infos}
           detail
           setShow={setShow}
+          rel={rel}
         />
       )}
     </div>
