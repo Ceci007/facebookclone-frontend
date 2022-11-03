@@ -200,6 +200,37 @@
   }
 }
 
+@media only screen and (max-width: 400px) {
+  .createPost,
+  .post {
+    margin-top: 1rem;
+  }
+
+  .home_middle,
+  .createPost,
+  .post {
+    width: 98%;
+    margin: 1rem auto;
+  }
+
+  .send_verification {
+    width: 98%;
+    margin: 0 auto;
+  }
+
+  .stories {
+    grid-template-columns: repeat(6, 13vw);
+  }
+
+  .home_middle {
+    margin: 56px auto;
+  }
+
+  .createPost_body {
+    padding: 5px 0;
+  }
+}
+
 @media only screen and (max-width: 330px) {
   .open_post {
     font-size: 12px;

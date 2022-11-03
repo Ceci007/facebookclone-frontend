@@ -190,7 +190,9 @@
   display: flex;
   gap: 5px;
   align-items: center;
+  justify-content: center;
   height: 240px;
+  margin: 0 auto;
 }
 .pplumayknow {
   width: 100%;
@@ -429,6 +431,23 @@
   }
   .profile_grid {
     grid-template-columns: 1fr;
-    width: 95%;
+  }
+  .profile_grid .createPost {
+    width: 100% !important;
+  }
+  .bottom_container {
+    padding: 5px;
+  }
+}
+
+@media (max-width: 650px) {
+  .profile_menu_wrap {
+    display: none;
+  }
+}
+
+@media (max-width: 510px) {
+  .udpate_cover_wrapper {
+    bottom: 3rem;
   }
 }

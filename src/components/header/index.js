@@ -24,11 +24,12 @@ import UserMenu from "./userMenu";
 export default function Header({ page }) {
   const { user } = useSelector((user) => ({ ...user }));
   const color = "#65676b";
-  const [showSearchMenu, setShowSearchMenu] = useState(false);
   const [showAllMenu, setShowAllMenu] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
   const allmenu = useRef(null);
   const usermenu = useRef(null);
+  const searchMenuRef = useRef(null);
+
   useClickOutside(allmenu, () => {
     setShowAllMenu(false);
   });
@@ -46,9 +47,7 @@ export default function Header({ page }) {
         </Link>
         <div
           className="search search1"
-          onClick={() => {
-            setShowSearchMenu(true);
-          }}
+          onClick={() => searchMenuRef.current.open()}
         >
           <Search color={color} />
           <input
@@ -58,9 +57,7 @@ export default function Header({ page }) {
           />
         </div>
       </div>
-      {showSearchMenu && (
-        <SearchMenu color={color} setShowSearchMenu={setShowSearchMenu} />
-      )}
+      <SearchMenu color={color} ref={searchMenuRef} />
       <div className="header_middle">
         <Link
           to="/"
@@ -110,7 +107,7 @@ export default function Header({ page }) {
             </div>
           </div>
 
-          {showAllMenu && <AllMenu />}
+          {showAllMenu && <AllMenu setShowAllMenu={setShowAllMenu} />}
         </div>
         <div className="circle_icon hover1">
           <Messenger />

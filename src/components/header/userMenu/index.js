@@ -8,7 +8,7 @@ import HelpSupport from "./HelpSupport";
 import DisplayAccessibility from "./DisplayAccessibility";
 import useClickOutside from "../../../helpers/clickOutside";
 
-export default function userMenuRef({ user, setUserMenuActive }) {
+export default function userMenuRef({ user }) {
   const [visible, setVisible] = useState(0);
   const userMenuRef = useRef(null);
   const dispatch = useDispatch();
@@ -16,9 +16,6 @@ export default function userMenuRef({ user, setUserMenuActive }) {
 
   useClickOutside(userMenuRef, () => {
     userMenuRef.current.style.display = "none";
-    if (userMenuRef.current.style.display === "none") {
-      setUserMenuActive(false);
-    }
   });
 
   const logout = () => {
