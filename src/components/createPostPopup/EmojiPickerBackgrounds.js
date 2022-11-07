@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Picker from "emoji-picker-react";
+import { useMediaQuery } from "react-responsive";
 
 export default function EmojiPickerBackgrounds({
   user,
@@ -14,6 +15,10 @@ export default function EmojiPickerBackgrounds({
   const textRef = useRef(null);
   const bgRef = useRef(null);
   const [cursorPosition, setCursorPosition] = useState();
+
+  const sm = useMediaQuery({
+    query: "(max-width: 405px)",
+  });
 
   useEffect(() => {
     textRef.current.selectionEnd = cursorPosition;
@@ -63,7 +68,9 @@ export default function EmojiPickerBackgrounds({
           maxLength="250"
           value={text}
           placeholder={`What's on your mind, ${user.first_name}`}
-          className={`post_input ${type2 ? "input2" : ""}`}
+          className={`post_input ${type2 ? "input2" : ""} ${
+            sm && !background && "l0"
+          }`}
           onChange={(e) => setText(e.target.value)}
           style={{
             paddingTop: `${

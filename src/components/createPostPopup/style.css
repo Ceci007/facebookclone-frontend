@@ -16,11 +16,12 @@
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   font-size: 20px;
   font-weight: 700;
   padding: 14px 15px 17px 15px;
   border-bottom: 1px solid var(--bg-third);
+  height: 55px;
 }
 
 .postBox .small_circle {
@@ -481,13 +482,57 @@
   }
 }
 /* ------- Post Error ------- */
-
-@media only screen and (max-width: 620px) {
+@media only screen and (max-width: 735px) {
   .postBox {
     width: 90vw;
   }
 
   .post_input {
     width: 88vw;
+  }
+
+  .box_header span {
+    position: absolute;
+    left: 18%;
+  }
+
+  .rlmove {
+    right: 10px;
+  }
+
+  .post_backgrounds {
+    width: 80%;
+    overflow-x: auto;
+  }
+
+  .post_backgrounds img {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@media only screen and (max-width: 405px) {
+  .postBox {
+    width: 96%;
+  }
+  .preview_actions {
+    flex-direction: column;
+    gap: 2px;
+  }
+  .mobile_text {
+    width: 50%;
+  }
+  .post_input {
+    width: 300px;
+    font-size: 17px;
+  }
+  .addtoyourpost {
+    justify-content: center;
+  }
+  .addto_text {
+    display: none;
+  }
+  .l0 {
+    left: 0;
   }
 }
