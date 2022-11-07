@@ -68,6 +68,8 @@
   }
   .left_home {
     width: 70px;
+    display: flex;
+    justify-content: center;
   }
   .left_link {
     background: var(--bg-third);

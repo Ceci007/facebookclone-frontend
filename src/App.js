@@ -1,45 +1,41 @@
-import React, { useEffect, useState, useReducer } from "react";
 import { Routes, Route } from "react-router-dom";
-import { useSelector } from "react-redux";
-import axios from "axios";
-import { postsReducer } from "./functions/reducers";
-import LoggedInRoutes from "./routes/LoggedInRoutes";
-import NotLoggedInRoutes from "./routes/NotLoggedInRoutes";
 import Login from "./pages/login";
 import Profile from "./pages/profile";
 import Home from "./pages/home";
+import LoggedInRoutes from "./routes/LoggedInRoutes";
+import NotLoggedInRoutes from "./routes/NotLoggedInRoutes";
+import { useSelector } from "react-redux";
 import Activate from "./pages/home/activate";
 import Reset from "./pages/reset";
 import CreatePostPopup from "./components/createPostPopup";
+import React, { useEffect, useReducer, useState } from "react";
+import axios from "axios";
+import { postsReducer } from "./functions/reducers";
 
 function App() {
-  const { user } = useSelector((state) => ({ ...state }));
   const [visible, setVisible] = useState(false);
+  const { user } = useSelector((state) => ({ ...state }));
   const [{ loading, error, posts }, dispatch] = useReducer(postsReducer, {
     loading: false,
-    error: "",
     posts: [],
+    error: "",
   });
-
   useEffect(() => {
     getAllPosts();
   }, []);
-
   const getAllPosts = async () => {
     try {
       dispatch({
         type: "POSTS_REQUEST",
       });
-
       const { data } = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}/getAllPosts`,
+        `${process.env.REACT_APP_BACKEND_URL}/getAllposts`,
         {
           headers: {
             Authorization: `Bearer ${user.token}`,
           },
         }
       );
-
       dispatch({
         type: "POSTS_SUCCESS",
         payload: data,
@@ -47,32 +43,46 @@ function App() {
     } catch (error) {
       dispatch({
         type: "POSTS_ERROR",
-        payload:
-          error && error.response && error.response.data
-            ? error.response.data.message
-            : "",
+        payload: error.response.data.message,
       });
     }
   };
-
   return (
     <div>
-      {visible && <CreatePostPopup user={user} setVisible={setVisible} />}
+      {visible && (
+        <CreatePostPopup
+          user={user}
+          setVisible={setVisible}
+          posts={posts}
+          dispatch={dispatch}
+        />
+      )}
       <Routes>
         <Route element={<LoggedInRoutes />}>
           <Route
             path="/profile"
-            element={<Profile setVisible={setVisible} />}
+            element={
+              <Profile setVisible={setVisible} getAllPosts={getAllPosts} />
+            }
             exact
           />
           <Route
             path="/profile/:username"
-            element={<Profile setVisible={setVisible} />}
+            element={
+              <Profile setVisible={setVisible} getAllPosts={getAllPosts} />
+            }
             exact
           />
           <Route
             path="/"
-            element={<Home setVisible={setVisible} posts={posts} />}
+            element={
+              <Home
+                setVisible={setVisible}
+                posts={posts}
+                loading={loading}
+                getAllPosts={getAllPosts}
+              />
+            }
             exact
           />
           <Route path="/activate/:token" element={<Activate />} exact />
