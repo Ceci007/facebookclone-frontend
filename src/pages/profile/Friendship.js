@@ -1,7 +1,16 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import { useSelector } from "react-redux";
+import {
+  addFriend,
+  cancelRequest,
+  follow,
+  unfollow,
+} from "../../functions/user";
 import useClickOutside from "../../helpers/clickOutside";
 
-export default function Friendship({ friendship }) {
+export default function Friendship({ friendshipProp, profileId }) {
+  const { user } = useSelector((state) => ({ ...state }));
+  const [friendship, setFriendship] = useState(friendshipProp);
   const [friendsMenu, setFriendsMenu] = useState(false);
   const [respondMenu, setRespondMenu] = useState(false);
   const menuFriendsRef = useRef(null);
@@ -9,6 +18,29 @@ export default function Friendship({ friendship }) {
 
   useClickOutside(menuFriendsRef, () => setFriendsMenu(false));
   useClickOutside(menuRespondRef, () => setRespondMenu(false));
+  const addFriendHandler = async () => {
+    setFriendship({ ...friendship, requestSent: true, following: true });
+    await addFriend(profileId, user.token);
+  };
+
+  const cancelRequestHandler = async () => {
+    setFriendship({ ...friendship, requestSent: false, following: false });
+    await cancelRequest(profileId, user.token);
+  };
+
+  const followHandler = async () => {
+    setFriendship({ ...friendship, following: true });
+    await follow(profileId, user.token);
+  };
+
+  const unfollowHandler = async () => {
+    setFriendship({ ...friendship, following: false });
+    await unfollow(profileId, user.token);
+  };
+
+  useEffect(() => {
+    setFriendship(friendshipProp);
+  }, [friendshipProp]);
 
   return (
     <>
@@ -31,12 +63,18 @@ export default function Friendship({ friendship }) {
                     Edit Friend List
                   </div>
                   {friendship.following ? (
-                    <div className="open_cover_menu_item hover1">
+                    <div
+                      className="open_cover_menu_item hover1"
+                      onClick={() => unfollowHandler()}
+                    >
                       <img src="../../../icons/unfollowOutlined.png" />
                       Unfollow
                     </div>
                   ) : (
-                    <div className="open_cover_menu_item hover1">
+                    <div
+                      className="open_cover_menu_item hover1"
+                      onClick={() => followHandler()}
+                    >
                       <img src="../../../icons/unfollowOutlined.png" />
                       Follow
                     </div>
@@ -51,7 +89,7 @@ export default function Friendship({ friendship }) {
           ) : (
             <>
               {!friendship.requestSent && !friendship.requestReceived && (
-                <button className="blue_btn">
+                <button className="blue_btn" onClick={() => addFriendHandler()}>
                   <img src="../../../icons/addFriend.png" className="invert" />
                   <span>Add Friend</span>
                 </button>
@@ -59,7 +97,7 @@ export default function Friendship({ friendship }) {
             </>
           )}
           {friendship.requestSent ? (
-            <button className="blue_btn">
+            <button className="blue_btn" onClick={() => cancelRequestHandler()}>
               <img src="../../../icons/cancelRequest.png" className="invert" />
               <span>Cancel Request</span>
             </button>
@@ -83,12 +121,12 @@ export default function Friendship({ friendship }) {
             )
           )}
           {friendship.following ? (
-            <button className="gray_btn">
+            <button className="gray_btn" onClick={() => unfollowHandler()}>
               <img src="../../../icons/follow.png" />
               <span>Following</span>
             </button>
           ) : (
-            <button className="blue_btn">
+            <button className="blue_btn" onClick={() => followHandler()}>
               <img src="../../../icons/follow.png" className="invert" />
               <span>Follow</span>
             </button>
