@@ -417,6 +417,17 @@
 .showMore .profile_left {
   top: 56px;
 }
+
+.friendship {
+  transform: translateY(-4rem);
+  z-index: 9;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.friendship .blue_btn {
+  height: 35px;
+}
 /*-----profile card--------*/
 @media (max-width: 900px) {
   .profile_w_left {
@@ -432,6 +443,7 @@
   .profile_img_wrap {
     flex-direction: column;
     justify-content: center;
+    align-items: center;
   }
   .profile_circle {
     right: 1rem;
