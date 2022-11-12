@@ -5,6 +5,9 @@ import {
   cancelRequest,
   follow,
   unfollow,
+  acceptRequest,
+  unfriend,
+  deleteRequest,
 } from "../../functions/user";
 import useClickOutside from "../../helpers/clickOutside";
 
@@ -36,6 +39,39 @@ export default function Friendship({ friendshipProp, profileId }) {
   const unfollowHandler = async () => {
     setFriendship({ ...friendship, following: false });
     await unfollow(profileId, user.token);
+  };
+
+  const acceptRequestHandler = async () => {
+    setFriendship({
+      ...friendship,
+      friends: true,
+      following: true,
+      requestSent: false,
+      requestReceived: false,
+    });
+    await acceptRequest(profileId, user.token);
+  };
+
+  const unfriendHandler = async () => {
+    setFriendship({
+      ...friendship,
+      friends: false,
+      following: false,
+      requestSent: false,
+      requestReceived: false,
+    });
+    await unfriend(profileId, user.token);
+  };
+
+  const deleteRequestHandler = async () => {
+    setFriendship({
+      ...friendship,
+      friends: false,
+      following: false,
+      requestSent: false,
+      requestReceived: false,
+    });
+    await deleteRequest(profileId, user.token);
   };
 
   useEffect(() => {
@@ -79,7 +115,10 @@ export default function Friendship({ friendshipProp, profileId }) {
                       Follow
                     </div>
                   )}
-                  <div className="open_cover_menu_item hover1">
+                  <div
+                    className="open_cover_menu_item hover1"
+                    onClick={() => unfriendHandler()}
+                  >
                     <i className="unfriend_outlined_icon"></i>
                     Unfriend
                   </div>
@@ -113,8 +152,18 @@ export default function Friendship({ friendshipProp, profileId }) {
                 </button>
                 {respondMenu && (
                   <div className="open_cover_menu" ref={menuRespondRef}>
-                    <div className="open_cover_menu_item hover1">Confirm</div>
-                    <div className="open_cover_menu_item hover1">Delete</div>
+                    <div
+                      className="open_cover_menu_item hover1"
+                      onClick={() => acceptRequestHandler()}
+                    >
+                      Confirm
+                    </div>
+                    <div
+                      className="open_cover_menu_item hover1"
+                      onClick={() => deleteRequestHandler()}
+                    >
+                      Delete
+                    </div>
                   </div>
                 )}
               </div>
@@ -134,7 +183,7 @@ export default function Friendship({ friendshipProp, profileId }) {
           <button className={friendship.friends ? "blue_btn" : "gray_btn"}>
             <img
               src="../../../icons/message.png"
-              className={friendship.friends && "invert"}
+              className={friendship.friends ? "invert" : ""}
             />
             <span>Message</span>
           </button>
