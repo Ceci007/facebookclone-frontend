@@ -78,6 +78,11 @@
   color: var(--color-secondary);
   font-size: 14px;
 }
+.profile_name {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
 .details_header {
   margin-top: 15px;
   font-weight: 600;
@@ -116,6 +121,12 @@
   margin: 10px 0;
   padding: 0 10px;
   border-radius: 5px;
+}
+
+@media (max-width: 900px) {
+  .profile_name {
+    align-items: center;
+  }
 }
 
 @media (max-width: 810px) {

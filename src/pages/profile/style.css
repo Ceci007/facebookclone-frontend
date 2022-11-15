@@ -54,7 +54,7 @@
   background: var(--bg-primary);
   position: absolute;
   right: 20px;
-  bottom: -90px;
+  bottom: -100px;
   padding: 10px;
   width: 300px;
   border-radius: 10px;
@@ -428,6 +428,9 @@
 .friendship .blue_btn {
   height: 35px;
 }
+.othername {
+  transform: translateY(-10px);
+}
 /*-----profile card--------*/
 @media (max-width: 900px) {
   .profile_w_left {
@@ -464,6 +467,14 @@
   .bottom_container {
     padding: 5px;
   }
+  .open_cover_menu {
+    background: var(--bg-primary);
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    top: 50px;
+    height: 90px;
+  }
 }
 
 @media (max-width: 650px) {
@@ -475,5 +486,24 @@
 @media (max-width: 510px) {
   .udpate_cover_wrapper {
     bottom: 3rem;
+  }
+
+  .open_cover_menu {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    bottom: -60px;
+  }
+}
+
+@media (max-width: 405px) {
+  .friendship {
+    flex-direction: column;
+  }
+}
+
+@media (min-width: 900px) {
+  .friendship {
+    transform: translateX(-2rem);
   }
 }

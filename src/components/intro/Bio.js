@@ -30,7 +30,7 @@ export default function Bio({
         <textarea
           placeholder={placeholder}
           name={name}
-          value={infos[name]}
+          value={infos && infos[name] ? infos[name] : ""}
           maxLength={detail ? 25 : 100}
           className="textarea_blue details_input"
           onChange={handleChange}

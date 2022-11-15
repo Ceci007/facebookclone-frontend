@@ -85,4 +85,13 @@
   .input_wrap {
     width: 86vw;
   }
+
+  .input_wrap input {
+    width: 280px;
+  }
+
+  .login_btn_form {
+    width: 280px !important;
+    margin: 0 auto;
+  }
 }

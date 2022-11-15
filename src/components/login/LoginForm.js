@@ -100,7 +100,7 @@ export default function LoginForm({ registerFormRef }) {
                   onChange={handleLoginChange}
                   bottom
                 />
-                <button type="submit" className="blue_btn">
+                <button type="submit" className="blue_btn login_btn_form">
                   Log In
                 </button>
               </Form>
