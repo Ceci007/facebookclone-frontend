@@ -27,7 +27,7 @@ const reactsArray = [
   },
 ];
 
-export default function ReactsPopup({ visible, setVisible }) {
+export default function ReactsPopup({ visible, setVisible, reactHandler }) {
   return (
     <>
       {visible && (
@@ -45,7 +45,11 @@ export default function ReactsPopup({ visible, setVisible }) {
           }
         >
           {reactsArray.map((react, i) => (
-            <div className="react" key={i}>
+            <div
+              className="react"
+              key={i}
+              onClick={() => reactHandler(react.name)}
+            >
               <img src={react.image} alt={`${react.name} button`} />
             </div>
           ))}

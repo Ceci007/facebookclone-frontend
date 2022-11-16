@@ -80,8 +80,7 @@
 }
 .profile_name {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
 }
 .details_header {
   margin-top: 15px;
@@ -123,14 +122,16 @@
   border-radius: 5px;
 }
 
-@media (max-width: 900px) {
-  .profile_name {
-    align-items: center;
-  }
-}
-
 @media (max-width: 810px) {
   .infosBox {
     width: 96% !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .profile_name {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }

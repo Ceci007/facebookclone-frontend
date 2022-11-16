@@ -1,4 +1,5 @@
-import React from "react";
+import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
 
 export default function Friends({ friends }) {
   return (
@@ -19,9 +20,25 @@ export default function Friends({ friends }) {
       <div className="profile_card_grid">
         {friends &&
           friends.length > 0 &&
-          friends
-            .slice(0, 9)
-            .map((friend) => <div className="profile_photo_card"></div>)}
+          friends.slice(0, 9).map((friend, i) => (
+            <Fragment key={i}>
+              {friend &&
+                friend.username &&
+                friend.picture &&
+                friend.first_name &&
+                friend.last_name && (
+                  <Link
+                    to={`/profile/${friend.username}`}
+                    className="profile_photo_card"
+                  >
+                    <img src={friend.picture} />
+                    <span>
+                      {friend.first_name} {friend.last_name}
+                    </span>
+                  </Link>
+                )}
+            </Fragment>
+          ))}
       </div>
     </div>
   );

@@ -1,15 +1,37 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Moment from "react-moment";
 import { Link } from "react-router-dom";
 import { Public, Dots } from "../../svg";
 import ReactsPopup from "./ReactsPopup";
 import CreateComment from "./CreateComment";
 import PostMenu from "./PostMenu";
+import { reactPost, getReacts } from "../../functions/post";
 import "./style.css";
 
 export default function Post({ post, user, profile }) {
   const [visible, setVisible] = useState(false);
   const [showPostMenu, setShowPostMenu] = useState(false);
+  const [reacts, setReacts] = useState();
+  const [check, setCheck] = useState();
+
+  useEffect(() => {
+    getPostReacts();
+  }, [post]);
+
+  const getPostReacts = async () => {
+    const res = await getReacts(post._id, user.token);
+    setReacts(res.reacts);
+    setCheck(res.check);
+  };
+
+  const reactHandler = async (type) => {
+    reactPost(post._id, type, user.token);
+    if (check == type) {
+      setCheck();
+    } else {
+      setCheck(type);
+    }
+  };
 
   return (
     <div className="post" style={{ width: `${profile && "100%"}` }}>
@@ -116,7 +138,11 @@ export default function Post({ post, user, profile }) {
         </div>
       </div>
       <div className="post_actions">
-        <ReactsPopup visible={visible} setVisible={setVisible} />
+        <ReactsPopup
+          visible={visible}
+          setVisible={setVisible}
+          reactHandler={reactHandler}
+        />
         <div
           className="post_action hover1"
           onMouseOver={() =>
@@ -129,9 +155,38 @@ export default function Post({ post, user, profile }) {
               setVisible(false);
             }, 500)
           }
+          onClick={() => reactHandler(check ? check : "like")}
         >
-          <i className="like_icon"></i>
-          <span>Like</span>
+          {check ? (
+            <img
+              src={`../../../reacts/${check}.svg`}
+              className="small_react"
+              style={{ width: "18px" }}
+            />
+          ) : (
+            <i className="like_icon"></i>
+          )}
+          <span
+            style={{
+              color: `${
+                check === "like"
+                  ? "#4267b2"
+                  : check === "love"
+                  ? "#f63459"
+                  : check === "haha"
+                  ? "#f7b125"
+                  : check === "sad"
+                  ? "#f7b125"
+                  : check === "wow"
+                  ? "#f7b125"
+                  : check === "angry"
+                  ? "#e4605a"
+                  : ""
+              }`,
+            }}
+          >
+            {check ? check : "Like"}
+          </span>
         </div>
         <div className="post_action hover1">
           <i className="comment_icon"></i>

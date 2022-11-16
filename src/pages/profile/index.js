@@ -108,7 +108,7 @@ export default function Profile({ setVisible }) {
   const check = useMediaQuery({
     query: "(min-width: 901px)",
   });
-  console.log(profile);
+
   return (
     <div className="profile">
       <Header page="profile" />
