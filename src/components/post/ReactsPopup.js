@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 
 const reactsArray = [
   {
@@ -45,13 +45,13 @@ export default function ReactsPopup({ visible, setVisible, reactHandler }) {
           }
         >
           {reactsArray.map((react, i) => (
-            <div
-              className="react"
-              key={i}
-              onClick={() => reactHandler(react.name)}
-            >
-              <img src={react.image} alt={`${react.name} button`} />
-            </div>
+            <Fragment key={i}>
+              {react && (
+                <div className="react" onClick={() => reactHandler(react.name)}>
+                  <img src={react.image} alt={`${react.name} button`} />
+                </div>
+              )}
+            </Fragment>
           ))}
         </div>
       )}

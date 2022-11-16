@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import Moment from "react-moment";
 import { Link } from "react-router-dom";
 import { Public, Dots } from "../../svg";
@@ -13,6 +13,7 @@ export default function Post({ post, user, profile }) {
   const [showPostMenu, setShowPostMenu] = useState(false);
   const [reacts, setReacts] = useState();
   const [check, setCheck] = useState();
+  const [total, setTotal] = useState(0);
 
   useEffect(() => {
     getPostReacts();
@@ -22,14 +23,30 @@ export default function Post({ post, user, profile }) {
     const res = await getReacts(post._id, user.token);
     setReacts(res.reacts);
     setCheck(res.check);
+    setTotal(res.total);
   };
 
   const reactHandler = async (type) => {
     reactPost(post._id, type, user.token);
     if (check == type) {
       setCheck();
+      let index = reacts.findIndex((x) => x.react == check);
+      if (index !== -1) {
+        setReacts([...reacts, (reacts[index].count = --reacts[index].count)]);
+        setTotal((prev) => --prev);
+      }
     } else {
       setCheck(type);
+      let index = reacts.findIndex((x) => x.react == type);
+      let index1 = reacts.findIndex((x) => x.react == check);
+      if (index !== -1) {
+        setReacts([...reacts, (reacts[index].count = ++reacts[index].count)]);
+        setTotal((prev) => ++prev);
+      }
+      if (index1 !== -1) {
+        setReacts([...reacts, (reacts[index1].count = --reacts[index1].count)]);
+        setTotal((prev) => --prev);
+      }
     }
   };
 
@@ -129,8 +146,27 @@ export default function Post({ post, user, profile }) {
       )}
       <div className="post_infos">
         <div className="reacts_count">
-          <div className="reacts_count_imgs"></div>
-          <div className="reacts_count_num"></div>
+          <div className="reacts_count_imgs">
+            {reacts &&
+              reacts
+                .sort((a, b) => {
+                  return b.count - a.count;
+                })
+                .slice(0, 3)
+                .map((react, i) => {
+                  return (
+                    <Fragment key={i}>
+                      {react.count > 0 && (
+                        <img
+                          src={`../../../reacts/${react.react}.svg`}
+                          key={i}
+                        />
+                      )}
+                    </Fragment>
+                  );
+                })}
+          </div>
+          <div className="reacts_count_num">{total > 0 && total}</div>
         </div>
         <div className="to_right">
           <div className="comments_count">13 comments</div>
