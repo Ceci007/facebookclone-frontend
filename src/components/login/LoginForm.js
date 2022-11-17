@@ -13,7 +13,7 @@ import Cookies from "js-cookie";
 const override = css`
   display: block;
   margin: 0 auto;
-  border-color: red;
+  border-color: #1876f2;
 `;
 
 const loginInfos = {
