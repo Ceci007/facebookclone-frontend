@@ -12,7 +12,7 @@ const override = css`
   border-color: #1876f2;
 `;
 
-export default function CreateComment({ user, postId }) {
+export default function CreateComment({ user, postId, setComments, setCount }) {
   const textRef = useRef(null);
   const imgInput = useRef(null);
   const [text, setText] = useState("");
@@ -81,12 +81,16 @@ export default function CreateComment({ user, postId }) {
           imgComment[0].url,
           user.token
         );
+        setComments(comments);
+        setCount((prev) => ++prev);
         setLoading(false);
         setText("");
         setCommentImage("");
       } else {
         setLoading(true);
         const comments = await comment(postId, text, "", user.token);
+        setComments(comments);
+        setCount((prev) => ++prev);
         setLoading(false);
         setText("");
         setCommentImage("");

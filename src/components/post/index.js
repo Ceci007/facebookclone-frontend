@@ -6,6 +6,7 @@ import ReactsPopup from "./ReactsPopup";
 import CreateComment from "./CreateComment";
 import PostMenu from "./PostMenu";
 import { reactPost, getReacts } from "../../functions/post";
+import Comment from "./Comment";
 import "./style.css";
 
 export default function Post({ post, user, profile }) {
@@ -14,9 +15,17 @@ export default function Post({ post, user, profile }) {
   const [reacts, setReacts] = useState();
   const [check, setCheck] = useState();
   const [total, setTotal] = useState(0);
+  const [comments, setComments] = useState([]);
+  const [count, setCount] = useState(1);
 
   useEffect(() => {
     getPostReacts();
+  }, [post]);
+
+  useEffect(() => {
+    if (post.comments) {
+      setComments(post.comments);
+    }
   }, [post]);
 
   const getPostReacts = async () => {
@@ -48,6 +57,10 @@ export default function Post({ post, user, profile }) {
         setTotal((prev) => --prev);
       }
     }
+  };
+
+  const showMore = () => {
+    setCount((prev) => prev + 3);
   };
 
   return (
@@ -169,7 +182,7 @@ export default function Post({ post, user, profile }) {
           <div className="reacts_count_num">{total > 0 && total}</div>
         </div>
         <div className="to_right">
-          <div className="comments_count">13 comments</div>
+          <div className="comments_count">{comments.length} comments</div>
           <div className="share_count">1 share</div>
         </div>
       </div>
@@ -235,7 +248,30 @@ export default function Post({ post, user, profile }) {
       </div>
       <div className="comments_wrap">
         <div className="comments_order">
-          <CreateComment user={user} postId={post._id} />
+          <CreateComment
+            user={user}
+            postId={post._id}
+            setComments={setComments}
+            setCount={setCount}
+          />
+          {comments &&
+            comments
+              .sort((a, b) => {
+                return new Date(b.commentAt) - new Date(a.commentAt);
+              })
+              .slice(0, count)
+              .map((comment, i) => {
+                return (
+                  <Fragment key={i}>
+                    <Comment comment={comment} />
+                  </Fragment>
+                );
+              })}
+          {count < comments.length && (
+            <div className="view_comments" onClick={() => showMore()}>
+              View more comments
+            </div>
+          )}
         </div>
       </div>
       {showPostMenu && (
