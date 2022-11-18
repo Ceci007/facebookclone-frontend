@@ -17,7 +17,13 @@ const override = css`
   border-color: red;
 `;
 
-export default function CreatePostPopup({ user, setVisible }) {
+export default function CreatePostPopup({
+  user,
+  setVisible,
+  posts,
+  dispatch,
+  profile,
+}) {
   const popup = useRef(null);
   const [showPrev, setShowPrev] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -43,7 +49,11 @@ export default function CreatePostPopup({ user, setVisible }) {
       );
       setLoading(false);
 
-      if (response === "Ok") {
+      if (response.status === "Ok") {
+        dispatch({
+          type: profile ? "PROFILE_POSTS" : "POSTS_SUCCESS",
+          payload: [response.data, ...posts],
+        });
         setBackground("");
         setText("");
         setVisible(false);
@@ -75,7 +85,11 @@ export default function CreatePostPopup({ user, setVisible }) {
       );
       setLoading(false);
 
-      if (response2 === "Ok") {
+      if (response2.status === "Ok") {
+        dispatch({
+          type: profile ? "PROFILE_POSTS" : "POSTS_SUCCESS",
+          payload: [response2.data, ...posts],
+        });
         setBackground("");
         setText("");
         setImages([]);
@@ -95,7 +109,11 @@ export default function CreatePostPopup({ user, setVisible }) {
       );
       setLoading(false);
 
-      if (response === "Ok") {
+      if (response.status === "Ok") {
+        dispatch({
+          type: profile ? "PROFILE_POSTS" : "POSTS_SUCCESS",
+          payload: [response.data, ...posts],
+        });
         setBackground("");
         setText("");
         setVisible(false);

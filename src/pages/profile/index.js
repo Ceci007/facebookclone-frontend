@@ -6,6 +6,7 @@ import { useMediaQuery } from "react-responsive";
 import { profileReducer } from "../../functions/reducers";
 import Header from "../../components/header";
 import "./style.css";
+import CreatePostPopup from "../../components/createPostPopup";
 import Cover from "./Cover";
 import ProfilePictureInfos from "./ProfilePictureInfos";
 import ProfileMenu from "./ProfileMenu";
@@ -17,7 +18,8 @@ import Photos from "./Photos";
 import Friends from "./Friends";
 import Intro from "../../components/intro";
 
-export default function Profile({ setVisible }) {
+export default function Profile({ getAllPosts }) {
+  const [visible, setVisible] = useState(false);
   const { username } = useParams();
   const navigate = useNavigate();
   const { user } = useSelector((state) => ({ ...state }));
@@ -111,7 +113,16 @@ export default function Profile({ setVisible }) {
 
   return (
     <div className="profile">
-      <Header page="profile" />
+      {visible && (
+        <CreatePostPopup
+          user={user}
+          setVisible={setVisible}
+          posts={profile.posts ? profile.posts : []}
+          dispatch={dispatch}
+          profile
+        />
+      )}
+      <Header page="profile" getAllPosts={getAllPosts} />
       <div className="profile_top" ref={profileTopRef}>
         <div className="profile_container">
           <Cover
