@@ -17,6 +17,7 @@ export default function Post({ post, user, profile }) {
   const [total, setTotal] = useState(0);
   const [comments, setComments] = useState([]);
   const [count, setCount] = useState(1);
+  const [checkSaved, setCheckSaved] = useState();
 
   useEffect(() => {
     getPostReacts();
@@ -33,6 +34,7 @@ export default function Post({ post, user, profile }) {
     setReacts(res.reacts);
     setCheck(res.check);
     setTotal(res.total);
+    setCheckSaved(res.checkSaved);
   };
 
   const reactHandler = async (type) => {
@@ -280,6 +282,10 @@ export default function Post({ post, user, profile }) {
           postUserId={post.user._id}
           imagesLength={post && post.images && post.images.length > 0}
           setShowPostMenu={setShowPostMenu}
+          postId={post._id}
+          token={user.token}
+          checkSaved={checkSaved}
+          setCheckSaved={setCheckSaved}
         />
       )}
     </div>

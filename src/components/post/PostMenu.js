@@ -1,8 +1,17 @@
 import React, { useState, useRef } from "react";
 import MenuItem from "./MenuItem";
 import useClickOutside from "../../helpers/clickOutside";
+import { savePost } from "../../functions/post";
 
-export default function PostMenu({ userId, postUserId, imagesLength }) {
+export default function PostMenu({
+  userId,
+  postUserId,
+  imagesLength,
+  postId,
+  token,
+  checkSaved,
+  setCheckSaved,
+}) {
   const [test, setTest] = useState(userId === postUserId);
   const postMenuRef = useRef(null);
 
@@ -10,14 +19,33 @@ export default function PostMenu({ userId, postUserId, imagesLength }) {
     postMenuRef.current.style.display = "none";
   });
 
+  const saveHandler = async () => {
+    savePost(postId, token);
+    if (checkSaved) {
+      setCheckSaved(false);
+    } else {
+      setCheckSaved(true);
+    }
+  };
+
   return (
     <ul className="post_menu" ref={postMenuRef}>
       {test && <MenuItem icon="pin_icon" title="Pin Post" />}
-      <MenuItem
-        icon="save_icon"
-        title="Save Post"
-        subtitle="Add this to your saved items"
-      />
+      <div onClick={() => saveHandler()}>
+        {checkSaved ? (
+          <MenuItem
+            icon="save_icon"
+            title="Unsave Post"
+            subtitle="Remove this from your saved items"
+          />
+        ) : (
+          <MenuItem
+            icon="save_icon"
+            title="Save Post"
+            subtitle="Add this to your saved items"
+          />
+        )}
+      </div>
       <div className="line"></div>
       {test && <MenuItem icon="edit_icon" title="Edit Post" />}
       {!test && (
