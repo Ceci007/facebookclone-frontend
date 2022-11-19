@@ -1,7 +1,8 @@
 import React, { useState, useRef } from "react";
+import { saveAs } from "file-saver";
 import MenuItem from "./MenuItem";
 import useClickOutside from "../../helpers/clickOutside";
-import { savePost } from "../../functions/post";
+import { savePost, deletePost } from "../../functions/post";
 
 export default function PostMenu({
   userId,
@@ -11,6 +12,8 @@ export default function PostMenu({
   token,
   checkSaved,
   setCheckSaved,
+  images,
+  postRef,
 }) {
   const [test, setTest] = useState(userId === postUserId);
   const postMenuRef = useRef(null);
@@ -25,6 +28,19 @@ export default function PostMenu({
       setCheckSaved(false);
     } else {
       setCheckSaved(true);
+    }
+  };
+
+  const downloadImages = async () => {
+    images.map((img) => {
+      saveAs(img.url, "image.jpg");
+    });
+  };
+
+  const deleteHandler = async () => {
+    const res = await deletePost(postId, token);
+    if (res.status === "Ok") {
+      postRef.current.remove();
     }
   };
 
@@ -54,7 +70,11 @@ export default function PostMenu({
           title="Turn on notifications for this post"
         />
       )}
-      {imagesLength && <MenuItem icon="download_icon" title="Download" />}
+      {imagesLength && (
+        <div onClick={() => downloadImages()}>
+          <MenuItem icon="download_icon" title="Download" />
+        </div>
+      )}
       {imagesLength && (
         <MenuItem icon="fullscreen_icon" title="Enter Fullscreen" />
       )}
@@ -72,11 +92,13 @@ export default function PostMenu({
       )}
       {test && <MenuItem icon="archive_icon" title="Move to archive" />}
       {test && (
-        <MenuItem
-          icon="trash_icon"
-          title="Move to trash"
-          subtitle="Items in your trash are deleted after 30 days"
-        />
+        <div onClick={() => deleteHandler()}>
+          <MenuItem
+            icon="trash_icon"
+            title="Move to trash"
+            subtitle="Items in your trash are deleted after 30 days"
+          />
+        </div>
       )}
       {!test && <div className="line"></div>}
       {!test && (

@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState, useRef } from "react";
 import Moment from "react-moment";
 import { Link } from "react-router-dom";
 import { Public, Dots } from "../../svg";
@@ -18,6 +18,7 @@ export default function Post({ post, user, profile }) {
   const [comments, setComments] = useState([]);
   const [count, setCount] = useState(1);
   const [checkSaved, setCheckSaved] = useState();
+  const postRef = useRef(null);
 
   useEffect(() => {
     getPostReacts();
@@ -66,7 +67,11 @@ export default function Post({ post, user, profile }) {
   };
 
   return (
-    <div className="post" style={{ width: `${profile && "100%"}` }}>
+    <div
+      className="post"
+      style={{ width: `${profile && "100%"}` }}
+      ref={postRef}
+    >
       {post && post.user && post.user.username && (
         <div className="post_header">
           <Link
@@ -286,6 +291,8 @@ export default function Post({ post, user, profile }) {
           token={user.token}
           checkSaved={checkSaved}
           setCheckSaved={setCheckSaved}
+          images={post.images}
+          postRef={postRef}
         />
       )}
     </div>
