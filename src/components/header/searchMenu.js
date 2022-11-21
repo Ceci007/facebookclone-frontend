@@ -26,11 +26,13 @@ const SearchMenu = forwardRef(({ color, token }, ref) => {
 
   useEffect(() => {
     getHistory();
-  }, [searchHistory, getSearchHistory]);
+  }, []);
 
   const getHistory = async () => {
     const res = await getSearchHistory(token);
-    setSearchHistory(res);
+    if (res) {
+      setSearchHistory(res);
+    }
   };
 
   const focusInput = () => {
@@ -61,7 +63,7 @@ const SearchMenu = forwardRef(({ color, token }, ref) => {
   };
 
   const addToSearchHistoryHandler = async (searchUser) => {
-    // const res = await addToSearchHistory(searchUser, token);
+    //const res = await addToSearchHistory(searchUser, token);
     addToSearchHistory(searchUser, token);
     getHistory();
     setSearchTerm("");
