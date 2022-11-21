@@ -57,7 +57,7 @@ export default function Header({ page, getAllPosts }) {
           />
         </div>
       </div>
-      <SearchMenu color={color} ref={searchMenuRef} />
+      <SearchMenu color={color} ref={searchMenuRef} token={user.token} />
       <div className="header_middle">
         <Link
           to="/"
