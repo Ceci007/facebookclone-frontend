@@ -12,6 +12,7 @@ import {
   search,
   addToSearchHistory,
   getSearchHistory,
+  removeFromSearch,
 } from "../../functions/user";
 
 const SearchMenu = forwardRef(({ color, token }, ref) => {
@@ -25,7 +26,7 @@ const SearchMenu = forwardRef(({ color, token }, ref) => {
 
   useEffect(() => {
     getHistory();
-  }, []);
+  }, [searchHistory, getSearchHistory]);
 
   const getHistory = async () => {
     const res = await getSearchHistory(token);
@@ -55,11 +56,21 @@ const SearchMenu = forwardRef(({ color, token }, ref) => {
     } else {
       const res = await search(searchTerm, token);
       setResults(res);
+      getHistory();
     }
   };
 
   const addToSearchHistoryHandler = async (searchUser) => {
-    const res = await addToSearchHistory(searchUser, token);
+    // const res = await addToSearchHistory(searchUser, token);
+    addToSearchHistory(searchUser, token);
+    getHistory();
+    setSearchTerm("");
+    setIsFocus(false);
+    setVisible(false);
+  };
+
+  const handleRemove = async (searchUser) => {
+    removeFromSearch(searchUser, token);
     getHistory();
   };
 
@@ -108,35 +119,42 @@ const SearchMenu = forwardRef(({ color, token }, ref) => {
                 />
               </div>
             </div>
-            {results == "" && (
-              <div className="search_history_header">
-                <span>Recent searches</span>
-                <a>Edit</a>
+            <>
+              {searchHistory && results == "" && (
+                <div className="search_history_header">
+                  <span>Recent searches</span>
+                  <a>Edit</a>
+                </div>
+              )}
+              <div className="search_history scrollbar">
+                {searchHistory &&
+                  results == "" &&
+                  searchHistory
+                    .sort((a, b) => {
+                      return new Date(b.createdAt) - new Date(a.createdAt);
+                    })
+                    .map((user) => (
+                      <div className="search_user_item hover1" key={user._id}>
+                        <Link
+                          className="flex"
+                          to={`/profile/${user.user.username}`}
+                          onClick={() =>
+                            addToSearchHistoryHandler(user.user._id)
+                          }
+                        >
+                          <img src={user.user.picture} alt="" />
+                          <span>
+                            {user.user.first_name} {user.user.last_name}
+                          </span>
+                        </Link>
+                        <i
+                          className="exit_icon"
+                          onClick={() => handleRemove(user.user._id)}
+                        ></i>
+                      </div>
+                    ))}
               </div>
-            )}
-            <div className="search_history scrollbar">
-              {searchHistory &&
-                results == "" &&
-                searchHistory
-                  .sort((a, b) => {
-                    return new Date(b.createdAt) - new Date(a.createdAt);
-                  })
-                  .map((user) => (
-                    <div className="search_user_item hover1" key={user._id}>
-                      <Link
-                        className="flex"
-                        to={`/profile/${user.user.username}`}
-                        onClick={() => addToSearchHistoryHandler(user.user._id)}
-                      >
-                        <img src={user.user.picture} alt="" />
-                        <span>
-                          {user.user.first_name} {user.user.last_name}
-                        </span>
-                      </Link>
-                      <i className="exit_icon"></i>
-                    </div>
-                  ))}
-            </div>
+            </>
             <div className="search_results scrollbar">
               {results &&
                 results.map((user) => (
