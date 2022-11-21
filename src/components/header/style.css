@@ -542,7 +542,8 @@ header {
   background: var(--light-blue-color);
   color: var(--blue-color);
 }
-.search_results {
+.search_results,
+.search_history {
   width: 100%;
   max-height: 70vh;
   overflow-y: auto;
@@ -566,6 +567,11 @@ header {
 .search_user_item span {
   font-weight: 600;
   font-size: 14px;
+}
+.search_user_item i {
+  position: absolute;
+  right: 10px;
+  transform: scale(0.6);
 }
 /*----------- Responsive ------------*/
 @media only screen and (max-width: 1295px) {
