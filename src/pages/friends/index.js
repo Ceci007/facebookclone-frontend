@@ -113,7 +113,12 @@ export default function Friends() {
             <div className="flex_wrap">
               {data.requests &&
                 data.requests.map((user) => (
-                  <Card user={user} key={user._id} type="request" />
+                  <Card
+                    friend={user}
+                    key={user._id}
+                    type="request"
+                    getData={getData}
+                  />
                 ))}
             </div>
 
@@ -125,7 +130,12 @@ export default function Friends() {
               <div className="flex_wrap">
                 {data.sentRequests &&
                   data.sentRequests.map((user) => (
-                    <Card user={user} key={user._id} type="sent" />
+                    <Card
+                      friend={user}
+                      key={user._id}
+                      type="sent"
+                      getData={getData}
+                    />
                   ))}
               </div>
             </div>
@@ -138,7 +148,12 @@ export default function Friends() {
               <div className="flex_wrap">
                 {data.friends &&
                   data.friends.map((user) => (
-                    <Card user={user} key={user._id} type="friends" />
+                    <Card
+                      friend={user}
+                      key={user._id}
+                      type="friends"
+                      getData={getData}
+                    />
                   ))}
               </div>
             </div>
