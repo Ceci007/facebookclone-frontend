@@ -7,6 +7,7 @@ import LoggedInRoutes from "./routes/LoggedInRoutes";
 import NotLoggedInRoutes from "./routes/NotLoggedInRoutes";
 import Login from "./pages/login";
 import Profile from "./pages/profile";
+import Friends from "./pages/friends";
 import Home from "./pages/home";
 import Activate from "./pages/home/activate";
 import Reset from "./pages/reset";
@@ -69,13 +70,23 @@ function App() {
         <Route element={<LoggedInRoutes />}>
           <Route
             path="/profile"
-            element={<Profile setVisible={setVisible} />}
+            element={
+              <Profile setVisible={setVisible} getAllPosts={getAllPosts} />
+            }
             exact
             getAllPosts={getAllPosts}
           />
           <Route
             path="/profile/:username"
             element={<Profile setVisible={setVisible} />}
+            exact
+            getAllPosts={getAllPosts}
+          />
+          <Route
+            path="/friends"
+            element={
+              <Friends setVisible={setVisible} getAllPosts={getAllPosts} />
+            }
             exact
             getAllPosts={getAllPosts}
           />
