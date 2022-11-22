@@ -1,8 +1,35 @@
-import React from "react";
+import React, { useEffect, useReducer } from "react";
+import { useSelector } from "react-redux";
 import Header from "../../components/header";
+import { getFriendsPageInfos } from "../../functions/user";
+import { friendsPageReducer } from "../../functions/reducers";
+import Card from "./Card";
 import "./style.css";
 
 export default function Friends() {
+  const { user } = useSelector((state) => ({ ...state }));
+
+  const [{ loading, error, data }, dispatch] = useReducer(friendsPageReducer, {
+    loading: false,
+    data: {},
+    error: "",
+  });
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = async () => {
+    dispatch({ type: "FRIENDS_REQUEST" });
+
+    const data = await getFriendsPageInfos(user.token);
+    if (data.status === "Ok") {
+      dispatch({ type: "FRIENDS_SUCCESS", payload: data.data });
+    } else {
+      dispatch({ type: "FRIENDS_ERROR", payload: data.data });
+    }
+  };
+
   return (
     <>
       <Header page="friends" />
@@ -77,7 +104,46 @@ export default function Friends() {
             </div>
           </div>
         </div>
-        <div className="friends_right"></div>
+        <div className="friends_right">
+          <div className="friends_right_wrap">
+            <div className="friends_left_header">
+              <h3>Friend Requests</h3>
+              <a className="see_link hover3">See all</a>
+            </div>
+            <div className="flex_wrap">
+              {data.requests &&
+                data.requests.map((user) => (
+                  <Card user={user} key={user._id} type="request" />
+                ))}
+            </div>
+
+            <div className="friends_right_wrap">
+              <div className="friends_left_header">
+                <h3>Sent Requests</h3>
+                <a className="see_link hover3">See all</a>
+              </div>
+              <div className="flex_wrap">
+                {data.sentRequests &&
+                  data.sentRequests.map((user) => (
+                    <Card user={user} key={user._id} type="sent" />
+                  ))}
+              </div>
+            </div>
+
+            <div className="friends_right_wrap">
+              <div className="friends_left_header">
+                <h3>Friends</h3>
+                <a className="see_link hover3">See all</a>
+              </div>
+              <div className="flex_wrap">
+                {data.friends &&
+                  data.friends.map((user) => (
+                    <Card user={user} key={user._id} type="friends" />
+                  ))}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );

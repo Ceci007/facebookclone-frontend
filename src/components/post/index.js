@@ -32,10 +32,12 @@ export default function Post({ post, user, profile }) {
 
   const getPostReacts = async () => {
     const res = await getReacts(post._id, user.token);
-    setReacts(res.reacts);
-    setCheck(res.check);
-    setTotal(res.total);
-    setCheckSaved(res.checkSaved);
+    if (res) {
+      setReacts(res.reacts);
+      setCheck(res.check);
+      setTotal(res.total);
+      setCheckSaved(res.checkSaved);
+    }
   };
 
   const reactHandler = async (type) => {
