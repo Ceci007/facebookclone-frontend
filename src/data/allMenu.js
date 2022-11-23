@@ -151,7 +151,7 @@ export const create = [
     icon: "m_event_icon",
   },
   {
-    name: "Marketplace Listing",
+    name: "Marketplace",
     icon: "m_post_mar",
   },
   {

@@ -18,7 +18,7 @@
   text-align: center;
   display: block;
   margin: 0 auto;
-  color: var(--dark-bg-third);
+  color: var(--color-secondary);
 }
 
 .login_2 {
@@ -107,10 +107,12 @@
   position: absolute;
   right: 0;
   cursor: pointer;
+  color: var(--color-secondary);
 }
 .register_header span:first-of-type {
   font-weight: 700;
   font-size: 32px;
+  color: var(--color-secondary);
 }
 .register_header span:last-of-type {
   font-size: 15px;
@@ -160,6 +162,7 @@
   background: var(--bg-primary);
   border-radius: 5px;
   cursor: pointer;
+  color: var(--color-secondary);
 }
 .reg_grid label {
   width: 90px;
@@ -167,7 +170,7 @@
   align-items: center;
   justify-content: space-between;
   font-size: 16px;
-  color: var(--color-primary);
+  color: var(--color-secondary);
   border-radius: 5px;
   cursor: pointer;
   border: 1px solid var(--color-secondary);
