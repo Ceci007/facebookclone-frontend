@@ -7,11 +7,13 @@
   --color-primary: #f1f1f1;
   --color-secondary: #b0b3b8;
   --shadow-2: rgba(0, 0, 0, 0.65);
+  --shadow-inset: rgba(0, 0, 0, 0.3);
 }
 .dark .blur {
   background: rgba(1, 1, 1, 0.53);
 }
-.dark .hover1:hover {
+.dark .hover1:hover,
+.dark .hover2:hover {
   background: var(--bg-third);
 }
 /* --------- Header ---------- */
@@ -42,4 +44,24 @@
 /* --------- Home ---------- */
 .dark .left_home .small_circle {
   background: var(--bg-fifth);
+}
+.dark .post_action i {
+  filter: invert(90%);
+}
+.dark .post_menu i,
+.dark .post_menu img {
+  filter: invert(100%);
+}
+.dark .comment_circle_icon i {
+  filter: invert(90%);
+}
+.dark .box_privacy i,
+.dark .box_privacy img {
+  filter: invert(90%);
+}
+.dark .emoji_icon_large:hover {
+  filter: invert(0);
+}
+.dark .add_pics_wrap i {
+  filter: invert(100%);
 }

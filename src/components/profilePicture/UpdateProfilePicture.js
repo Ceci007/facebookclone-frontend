@@ -82,6 +82,8 @@ export default function UpdateProfilePicture({
         user.token
       );
 
+      console.log(res);
+
       if (updated_picture === "Ok") {
         const new_post = await createPost(
           "profilePicture",
@@ -91,6 +93,8 @@ export default function UpdateProfilePicture({
           user.id,
           user.token
         );
+
+        console.log(new_post);
 
         if (new_post === "Ok") {
           setLoading(false);
@@ -104,7 +108,7 @@ export default function UpdateProfilePicture({
             })
           );
           dispatch({
-            type: "UPDATEPICTURE",
+            type: "UPDATE_PICTURE",
             payload: res[0].url,
           });
           setShow(false);

@@ -76,6 +76,10 @@
   padding: 0 15px 10px 15px;
 }
 
+.post_bg_text {
+  color: #000;
+}
+
 /*-----------------------------GRID IMAGES----------------*/
 .grid_1 img {
   width: 100%;
