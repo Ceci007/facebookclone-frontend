@@ -65,3 +65,36 @@
 .dark .add_pics_wrap i {
   filter: invert(100%);
 }
+/* --------- Home ---------- */
+/* --------- Profile ---------- */
+.dark .active_link:hover {
+  background: var(--light-blue-color);
+}
+.dark .open_cover_menu i,
+.dark .open_cover_menu img,
+.dark .profile_circle i {
+  filter: invert(100%);
+}
+.dark .gray_btn {
+  background: var(--bg-third);
+}
+.dark .gray_btn:hover {
+  background: #777;
+}
+.dark .gray_btn i,
+.dark .gray_btn img {
+  filter: invert(100%);
+}
+.dark .profile_container svg {
+  filter: invert(90%);
+}
+.dark .grid_icon {
+  filter: invert(85%);
+}
+.dark .slider i {
+  filter: invert(100%);
+}
+.dark .flex_p_t i {
+  filter: invert(100%);
+}
+/* --------- Profile ---------- */

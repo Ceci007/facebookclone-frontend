@@ -53,8 +53,8 @@
 .open_cover_menu {
   background: var(--bg-primary);
   position: absolute;
-  right: 20px;
-  bottom: -100px;
+  right: 0;
+  top: 50px;
   padding: 10px;
   width: 300px;
   border-radius: 10px;
@@ -454,6 +454,9 @@
 .friendship .blue_btn {
   height: 35px;
 }
+.update_cover_wrapper {
+  position: relative;
+}
 /*-----profile card--------*/
 @media (max-width: 900px) {
   .profile_w_left {
@@ -489,10 +492,8 @@
   .open_cover_menu {
     background: var(--bg-primary);
     position: absolute;
-    left: 50%;
-    transform: translate(-50%);
-    top: 50px;
-    height: 90px;
+    right: 0;
+    bottom: 0;
   }
   .profile_card_count {
     text-align: center;
