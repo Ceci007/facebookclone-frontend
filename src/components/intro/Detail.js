@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Bio from "./Bio";
 
 export default function Detail({
@@ -13,15 +13,11 @@ export default function Detail({
   rel,
 }) {
   const [show, setShow] = useState(false);
-
   return (
     <div>
-      <div
-        className="add_details_flex no_underline"
-        onClick={() => setShow(true)}
-      >
+      <div className="add_details_flex " onClick={() => setShow(true)}>
         {value ? (
-          <div className="info_profile">
+          <div className="info_profile ">
             <img src={`../../../icons/${img}.png`} alt="" />
             {value}
             <i className="edit_icon"></i>
@@ -29,7 +25,7 @@ export default function Detail({
         ) : (
           <>
             <i className="rounded_plus_icon"></i>
-            <span className="underline">add {text}</span>
+            <span className="underline">Add {text}</span>
           </>
         )}
       </div>

@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function AddFriendSmallCard({ item }) {
   return (
     <div className="addfriendCard">

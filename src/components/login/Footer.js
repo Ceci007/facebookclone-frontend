@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
 export default function Footer() {
@@ -55,13 +54,7 @@ export default function Footer() {
         <Link to="/">Help</Link>
       </div>
       <div className="login_footer_wrap">
-        <Link
-          to="/"
-          style={{
-            fontSize: "12px",
-            margin: "10px 0",
-          }}
-        >
+        <Link to="/" style={{ fontSize: "12px", marginTop: "10px" }}>
           Meta © 2022
         </Link>
       </div>

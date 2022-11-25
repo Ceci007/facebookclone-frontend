@@ -1,13 +1,4 @@
-import React from "react";
 import PropagateLoader from "react-spinners/PropagateLoader";
-import { css } from "@emotion/react";
-
-const override = css`
-  display: block;
-  margin: 0 auto;
-  border-color: red;
-`;
-
 export default function ActivateForm({ type, header, text, loading }) {
   return (
     <div className="blur">
@@ -20,12 +11,7 @@ export default function ActivateForm({ type, header, text, loading }) {
           {header}
         </div>
         <div className="popup_message">{text}</div>
-        <PropagateLoader
-          color="#1876f2"
-          loading={loading}
-          css={override}
-          size={30}
-        />
+        <PropagateLoader color="#1876f2" size={20} loading={loading} />
       </div>
     </div>
   );

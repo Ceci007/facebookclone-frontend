@@ -1,46 +1,50 @@
-import React, { useState } from "react";
+import "./style.css";
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Cookies from "js-cookie";
+import { Form, Formik } from "formik";
+import { useState } from "react";
+import LoginInput from "../../components/inputs/loginInput";
 import SearchAccount from "./SearchAccount";
 import SendEmail from "./SendEmail";
 import CodeVerification from "./CodeVerification";
-import ChangePassword from "./ChangePassword";
 import Footer from "../../components/login/Footer";
-import "./style.css";
-
+import ChangePassword from "./ChangePassword";
 export default function Reset() {
   const { user } = useSelector((state) => ({ ...state }));
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [visible, setVisible] = useState(0);
+  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
-  const [error, setError] = useState("");
   const [code, setCode] = useState("");
   const [password, setPassword] = useState("");
   const [conf_password, setConf_password] = useState("");
-  const [visible, setVisible] = useState(0);
-  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const [userInfos, setUserInfos] = useState("");
-
   const logout = () => {
     Cookies.set("user", "");
-    dispatch({ type: "LOGOUT" });
+    dispatch({
+      type: "LOGOUT",
+    });
     navigate("/login");
   };
-
+  console.log(userInfos);
   return (
     <div className="reset">
       <div className="reset_header">
-        <img src="../../../icons/facebook.svg" alt="facebook long logo" />
+        <img src="../../../icons/facebook.svg" alt="" />
         {user ? (
           <div className="right_reset">
             <Link to="/profile">
-              <img
-                src={user.picture}
-                alt={`${user.first_name} ${user.last_name}`}
-              />
+              <img src={user.picture} alt="" />
             </Link>
-            <button className="blue_btn" onClick={() => logout()}>
+            <button
+              className="blue_btn"
+              onClick={() => {
+                logout();
+              }}
+            >
               Logout
             </button>
           </div>
@@ -50,7 +54,6 @@ export default function Reset() {
           </Link>
         )}
       </div>
-
       <div className="reset_wrap">
         {visible === 0 && (
           <SearchAccount
@@ -58,7 +61,6 @@ export default function Reset() {
             setEmail={setEmail}
             error={error}
             setError={setError}
-            loading={loading}
             setLoading={setLoading}
             setUserInfos={setUserInfos}
             setVisible={setVisible}
@@ -67,13 +69,12 @@ export default function Reset() {
         {visible === 1 && userInfos && (
           <SendEmail
             email={email}
+            userInfos={userInfos}
             error={error}
             setError={setError}
-            loading={loading}
             setLoading={setLoading}
             setUserInfos={setUserInfos}
             setVisible={setVisible}
-            userInfos={userInfos}
           />
         )}
         {visible === 2 && (
@@ -83,9 +84,7 @@ export default function Reset() {
             setCode={setCode}
             error={error}
             setError={setError}
-            loading={loading}
             setLoading={setLoading}
-            setUserInfos={setUserInfos}
             setVisible={setVisible}
             userInfos={userInfos}
           />
@@ -98,9 +97,7 @@ export default function Reset() {
             setPassword={setPassword}
             error={error}
             setError={setError}
-            loading={loading}
             setLoading={setLoading}
-            setUserInfos={setUserInfos}
             setVisible={setVisible}
             userInfos={userInfos}
           />

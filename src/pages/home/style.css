@@ -1,52 +1,20 @@
 .home {
+  min-height: 100vh;
+  background: var(--bg-secondary);
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  background: var(--bg-secondary);
 }
-
 .home_middle {
   margin-top: 75px;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
 }
-
-/*------------ Activate Popup ------------*/
-.popup {
-  position: relative;
-  background: var(--bg-primary);
-  box-shadow: 0 1px 2px var(--shadow-1);
-  width: 30vw;
-  height: 200px;
-  position: fixed;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 99;
-  text-align: center;
-  border-radius: 10px;
-}
-
-.popup_header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
-  border-bottom: 1px solid var(--bg-third);
-  padding: 15px;
-}
-
-.popup_message {
-  padding: 15px;
-  font-weight: 500;
-}
-/*------------ Activate Popup ------------*/
-/*------------ Media Queries ------------*/
-@media only screen and (max-width: 1175px) {
+@media (max-width: 1175px) {
   .stories,
   .createPost,
-  .send_verification,
-  .post {
+  .post,
+  .send_verification {
     width: 84%;
   }
   .home_middle {
@@ -56,8 +24,7 @@
     width: 18vw;
   }
 }
-
-@media only screen and (max-width: 1030px) {
+@media (max-width: 1030px) {
   .left_home .left_link span,
   .left_home .left_link .col,
   .shortcut,
@@ -68,8 +35,6 @@
   }
   .left_home {
     width: 70px;
-    display: flex;
-    justify-content: center;
   }
   .left_link {
     background: var(--bg-third);
@@ -94,16 +59,15 @@
   }
   .stories,
   .createPost,
-  .send_verification,
-  .post {
+  .post,
+  .send_verification {
     width: 100%;
   }
 }
-
-@media only screen and (max-width: 960px) {
+@media (max-width: 960px) {
   .createPost,
-  .send_verification,
-  .post {
+  .post,
+  .send_verification {
     width: 93%;
   }
   .stories {
@@ -126,14 +90,13 @@
     right: 0;
   }
 }
-
-@media only screen and (max-width: 885px) {
+@media (max-width: 885px) {
   .right_home {
     display: none;
   }
   .createPost,
-  .send_verification,
-  .post {
+  .post,
+  .send_verification {
     width: 110%;
   }
   .stories {
@@ -143,8 +106,7 @@
     margin-left: 9%;
   }
 }
-
-@media only screen and (max-width: 805px) {
+@media (max-width: 805px) {
   .stories {
     grid-template-columns: repeat(6, 12.7vw);
   }
@@ -166,11 +128,10 @@
     display: none;
   }
   .popup {
-    width: 70vw;
+    width: 70vw !important;
   }
 }
-
-@media only screen and (max-width: 620px) {
+@media (max-width: 620px) {
   .left_home {
     display: none;
   }
@@ -180,12 +141,15 @@
   }
   .stories,
   .createPost,
-  .send_verification,
-  .post {
+  .post,
+  .send_verification {
     width: 100%;
   }
   .stories .white_circle {
     display: none;
+  }
+  .stories {
+    grid-template-columns: repeat(6, 14vw);
   }
   .story,
   .create_story_card {
@@ -195,55 +159,63 @@
     font-size: 12px;
   }
   .open_post {
-    font-size: 14px;
+    font-size: 16px;
   }
   .createPost_icon svg {
-    width: 18px;
+    width: 20px;
   }
 }
-
-@media only screen and (max-width: 400px) {
+@media (max-width: 400px) {
   .createPost,
   .post {
     margin-top: 1rem;
   }
-
   .home_middle,
   .createPost,
   .post {
     width: 98%;
     margin: 1rem auto;
   }
-
   .send_verification {
     width: 98%;
     margin: 0 auto;
   }
-
   .stories {
     grid-template-columns: repeat(6, 13vw);
+    padding-left: 10px;
   }
-
   .home_middle {
     margin: 56px auto;
   }
-
   .createPost_body {
     padding: 5px 0;
   }
 }
-
-@media only screen and (max-width: 330px) {
-  .open_post {
-    font-size: 12px;
-  }
-
-  .createPost_icon {
-    font-size: 9px;
-  }
-
-  .stories {
-    grid-template-columns: repeat(5, 1fr);
-  }
+/*-----Activate popup----*/
+.popup {
+  position: relative;
+  background: var(--bg-primary);
+  box-shadow: 0 1px 2px var(--shadow-1);
+  width: 40vw;
+  height: 200px;
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 99;
+  text-align: center;
+  border-radius: 10px;
 }
-/*------------ Media Queries ------------*/
+.popup_header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  border-bottom: 1px solid var(--bg-third);
+  padding: 15px;
+}
+.popup_message {
+  padding: 15px;
+  font-weight: 500;
+}
+/*-----Activate popup----*/

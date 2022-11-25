@@ -17,20 +17,18 @@ import {
 } from "../../svg";
 import { useSelector } from "react-redux";
 import SearchMenu from "./SearchMenu";
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import AllMenu from "./AllMenu";
 import useClickOutside from "../../helpers/clickOutside";
 import UserMenu from "./userMenu";
-
 export default function Header({ page, getAllPosts }) {
   const { user } = useSelector((user) => ({ ...user }));
   const color = "#65676b";
+  const [showSearchMenu, setShowSearchMenu] = useState(false);
   const [showAllMenu, setShowAllMenu] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
   const allmenu = useRef(null);
   const usermenu = useRef(null);
-  const searchMenuRef = useRef(null);
-
   useClickOutside(allmenu, () => {
     setShowAllMenu(false);
   });
@@ -48,7 +46,9 @@ export default function Header({ page, getAllPosts }) {
         </Link>
         <div
           className="search search1"
-          onClick={() => searchMenuRef.current.open()}
+          onClick={() => {
+            setShowSearchMenu(true);
+          }}
         >
           <Search color={color} />
           <input
@@ -58,7 +58,13 @@ export default function Header({ page, getAllPosts }) {
           />
         </div>
       </div>
-      <SearchMenu color={color} ref={searchMenuRef} token={user.token} />
+      {showSearchMenu && (
+        <SearchMenu
+          color={color}
+          setShowSearchMenu={setShowSearchMenu}
+          token={user.token}
+        />
+      )}
       <div className="header_middle">
         <Link
           to="/"
@@ -91,12 +97,8 @@ export default function Header({ page, getAllPosts }) {
             page === "profile" ? "active_link" : ""
           }`}
         >
-          {user && user.picture && user.first_name && (
-            <>
-              <img src={user.picture} alt="" />
-              <span>{user.first_name}</span>
-            </>
-          )}
+          <img src={user?.picture} alt="" />
+          <span>{user?.first_name}</span>
         </Link>
         <div
           className={`circle_icon hover1 ${showAllMenu && "active_header"}`}
@@ -112,7 +114,7 @@ export default function Header({ page, getAllPosts }) {
             </div>
           </div>
 
-          {showAllMenu && <AllMenu setShowAllMenu={setShowAllMenu} />}
+          {showAllMenu && <AllMenu />}
         </div>
         <div className="circle_icon hover1">
           <Messenger />

@@ -1,27 +1,24 @@
-import React, { useState, useRef } from "react";
-import { saveAs } from "file-saver";
+import { useRef, useState } from "react";
 import MenuItem from "./MenuItem";
-import useClickOutside from "../../helpers/clickOutside";
-import { savePost, deletePost } from "../../functions/post";
+import useOnClickOutside from "../../helpers/clickOutside";
+import { deletePost, savePost } from "../../functions/post";
+import { saveAs } from "file-saver";
 
 export default function PostMenu({
-  userId,
   postUserId,
+  userId,
   imagesLength,
-  postId,
+  setShowMenu,
   token,
+  postId,
   checkSaved,
   setCheckSaved,
   images,
   postRef,
 }) {
   const [test, setTest] = useState(postUserId === userId ? true : false);
-  const postMenuRef = useRef(null);
-
-  useClickOutside(postMenuRef, () => {
-    postMenuRef.current.style.display = "none";
-  });
-
+  const menu = useRef(null);
+  useOnClickOutside(menu, () => setShowMenu(false));
   const saveHandler = async () => {
     savePost(postId, token);
     if (checkSaved) {
@@ -30,35 +27,32 @@ export default function PostMenu({
       setCheckSaved(true);
     }
   };
-
   const downloadImages = async () => {
     images.map((img) => {
       saveAs(img.url, "image.jpg");
     });
   };
-
   const deleteHandler = async () => {
     const res = await deletePost(postId, token);
-    if (res.status === "Ok") {
+    if (res.status === "ok") {
       postRef.current.remove();
     }
   };
-
   return (
-    <ul className="post_menu" ref={postMenuRef}>
+    <ul className="post_menu" ref={menu}>
       {test && <MenuItem icon="pin_icon" title="Pin Post" />}
       <div onClick={() => saveHandler()}>
         {checkSaved ? (
           <MenuItem
             icon="save_icon"
             title="Unsave Post"
-            subtitle="Remove this from your saved items"
+            subtitle="Remove this from your saved items."
           />
         ) : (
           <MenuItem
             icon="save_icon"
             title="Save Post"
-            subtitle="Add this to your saved items"
+            subtitle="Add this to your saved items."
           />
         )}
       </div>
@@ -78,7 +72,7 @@ export default function PostMenu({
       {imagesLength && (
         <MenuItem icon="fullscreen_icon" title="Enter Fullscreen" />
       )}
-      {test && <MenuItem img="../../../icons/lock.png" title="Edit Audience" />}
+      {test && <MenuItem img="../../../icons/lock.png" title="Edit audience" />}
       {test && (
         <MenuItem
           icon="turnOffNotifications_icon"
@@ -96,7 +90,7 @@ export default function PostMenu({
           <MenuItem
             icon="trash_icon"
             title="Move to trash"
-            subtitle="Items in your trash are deleted after 30 days"
+            subtitle="items in your trash are deleted after 30 days"
           />
         </div>
       )}
@@ -104,8 +98,8 @@ export default function PostMenu({
       {!test && (
         <MenuItem
           img="../../../icons/report.png"
-          title="Repost Post"
-          subtitle="I'm concerned about this post"
+          title="Report post"
+          subtitle="i'm concerned about this post"
         />
       )}
     </ul>

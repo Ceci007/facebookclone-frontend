@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function MenuItem({ icon, title, subtitle, img }) {
   return (
     <li className="hover1">

@@ -11,11 +11,11 @@ export function postsReducer(state, action) {
       };
     case "POSTS_ERROR":
       return { ...state, loading: false, error: action.payload };
+
     default:
       return state;
   }
 }
-
 export function profileReducer(state, action) {
   switch (action.type) {
     case "PROFILE_REQUEST":
@@ -40,7 +40,6 @@ export function profileReducer(state, action) {
       return state;
   }
 }
-
 export function photosReducer(state, action) {
   switch (action.type) {
     case "PHOTOS_REQUEST":
@@ -54,12 +53,12 @@ export function photosReducer(state, action) {
       };
     case "PHOTOS_ERROR":
       return { ...state, loading: false, error: action.payload };
+
     default:
       return state;
   }
 }
-
-export function friendsPageReducer(state, action) {
+export function friendspage(state, action) {
   switch (action.type) {
     case "FRIENDS_REQUEST":
       return { ...state, loading: true, error: "" };
@@ -72,6 +71,7 @@ export function friendsPageReducer(state, action) {
       };
     case "FRIENDS_ERROR":
       return { ...state, loading: false, error: action.payload };
+
     default:
       return state;
   }

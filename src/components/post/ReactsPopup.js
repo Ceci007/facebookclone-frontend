@@ -1,5 +1,6 @@
-import React, { Fragment } from "react";
-
+import { useState } from "react";
+import { reactPost } from "../../functions/post";
+import { useSelector } from "react-redux";
 const reactsArray = [
   {
     name: "like",
@@ -14,16 +15,16 @@ const reactsArray = [
     image: "../../../reacts/haha.gif",
   },
   {
+    name: "wow",
+    image: "../../../reacts/wow.gif",
+  },
+  {
     name: "sad",
     image: "../../../reacts/sad.gif",
   },
   {
     name: "angry",
     image: "../../../reacts/angry.gif",
-  },
-  {
-    name: "wow",
-    image: "../../../reacts/wow.gif",
   },
 ];
 
@@ -33,25 +34,25 @@ export default function ReactsPopup({ visible, setVisible, reactHandler }) {
       {visible && (
         <div
           className="reacts_popup"
-          onMouseOver={() =>
+          onMouseOver={() => {
             setTimeout(() => {
               setVisible(true);
-            }, 500)
-          }
-          onMouseLeave={() =>
+            }, 500);
+          }}
+          onMouseLeave={() => {
             setTimeout(() => {
               setVisible(false);
-            }, 500)
-          }
+            }, 500);
+          }}
         >
           {reactsArray.map((react, i) => (
-            <Fragment key={i}>
-              {react && (
-                <div className="react" onClick={() => reactHandler(react.name)}>
-                  <img src={react.image} alt={`${react.name} button`} />
-                </div>
-              )}
-            </Fragment>
+            <div
+              className="react"
+              key={i}
+              onClick={() => reactHandler(react.name)}
+            >
+              <img src={react.image} alt="" />
+            </div>
           ))}
         </div>
       )}

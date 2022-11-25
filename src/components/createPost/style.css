@@ -6,21 +6,18 @@
   width: 100%;
   cursor: pointer;
 }
-
 .createPost_header {
   display: flex;
   align-items: center;
   gap: 8px;
   padding: 10px 17px 5px 15px;
 }
-
 .createPost_header img {
   width: 40px;
   height: 40px;
   border-radius: 50%;
   object-fit: cover;
 }
-
 .open_post {
   background: var(--bg-forth);
   color: var(--color-secondary);
@@ -33,20 +30,17 @@
   align-items: center;
   padding-left: 10px;
 }
-
 .create_splitter {
   height: 1px;
   width: 95%;
   background: var(--bg-third);
   margin: 7px 10px;
 }
-
 .createPost_body {
   padding: 0 10px 8px 10px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 }
-
 .createPost_icon {
   display: flex;
   align-items: center;

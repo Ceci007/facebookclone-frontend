@@ -9,15 +9,15 @@
 .profile_container {
   max-width: 945px;
   margin: 0 auto;
-  position: relative;
 }
 .profile_cover {
   position: relative;
   height: 350px;
   width: 100%;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
   background: var(--bg-secondary);
 }
-
 .cover {
   width: 100%;
   height: 100%;
@@ -26,16 +26,12 @@
   border-bottom-right-radius: 8px;
 }
 .udpate_cover_wrapper {
-  position: relative;
+  position: absolute;
   bottom: 1rem;
   right: 1rem;
 }
-
 .open_cover_update {
   background: #fff;
-  position: absolute;
-  right: 20px;
-  bottom: 20px;
   padding: 7px 15px;
   display: flex;
   align-items: center;
@@ -54,7 +50,6 @@
   background: var(--bg-primary);
   position: absolute;
   right: 0;
-  top: 50px;
   padding: 10px;
   width: 300px;
   border-radius: 10px;
@@ -79,6 +74,7 @@
   justify-content: space-between;
   padding: 0 1rem;
   margin-bottom: -2.8rem;
+  z-index: 1;
 }
 .profile_w_left {
   display: flex;
@@ -190,9 +186,7 @@
   display: flex;
   gap: 5px;
   align-items: center;
-  justify-content: center;
   height: 240px;
-  margin: 0 auto;
 }
 .pplumayknow {
   width: 100%;
@@ -243,6 +237,7 @@
   color: var(--blue-color);
 }
 .profile_grid {
+  position: relative;
   display: grid;
   grid-template-columns: 1fr 1.4fr;
   gap: 10px;
@@ -277,7 +272,6 @@
 .othername {
   color: var(--color-secondary);
   font-size: 20px;
-  margin-bottom: 10px;
 }
 .no_posts {
   display: flex;
@@ -338,16 +332,15 @@
 }
 .profile_photo_card span {
   color: var(--color-primary);
-  font-size: 14px;
+  font-size: 13px;
+  padding-left: 1px;
 }
-.profile_card_count {
-  font-weight: 900;
-  margin-bottom: 5px;
+.profile_friend_count {
+  font-weight: 600;
 }
 .profile_friend_imgs {
   display: flex;
-  align-items: flex-start;
-  margin-bottom: 10px;
+  align-items: center;
 }
 .profile_friend_imgs img {
   width: 32px;
@@ -358,27 +351,30 @@
 .profile_friend_imgs img:hover {
   filter: brightness(110%);
 }
-.cover_cropper {
+.cover_crooper {
   height: 100%;
 }
-.cover_cropper img {
+.cover_crooper img {
   object-fit: cover;
   width: 100%;
 }
-.cover_cropper .reactEasyCrop_Container {
+.friends_menu_wrap {
+  position: relative;
+}
+.cover_crooper .reactEasyCrop_Container {
   border-bottom-right-radius: 8px;
   border-bottom-left-radius: 8px;
 }
 .save_changes_cover {
+  z-index: 999999999;
   position: fixed;
   left: 0;
-  z-index: 9999999;
   display: flex;
   align-items: center;
-  background: rgba(0, 0, 0, 0.7);
   justify-content: space-between;
   width: 100%;
   padding: 10px 15px;
+  background: rgba(0, 0, 0, 0.7);
   font-weight: 500;
   font-size: 14px;
   color: var(--color-primary);
@@ -429,34 +425,7 @@
   color: var(--blue-color);
   border-bottom: 3px solid var(--blue-color);
 }
-.scrollFixed .profile_left {
-  position: fixed;
-  width: 360px;
-}
-.scrollFixed .profile_right {
-  margin-left: 370px;
-  width: 504px;
-}
-.showLess .profile_left {
-  bottom: 10px;
-}
-.showMore .profile_left {
-  top: 56px;
-}
 
-.friendship {
-  transform: translateY(-4rem);
-  z-index: 9;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.friendship .blue_btn {
-  height: 35px;
-}
-.update_cover_wrapper {
-  position: relative;
-}
 /*-----profile card--------*/
 @media (max-width: 900px) {
   .profile_w_left {
@@ -472,10 +441,13 @@
   .profile_img_wrap {
     flex-direction: column;
     justify-content: center;
-    align-items: center;
   }
   .profile_circle {
     right: 1rem;
+  }
+  .profile_name {
+    padding-bottom: 10px;
+    flex-direction: column;
   }
   .pplumayknow {
     display: none;
@@ -489,56 +461,78 @@
   .bottom_container {
     padding: 5px;
   }
-  .open_cover_menu {
-    background: var(--bg-primary);
-    position: absolute;
-    right: 0;
-    bottom: 0;
+  .friendship {
+    transform: translateY(-4rem);
   }
-  .profile_card_count {
+  .othername {
+    transform: translateY(-10px);
+  }
+  .profile_friend_count {
     text-align: center;
+    transform: translateY(-15px);
   }
   .profile_friend_imgs {
-    align-items: center;
     justify-content: center;
+    transform: translateY(-10px);
+  }
+  .fix1 {
+    transform: translate(1.2rem, -10px);
   }
 }
-
 @media (max-width: 650px) {
   .profile_menu_wrap {
     display: none;
   }
-
-  .open_cover_update {
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 300px;
-    height: 40px;
-  }
 }
-
 @media (max-width: 510px) {
   .udpate_cover_wrapper {
     bottom: 3rem;
   }
-
-  .open_cover_menu {
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%);
-    bottom: -60px;
-  }
 }
-
 @media (max-width: 405px) {
   .friendship {
     flex-direction: column;
   }
 }
 
+.scrollFixed .profile_left {
+  position: fixed;
+  width: 360px;
+}
+.scrollFixed .profile_right {
+  margin-left: 370px;
+  width: 505px;
+}
+.showLess .profile_left {
+  bottom: 10px;
+}
+.showMore .profile_left {
+  top: 54px;
+}
+.friendship {
+  z-index: 9;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.friendship .blue_btn {
+  height: 34px;
+}
 @media (min-width: 900px) {
   .friendship {
     transform: translateX(-2rem);
   }
+}
+.fix {
+  flex-direction: row !important;
+}
+.react-loading-skeleton {
+  --base-color: #ccc !important;
+  --highlight-color: #ddd !important;
+}
+.sekelton_loader {
+  height: 100px;
+  width: 100%;
+  display: grid;
+  place-items: center;
 }

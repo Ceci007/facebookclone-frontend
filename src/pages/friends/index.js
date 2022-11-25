@@ -1,31 +1,27 @@
-import React, { useEffect, useReducer } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useEffect, useReducer } from "react";
 import { useSelector } from "react-redux";
+import { Link, useParams } from "react-router-dom";
 import Header from "../../components/header";
+import { friendspage } from "../../functions/reducers";
 import { getFriendsPageInfos } from "../../functions/user";
-import { friendsPageReducer } from "../../functions/reducers";
 import Card from "./Card";
 import "./style.css";
-
 export default function Friends() {
   const { user } = useSelector((state) => ({ ...state }));
   const { type } = useParams();
 
-  const [{ loading, error, data }, dispatch] = useReducer(friendsPageReducer, {
+  const [{ loading, error, data }, dispatch] = useReducer(friendspage, {
     loading: false,
     data: {},
     error: "",
   });
-
   useEffect(() => {
     getData();
   }, []);
-
   const getData = async () => {
     dispatch({ type: "FRIENDS_REQUEST" });
-
     const data = await getFriendsPageInfos(user.token);
-    if (data.status === "Ok") {
+    if (data.status === "ok") {
       dispatch({ type: "FRIENDS_SUCCESS", payload: data.data });
     } else {
       dispatch({ type: "FRIENDS_ERROR", payload: data.data });
@@ -46,12 +42,12 @@ export default function Friends() {
           <div className="friends_left_wrap">
             <Link
               to="/friends"
-              className={`menu_item hover3 ${
+              className={`mmenu_item hover3 ${
                 type === undefined && "active_friends"
               }`}
             >
               <div className="small_circle">
-                <i className="friends_home_icon"></i>
+                <i className="friends_home_icon "></i>
               </div>
               <span>Home</span>
               <div className="rArrow">
@@ -60,7 +56,7 @@ export default function Friends() {
             </Link>
             <Link
               to="/friends/requests"
-              className={`menu_item hover3 ${
+              className={`mmenu_item hover3 ${
                 type === "requests" && "active_friends"
               }`}
             >
@@ -74,7 +70,7 @@ export default function Friends() {
             </Link>
             <Link
               to="/friends/sent"
-              className={`menu_item hover3 ${
+              className={`mmenu_item hover3 ${
                 type === "sent" && "active_friends"
               }`}
             >
@@ -86,7 +82,7 @@ export default function Friends() {
                 <i className="right_icon"></i>
               </div>
             </Link>
-            <div className="menu_item hover3">
+            <div className="mmenu_item hover3">
               <div className="small_circle">
                 <i className="friends_suggestions_icon"></i>
               </div>
@@ -97,7 +93,7 @@ export default function Friends() {
             </div>
             <Link
               to="/friends/all"
-              className={`menu_item hover3 ${
+              className={`mmenu_item hover3 ${
                 type === "all" && "active_friends"
               }`}
             >
@@ -109,7 +105,7 @@ export default function Friends() {
                 <i className="right_icon"></i>
               </div>
             </Link>
-            <div className="menu_item hover3">
+            <div className="mmenu_item hover3">
               <div className="small_circle">
                 <i className="birthdays_icon"></i>
               </div>
@@ -118,7 +114,7 @@ export default function Friends() {
                 <i className="right_icon"></i>
               </div>
             </div>
-            <div className="menu_item hover3">
+            <div className="mmenu_item hover3">
               <div className="small_circle">
                 <i className="all_friends_icon"></i>
               </div>
@@ -144,7 +140,7 @@ export default function Friends() {
                 {data.requests &&
                   data.requests.map((user) => (
                     <Card
-                      friend={user}
+                      userr={user}
                       key={user._id}
                       type="request"
                       getData={getData}
@@ -153,7 +149,6 @@ export default function Friends() {
               </div>
             </div>
           )}
-
           {(type === undefined || type === "sent") && (
             <div className="friends_right_wrap">
               <div className="friends_left_header">
@@ -168,7 +163,7 @@ export default function Friends() {
                 {data.sentRequests &&
                   data.sentRequests.map((user) => (
                     <Card
-                      friend={user}
+                      userr={user}
                       key={user._id}
                       type="sent"
                       getData={getData}
@@ -177,7 +172,6 @@ export default function Friends() {
               </div>
             </div>
           )}
-
           {(type === undefined || type === "all") && (
             <div className="friends_right_wrap">
               <div className="friends_left_header">
@@ -192,7 +186,7 @@ export default function Friends() {
                 {data.friends &&
                   data.friends.map((user) => (
                     <Card
-                      friend={user}
+                      userr={user}
                       key={user._id}
                       type="friends"
                       getData={getData}

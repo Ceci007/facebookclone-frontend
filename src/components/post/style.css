@@ -2,7 +2,6 @@
   margin-top: 1rem;
   width: 100%;
 }
-
 .post {
   position: relative;
   width: 685px;
@@ -13,32 +12,27 @@
   color: var(--color-primary);
   margin-bottom: 10px;
 }
-
 .post_header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 10px 15px;
 }
-
 .post_header_left {
   display: flex;
   align-items: center;
   gap: 10px;
 }
-
 .post_header_left img {
   width: 40px;
   height: 40px;
   border-radius: 50%;
   object-fit: cover;
 }
-
 .header_col {
   display: flex;
   flex-direction: column;
 }
-
 .post_profile_name {
   display: flex;
   align-items: center;
@@ -48,12 +42,10 @@
   line-height: 19px;
   color: var(--color-primary);
 }
-
 .updated_p {
   color: var(--color-secondary);
   font-weight: normal;
 }
-
 .post_profile_privacy_date {
   margin-top: 1px;
   display: flex;
@@ -61,7 +53,6 @@
   font-size: 12px;
   color: var(--color-secondary);
 }
-
 .post_bg {
   height: 500px;
   padding: 15px;
@@ -72,11 +63,9 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
-
 .post_text {
   padding: 0 15px 10px 15px;
 }
-
 .post_bg_text {
   color: #000;
 }
@@ -87,13 +76,11 @@
   height: 610px;
   object-fit: cover;
 }
-
 .grid_1 {
   display: flex;
   height: 610px;
   justify-content: center;
 }
-
 .grid_2 {
   width: 100%;
   display: grid;
@@ -102,7 +89,6 @@
   background: #fff;
   gap: 1px;
 }
-
 .grid_2 img:first-of-type {
   width: 100%;
   grid-column-start: 1;
@@ -110,7 +96,6 @@
   height: 610px;
   object-fit: cover;
 }
-
 .grid_2 img:last-of-type {
   width: 100%;
   grid-column-start: 2;
@@ -118,7 +103,6 @@
   height: 610px;
   object-fit: cover;
 }
-
 .grid_3 {
   width: 100%;
   display: grid;
@@ -127,13 +111,11 @@
   background: #fff;
   gap: 1px;
 }
-
 .grid_3 img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-
 .grid_3 .img-0 {
   width: 100%;
   grid-column-start: 1;
@@ -143,7 +125,6 @@
   height: 610px;
   object-fit: cover;
 }
-
 .grid_3 .img-1 {
   width: 100%;
   grid-column-start: 2;
@@ -153,7 +134,6 @@
   height: 305px;
   object-fit: cover;
 }
-
 .grid_3 .img-2 {
   width: 100%;
   grid-column-start: 2;
@@ -163,7 +143,6 @@
   height: 305px;
   object-fit: cover;
 }
-
 .grid_4 {
   width: 100%;
   display: grid;
@@ -172,13 +151,11 @@
   background: #fff;
   gap: 1px;
 }
-
 .grid_4 img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-
 .grid_4 .img-0 {
   width: 100%;
   grid-column-start: 1;
@@ -188,7 +165,6 @@
   height: 305px;
   object-fit: cover;
 }
-
 .grid_4 .img-1 {
   width: 100%;
   grid-column-start: 1;
@@ -198,7 +174,6 @@
   height: 305px;
   object-fit: cover;
 }
-
 .grid_4 .img-2 {
   width: 100%;
   grid-column-start: 2;
@@ -208,7 +183,6 @@
   height: 305px;
   object-fit: cover;
 }
-
 .grid_4 .img-3 {
   width: 100%;
   grid-column-start: 3;
@@ -218,7 +192,6 @@
   height: 305px;
   object-fit: cover;
 }
-
 .grid_5 {
   position: relative;
   width: 100%;
@@ -228,13 +201,11 @@
   background: #fff;
   gap: 1px;
 }
-
 .grid_5 img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-
 .grid_5 .img-0 {
   width: 100%;
   grid-column: auto / span 3;
@@ -243,7 +214,6 @@
   height: 305px;
   object-fit: cover;
 }
-
 .grid_5 .img-1 {
   width: 100%;
   grid-column: auto / span 3;
@@ -253,7 +223,6 @@
   height: 305px;
   object-fit: cover;
 }
-
 .grid_5 .img-2 {
   width: 100%;
   grid-column: auto / span 2;
@@ -263,7 +232,6 @@
   height: 305px;
   object-fit: cover;
 }
-
 .grid_5 .img-3 {
   width: 100%;
   grid-column: auto / span 2;
@@ -273,7 +241,6 @@
   height: 305px;
   object-fit: cover;
 }
-
 .grid_5 .img-4 {
   width: 100%;
   grid-column: auto / span 3;
@@ -298,35 +265,29 @@
   cursor: pointer;
   color: #fff;
 }
-
 .post_infos {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 10px;
 }
-
 .reacts_count {
   display: flex;
   align-items: center;
   gap: 5px;
 }
-
 .reacts_count_imgs {
   display: flex;
   align-items: center;
   gap: 1px;
 }
-
 .reacts_count_imgs img {
   width: 18px;
 }
-
 .reacts_count_num {
   font-size: 14px;
   color: var(--color-secondary);
 }
-
 .to_right {
   display: flex;
   align-items: center;
@@ -334,13 +295,11 @@
   color: var(--color-secondary);
   font-size: 15px;
 }
-
 .comments_count:hover,
 .share_count:hover {
   cursor: pointer;
   text-decoration: underline;
 }
-
 .post_actions {
   position: relative;
   display: grid;
@@ -351,7 +310,6 @@
   margin: 0 10px;
   padding: 5px 0;
 }
-
 .post_action {
   position: relative;
   display: flex;
@@ -362,7 +320,6 @@
   padding: 7px 0;
   border-radius: 5px;
 }
-
 .post_action span {
   color: var(--color-secondary);
   font-weight: 600;
@@ -370,7 +327,6 @@
   transform: translateY(-1px);
   text-transform: capitalize;
 }
-
 .reacts_popup {
   display: flex;
   align-items: center;
@@ -382,16 +338,13 @@
   gap: 8px;
   box-shadow: 0 1px 2px var(--shadow-1);
 }
-
 .react {
   cursor: pointer;
   transition: all 0.2s;
 }
-
 .react:hover {
   transform: scale(1.3);
 }
-
 .react img {
   width: 42px;
   height: 42px;
@@ -402,21 +355,17 @@
 .comments_wrap {
   padding: 10px 15px;
 }
-
 .create_comment {
   display: flex;
   align-items: center;
   gap: 5px;
-  margin-bottom: 10px;
 }
-
 .create_comment img {
   width: 35px;
   height: 35px;
   border-radius: 50%;
   object-fit: cover;
 }
-
 .comment_input_wrap {
   position: relative;
   width: 100%;
@@ -427,7 +376,6 @@
   border-radius: 50px;
   padding-right: 10px;
 }
-
 .comment_input_wrap input {
   outline: none;
   border: none;
@@ -437,7 +385,9 @@
   color: var(--color-primary);
   background: transparent;
 }
-
+.comment_name {
+  font-weight: 600;
+}
 .comment_circle_icon {
   height: 30px;
   width: 30px;
@@ -446,26 +396,22 @@
   place-items: center;
   cursor: pointer;
 }
-
 .comment_error {
   padding: 0 !important;
   opacity: 1 !important;
 }
-
 .comment_img_preview {
   position: relative;
   margin-top: 5px;
   margin-left: 40px;
   width: 160px;
 }
-
 .comment_img_preview img {
   width: 150px;
   height: 100px;
   object-fit: cover;
   border-radius: 5px;
 }
-
 .comment_img_preview .small_white_circle {
   top: -6px;
   right: -4px;
@@ -487,7 +433,6 @@
   line-height: 19px;
   padding: 10px;
 }
-
 .post_menu li {
   display: flex;
   align-items: center;
@@ -497,31 +442,26 @@
   cursor: pointer;
   border-radius: 10px;
 }
-
 .post_menu_text {
   display: flex;
   flex-direction: column;
 }
-
 .menu_post_col {
   font-size: 12px;
   color: #65676b;
 }
-
 .line {
   width: 100%;
   height: 1px;
   background: #ced0d4;
   margin: 5px 0;
 }
-
 .post_profile_wrap {
   position: relative;
   height: 500px;
   display: grid;
   place-items: center;
 }
-
 .post_updated_bg {
   position: absolute;
   top: 0;
@@ -535,7 +475,6 @@
   height: 100%;
   object-fit: cover;
 }
-
 .post_updated_picture {
   z-index: 1;
   width: 420px;
@@ -544,7 +483,6 @@
   object-fit: cover;
   border: 3px solid var(--bg-primary);
 }
-
 .post_cover_wrap {
   width: 100%;
   height: 350px;
@@ -554,13 +492,12 @@
   height: 100%;
   object-fit: cover;
 }
-/*------Post menu------*/
-/*------Comments------*/
+/*----Comment-----------*/
 .comment {
   display: flex;
   gap: 5px;
   font-size: 14px;
-  margin-bottom: 5px;
+  margin-top: 5px;
 }
 .comment_img {
   width: 35px;
@@ -599,7 +536,8 @@
 .view_comments:hover {
   text-decoration: underline;
 }
-/*------Comments------*/
+/*----Comment-----------*/
+/*------Post menu------*/
 @media (max-width: 435px) {
   .post .grid_2 img,
   .post .grid_3 img,
@@ -607,36 +545,30 @@
   .post .grid_5 img {
     height: 240px !important;
   }
-
   .post_bg {
     height: 400px !important;
   }
-
   .post .grid_1 {
     height: 100% !important;
   }
-
   .post .grid_1 img {
     height: 450px !important;
   }
-
   .post_profile_wrap {
     height: 320px;
   }
-
   .post_updated_bg {
     height: 200px;
   }
-
   .post_updated_picture {
     width: 250px;
     height: 250px;
   }
 }
-
 @media (max-width: 400px) {
   .posts {
-    margin: 0 auto !important;
+    width: 100%;
+    margin: 0 auto;
   }
   .post input {
     width: 30vw;
@@ -649,7 +581,7 @@
     height: 35px !important;
   }
   .reacts_popup {
-    top: -3.2rem;
+    top: -3rem;
   }
   .react img {
     width: 32px;

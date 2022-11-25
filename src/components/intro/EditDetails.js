@@ -1,7 +1,6 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import Detail from "./Detail";
-import useClickOutside from "../../helpers/clickOutside";
-
+import useOnCLickOutside from "../../helpers/clickOutside";
 export default function EditDetails({
   details,
   handleChange,
@@ -9,15 +8,11 @@ export default function EditDetails({
   infos,
   setVisible,
 }) {
-  const detailsModalRef = useRef(null);
-
-  useClickOutside(detailsModalRef, () => {
-    setVisible(false);
-  });
-
+  const modal = useRef(null);
+  useOnCLickOutside(modal, () => setVisible(false));
   return (
     <div className="blur">
-      <div className="postBox infosBox" ref={detailsModalRef}>
+      <div className="postBox infosBox" ref={modal}>
         <div className="box_header">
           <div className="small_circle" onClick={() => setVisible(false)}>
             <i className="exit_icon"></i>
@@ -26,106 +21,106 @@ export default function EditDetails({
         </div>
         <div className="details_wrapper scrollbar">
           <div className="details_col">
-            <span>Customize your intro</span>
+            <span>Customize Your Intro</span>
             <span>Details you select will be public</span>
           </div>
           <div className="details_header">Other Name</div>
           <Detail
-            value={details && details.otherName ? details.otherName : ""}
+            value={details?.otherName}
             img="studies"
             placeholder="Add other name"
             name="otherName"
+            text="other Name"
             handleChange={handleChange}
             updateDetails={updateDetails}
             infos={infos}
-            text="other name"
           />
           <div className="details_header">Work</div>
           <Detail
-            value={details && details.job ? details.job : ""}
+            value={details?.job}
             img="job"
-            placeholder="Add job tittle"
+            placeholder="Add job title"
             name="job"
+            text="a job"
             handleChange={handleChange}
             updateDetails={updateDetails}
             infos={infos}
-            text="job"
           />
           <Detail
-            value={details && details.workplace ? details.workplace : ""}
+            value={details?.workplace}
             img="job"
             placeholder="Add a workplace"
             name="workplace"
+            text="workplace"
             handleChange={handleChange}
             updateDetails={updateDetails}
             infos={infos}
-            text="workplace"
           />
           <div className="details_header">Education</div>
           <Detail
-            value={details && details.highSchool ? details.highSchool : ""}
+            value={details?.highSchool}
             img="studies"
             placeholder="Add a high school"
             name="highSchool"
+            text="a high school"
             handleChange={handleChange}
             updateDetails={updateDetails}
             infos={infos}
-            text="high school"
           />
           <Detail
-            value={details && details.college ? details.college : ""}
+            value={details?.college}
             img="studies"
             placeholder="Add a college"
             name="college"
-            handleChange={handleChange}
-            updateDetails={updateDetails}
-            infos={infos}
             text="college"
-          />
-          <div className="details_header">Current city</div>
-          <Detail
-            value={details && details.currentCity ? details.currentCity : ""}
-            img="home"
-            placeholder="Add current city"
-            name="currentCity"
             handleChange={handleChange}
             updateDetails={updateDetails}
             infos={infos}
-            text="current city"
+          />
+          <div className="details_header">Current City</div>
+          <Detail
+            value={details?.currentCity}
+            img="home"
+            placeholder="Add a current city"
+            name="currentCity"
+            text="a current city"
+            handleChange={handleChange}
+            updateDetails={updateDetails}
+            infos={infos}
           />
           <div className="details_header">Hometown</div>
           <Detail
-            value={details && details.hometown ? details.hometown : ""}
+            value={details?.hometown}
             img="home"
             placeholder="Add hometown"
             name="hometown"
+            text="hometown"
             handleChange={handleChange}
             updateDetails={updateDetails}
             infos={infos}
-            text="hometown"
           />
           <div className="details_header">Relationship</div>
           <Detail
-            value={details && details.relationship ? details.relationship : ""}
+            value={details?.relationship}
             img="relationship"
-            placeholder="Add a relationship"
+            placeholder="Add instagram"
             name="relationship"
+            text="relationship"
             handleChange={handleChange}
             updateDetails={updateDetails}
             infos={infos}
-            text="relationship"
             rel
           />
           <div className="details_header">Instagram</div>
           <Detail
-            value={details && details.instagram ? details.instagram : ""}
-            img="instagram"
+            value={details?.instagram}
+            img="home"
             placeholder="Add instagram"
             name="instagram"
+            text="instagram"
             handleChange={handleChange}
             updateDetails={updateDetails}
             infos={infos}
-            text="instagram"
           />
         </div>
       </div>

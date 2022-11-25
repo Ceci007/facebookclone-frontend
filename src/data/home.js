@@ -110,7 +110,6 @@ export const left = [
     img: "weather",
   },
 ];
-
 export const stories = [
   {
     profile_picture: "../../stories/profile1.jpg",

@@ -1,38 +1,26 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { Formik, Form } from "formik";
-import * as Yup from "yup";
 import { Link } from "react-router-dom";
-import LoginInput from "../inputs/loginInput";
+import * as Yup from "yup";
+import LoginInput from "../../components/inputs/loginInput";
+import { useState } from "react";
 import DotLoader from "react-spinners/DotLoader";
-import { css } from "@emotion/react";
 import axios from "axios";
+import { useDispatch } from "react-redux";
 import Cookies from "js-cookie";
-
-const override = css`
-  display: block;
-  margin: 0 auto;
-  border-color: #1876f2;
-`;
-
+import { useNavigate } from "react-router-dom";
 const loginInfos = {
   email: "",
   password: "",
 };
-
-export default function LoginForm({ registerFormRef }) {
-  const navigate = useNavigate();
+export default function LoginForm({ setVisible }) {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const [login, setLogin] = useState(loginInfos);
   const { email, password } = login;
-
   const handleLoginChange = (e) => {
     const { name, value } = e.target;
     setLogin({ ...login, [name]: value });
   };
-
   const loginValidation = Yup.object({
     email: Yup.string()
       .required("Email address is required.")
@@ -40,21 +28,18 @@ export default function LoginForm({ registerFormRef }) {
       .max(100),
     password: Yup.string().required("Password is required"),
   });
-
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-
   const loginSubmit = async () => {
     try {
       setLoading(true);
       const { data } = await axios.post(
         `${process.env.REACT_APP_BACKEND_URL}/login`,
-        { email, password }
+        {
+          email,
+          password,
+        }
       );
-
-      setError("");
-      setLoading(false);
-
       dispatch({ type: "LOGIN", payload: data });
       Cookies.set("user", JSON.stringify(data));
       navigate("/");
@@ -63,11 +48,10 @@ export default function LoginForm({ registerFormRef }) {
       setError(error.response.data.message);
     }
   };
-
   return (
     <div className="login_wrap">
       <div className="login_1">
-        <img src="icons/facebook.svg" alt="facebook logo" />
+        <img src="../../icons/facebook.svg" alt="" />
         <span>
           Facebook helps you connect and share with the people in your life.
         </span>
@@ -100,7 +84,7 @@ export default function LoginForm({ registerFormRef }) {
                   onChange={handleLoginChange}
                   bottom
                 />
-                <button type="submit" className="blue_btn login_btn_form">
+                <button type="submit" className="blue_btn">
                   Log In
                 </button>
               </Form>
@@ -109,25 +93,20 @@ export default function LoginForm({ registerFormRef }) {
           <Link to="/reset" className="forgot_password">
             Forgotten password?
           </Link>
-          <div className="sign_splitter"></div>
-          <DotLoader
-            color="#1876f2"
-            loading={loading}
-            css={override}
-            size={30}
-          />
+          <DotLoader color="#1876f2" loading={loading} size={30} />
+
           {error && <div className="error_text">{error}</div>}
+          <div className="sign_splitter"></div>
           <button
             className="blue_btn open_signup"
-            onClick={() => registerFormRef.current.open()}
+            onClick={() => setVisible(true)}
           >
             Create Account
           </button>
         </div>
-        <Link to="/">
-          <b>Create a page</b> for a celebrity, brand or business.
+        <Link to="/" className="sign_extra">
+          <b>Create a Page</b> for a celebrity, brand or business.
         </Link>
-        <br />
       </div>
     </div>
   );

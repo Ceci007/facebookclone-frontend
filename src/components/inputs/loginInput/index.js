@@ -1,15 +1,11 @@
-import React from "react";
-import { useMediaQuery } from "react-responsive";
-import { useField, ErrorMessage } from "formik";
 import "./style.css";
-
+import { useField, ErrorMessage } from "formik";
+import { useMediaQuery } from "react-responsive";
 export default function LoginInput({ placeholder, bottom, ...props }) {
   const [field, meta] = useField(props);
-
   const desktopView = useMediaQuery({
     query: "(min-width: 850px)",
   });
-
   const view1050 = useMediaQuery({
     query: "(max-width: 1050px)",
   });

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Cropper from "react-easy-crop";
 import useClickOutside from "../../helpers/clickOutside";
 import getCroppedImg from "../../helpers/getCroppedImg";
@@ -10,7 +10,7 @@ import PulseLoader from "react-spinners/PulseLoader";
 import OldCovers from "./OldCovers";
 
 export default function Cover({ cover, visitor, photos }) {
-  const [showCoverMenu, setShowCoverMenu] = useState(false);
+  const [showCoverMneu, setShowCoverMenu] = useState(false);
   const [coverPicture, setCoverPicture] = useState("");
   const [loading, setLoading] = useState(false);
   const [show, setShow] = useState(false);
@@ -83,7 +83,7 @@ export default function Cover({ cover, visitor, photos }) {
       formData.append("path", path);
       const res = await uploadImages(formData, path, user.token);
       const updated_picture = await updateCover(res[0].url, user.token);
-      if (updated_picture === "Ok") {
+      if (updated_picture === "ok") {
         const new_post = await createPost(
           "coverPicture",
           null,
@@ -92,17 +92,18 @@ export default function Cover({ cover, visitor, photos }) {
           user.id,
           user.token
         );
-
-        if (new_post === "Ok") {
+        if (new_post.status === "ok") {
           setLoading(false);
           setCoverPicture("");
           cRef.current.src = res[0].url;
         } else {
           setLoading(false);
+
           setError(new_post);
         }
       } else {
         setLoading(false);
+
         setError(updated_picture);
       }
     } catch (error) {
@@ -110,7 +111,6 @@ export default function Cover({ cover, visitor, photos }) {
       setError(error.response.data.message);
     }
   };
-
   return (
     <div className="profile_cover" ref={coverRef}>
       {coverPicture && (
@@ -166,26 +166,29 @@ export default function Cover({ cover, visitor, photos }) {
         <img src={cover} className="cover" alt="" ref={cRef} />
       )}
       {!visitor && (
-        <div className="update_cover_wrapper">
+        <div className="udpate_cover_wrapper">
           <div
             className="open_cover_update"
             onClick={() => setShowCoverMenu((prev) => !prev)}
           >
-            <i className="camera_filled_icon"></i> Add Cover Photo
+            <i className="camera_filled_icon"></i>
+            Add Cover Photo
           </div>
-          {showCoverMenu && (
+          {showCoverMneu && (
             <div className="open_cover_menu" ref={menuRef}>
               <div
                 className="open_cover_menu_item hover1"
                 onClick={() => setShow(true)}
               >
-                <i className="photo_icon"></i> Select Photo
+                <i className="photo_icon"></i>
+                Select Photo
               </div>
               <div
                 className="open_cover_menu_item hover1"
                 onClick={() => refInput.current.click()}
               >
-                <i className="upload_icon"></i> Upload Photo
+                <i className="upload_icon"></i>
+                Upload Photo
               </div>
             </div>
           )}

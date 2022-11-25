@@ -1,46 +1,42 @@
-import React, { useEffect, useState, useReducer } from "react";
 import { Routes, Route } from "react-router-dom";
-import { useSelector } from "react-redux";
-import axios from "axios";
-import { postsReducer } from "./functions/reducers";
-import LoggedInRoutes from "./routes/LoggedInRoutes";
-import NotLoggedInRoutes from "./routes/NotLoggedInRoutes";
 import Login from "./pages/login";
 import Profile from "./pages/profile";
-import Friends from "./pages/friends";
 import Home from "./pages/home";
+import LoggedInRoutes from "./routes/LoggedInRoutes";
+import NotLoggedInRoutes from "./routes/NotLoggedInRoutes";
+import { useSelector } from "react-redux";
 import Activate from "./pages/home/activate";
 import Reset from "./pages/reset";
 import CreatePostPopup from "./components/createPostPopup";
+import { useEffect, useReducer, useState } from "react";
+import axios from "axios";
+import { postsReducer } from "./functions/reducers";
+import Friends from "./pages/friends";
 
 function App() {
-  const { user, darkTheme } = useSelector((state) => ({ ...state }));
   const [visible, setVisible] = useState(false);
+  const { user, darkTheme } = useSelector((state) => ({ ...state }));
   const [{ loading, error, posts }, dispatch] = useReducer(postsReducer, {
     loading: false,
-    error: "",
     posts: [],
+    error: "",
   });
-
   useEffect(() => {
     getAllPosts();
   }, []);
-
   const getAllPosts = async () => {
     try {
       dispatch({
         type: "POSTS_REQUEST",
       });
-
       const { data } = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}/getAllPosts`,
+        `${process.env.REACT_APP_BACKEND_URL}/getAllposts`,
         {
           headers: {
             Authorization: `Bearer ${user.token}`,
           },
         }
       );
-
       dispatch({
         type: "POSTS_SUCCESS",
         payload: data,
@@ -48,14 +44,10 @@ function App() {
     } catch (error) {
       dispatch({
         type: "POSTS_ERROR",
-        payload:
-          error && error.response && error.response.data
-            ? error.response.data.message
-            : "",
+        payload: error.response.data.message,
       });
     }
   };
-
   return (
     <div className={darkTheme && "dark"}>
       {visible && (
@@ -74,13 +66,13 @@ function App() {
               <Profile setVisible={setVisible} getAllPosts={getAllPosts} />
             }
             exact
-            getAllPosts={getAllPosts}
           />
           <Route
             path="/profile/:username"
-            element={<Profile setVisible={setVisible} />}
+            element={
+              <Profile setVisible={setVisible} getAllPosts={getAllPosts} />
+            }
             exact
-            getAllPosts={getAllPosts}
           />
           <Route
             path="/friends"
@@ -88,7 +80,6 @@ function App() {
               <Friends setVisible={setVisible} getAllPosts={getAllPosts} />
             }
             exact
-            getAllPosts={getAllPosts}
           />
           <Route
             path="/friends/:type"
@@ -96,7 +87,6 @@ function App() {
               <Friends setVisible={setVisible} getAllPosts={getAllPosts} />
             }
             exact
-            getAllPosts={getAllPosts}
           />
           <Route
             path="/"

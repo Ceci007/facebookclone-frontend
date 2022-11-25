@@ -6,15 +6,12 @@
   font-size: 15px;
   color: var(--color-primary);
 }
-
 .info_profile img {
   filter: invert(40%);
 }
-
 .info_text {
   word-break: break-word;
 }
-
 .info_col {
   text-align: center;
   display: flex;
@@ -34,10 +31,10 @@
 }
 .details_input {
   margin-top: 10px;
-  background: var(--bg-secondary);
+  background: var(--bg-secondary) !important;
 }
 .details_input:focus {
-  outline-color: var(--blue-color);
+  outline-color: var(--blue-color) !important;
   outline-offset: 1px !important;
 }
 .remaining {
@@ -58,13 +55,13 @@
   filter: invert(40%);
 }
 .infosBox {
-  height: 600px;
+  height: 650px;
   width: 800px !important;
 }
 .details_wrapper {
   padding: 1rem;
   overflow-y: auto;
-  height: 75vh;
+  height: 570px;
 }
 .details_col {
   display: flex;
@@ -77,10 +74,6 @@
 .details_col span:last-of-type {
   color: var(--color-secondary);
   font-size: 14px;
-}
-.profile_name {
-  display: flex;
-  align-items: center;
 }
 .details_header {
   margin-top: 15px;
@@ -97,17 +90,12 @@
   font-size: 14px;
   cursor: pointer;
 }
-.add_details_flex:hover {
-  text-decoration: underline;
-}
+
 .add_details_flex .edit_icon {
   position: absolute;
   right: 1rem;
   cursor: pointer;
   transform: scale(1.1);
-}
-.no_underline:hover {
-  text-decoration: none;
 }
 .underline:hover {
   text-decoration: underline;
@@ -121,17 +109,8 @@
   padding: 0 10px;
   border-radius: 5px;
 }
-
 @media (max-width: 810px) {
   .infosBox {
     width: 96% !important;
-  }
-}
-
-@media (max-width: 768px) {
-  .profile_name {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
   }
 }

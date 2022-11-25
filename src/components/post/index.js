@@ -1,33 +1,27 @@
-import React, { Fragment, useEffect, useState, useRef } from "react";
-import Moment from "react-moment";
 import { Link } from "react-router-dom";
-import { Public, Dots } from "../../svg";
+import "./style.css";
+import Moment from "react-moment";
+import { Dots, Public } from "../../svg";
 import ReactsPopup from "./ReactsPopup";
+import { useEffect, useRef, useState } from "react";
 import CreateComment from "./CreateComment";
 import PostMenu from "./PostMenu";
-import { reactPost, getReacts } from "../../functions/post";
+import { comment, getReacts, reactPost } from "../../functions/post";
 import Comment from "./Comment";
-import "./style.css";
-
 export default function Post({ post, user, profile }) {
   const [visible, setVisible] = useState(false);
-  const [showPostMenu, setShowPostMenu] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
   const [reacts, setReacts] = useState();
   const [check, setCheck] = useState();
   const [total, setTotal] = useState(0);
-  const [comments, setComments] = useState([]);
   const [count, setCount] = useState(1);
   const [checkSaved, setCheckSaved] = useState();
-  const postRef = useRef(null);
-
+  const [comments, setComments] = useState([]);
   useEffect(() => {
     getPostReacts();
   }, [post]);
-
   useEffect(() => {
-    if (post.comments) {
-      setComments(post.comments);
-    }
+    setComments(post?.comments);
   }, [post]);
 
   const getPostReacts = async () => {
@@ -56,64 +50,60 @@ export default function Post({ post, user, profile }) {
       if (index !== -1) {
         setReacts([...reacts, (reacts[index].count = ++reacts[index].count)]);
         setTotal((prev) => ++prev);
+        console.log(reacts);
       }
       if (index1 !== -1) {
         setReacts([...reacts, (reacts[index1].count = --reacts[index1].count)]);
         setTotal((prev) => --prev);
+        console.log(reacts);
       }
     }
   };
-
   const showMore = () => {
     setCount((prev) => prev + 3);
   };
-
+  const postRef = useRef(null);
   return (
     <div
       className="post"
       style={{ width: `${profile && "100%"}` }}
       ref={postRef}
     >
-      {post && post.user && post.user.username && (
-        <div className="post_header">
-          <Link
-            to={`/profile/${post.user.username}`}
-            className="post_header_left"
-          >
-            <img
-              src={post.user.picture}
-              alt={`${post.user.first_name} ${post.user.last_name}`}
-            />
-            <div className="header_col">
-              <div className="post_profile_name">
-                {post.user.first_name} {post.user.last_name}
-                <div className="updated_p">
-                  {post.type === "profilePicture" &&
-                    `updated ${
-                      post.user.gender === "male" ? "his" : "her"
-                    } profile picture`}
-                  {post.type === "coverPicture" &&
-                    `updated ${
-                      post.user.gender === "male" ? "his" : "her"
-                    } cover picture`}
-                </div>
-              </div>
-              <div className="post_profile_privacy_date">
-                <Moment fromNow interval={30}>
-                  {post.createdAt}
-                </Moment>
-                . <Public color="#828387" />
+      <div className="post_header">
+        <Link
+          to={`/profile/${post.user.username}`}
+          className="post_header_left"
+        >
+          <img src={post.user.picture} alt="" />
+          <div className="header_col">
+            <div className="post_profile_name">
+              {post.user.first_name} {post.user.last_name}
+              <div className="updated_p">
+                {post.type == "profilePicture" &&
+                  `updated ${
+                    post.user.gender === "male" ? "his" : "her"
+                  } profile picture`}
+                {post.type == "coverPicture" &&
+                  `updated ${
+                    post.user.gender === "male" ? "his" : "her"
+                  } cover picture`}
               </div>
             </div>
-          </Link>
-          <div
-            className="post_header_right hover1"
-            onClick={() => setShowPostMenu((prev) => !prev)}
-          >
-            <Dots color="#828387" />
+            <div className="post_profile_privacy_date">
+              <Moment fromNow interval={30}>
+                {post.createdAt}
+              </Moment>
+              . <Public color="#828387" />
+            </div>
           </div>
+        </Link>
+        <div
+          className="post_header_right hover1"
+          onClick={() => setShowMenu((prev) => !prev)}
+        >
+          <Dots color="#828387" />
         </div>
-      )}
+      </div>
       {post.background ? (
         <div
           className="post_bg"
@@ -121,7 +111,7 @@ export default function Post({ post, user, profile }) {
         >
           <div className="post_bg_text">{post.text}</div>
         </div>
-      ) : post.type == null ? (
+      ) : post.type === null ? (
         <>
           <div className="post_text">{post.text}</div>
           {post.images && post.images.length && (
@@ -139,12 +129,7 @@ export default function Post({ post, user, profile }) {
               }
             >
               {post.images.slice(0, 5).map((image, i) => (
-                <img
-                  src={image.url}
-                  key={i}
-                  alt={image.url}
-                  className={`img-${i}`}
-                />
+                <img src={image.url} key={i} alt="" className={`img-${i}`} />
               ))}
               {post.images.length > 5 && (
                 <div className="more-pics-shadow">
@@ -154,18 +139,23 @@ export default function Post({ post, user, profile }) {
             </div>
           )}
         </>
-      ) : post.type == "profilePicture" ? (
+      ) : post.type === "profilePicture" ? (
         <div className="post_profile_wrap">
           <div className="post_updated_bg">
             <img src={post.user.cover} alt="" />
           </div>
-          <img src={post.images[0].url} className="post_updated_picture" />
+          <img
+            src={post.images[0].url}
+            alt=""
+            className="post_updated_picture"
+          />
         </div>
       ) : (
         <div className="post_cover_wrap">
-          <img src={post.images[0].url}></img>
+          <img src={post.images[0].url} alt="" />
         </div>
       )}
+
       <div className="post_infos">
         <div className="reacts_count">
           <div className="reacts_count_imgs">
@@ -175,18 +165,16 @@ export default function Post({ post, user, profile }) {
                   return b.count - a.count;
                 })
                 .slice(0, 3)
-                .map((react, i) => {
-                  return (
-                    <Fragment key={i}>
-                      {react.count > 0 && (
-                        <img
-                          src={`../../../reacts/${react.react}.svg`}
-                          key={i}
-                        />
-                      )}
-                    </Fragment>
-                  );
-                })}
+                .map(
+                  (react, i) =>
+                    react.count > 0 && (
+                      <img
+                        src={`../../../reacts/${react.react}.svg`}
+                        alt=""
+                        key={i}
+                      />
+                    )
+                )}
           </div>
           <div className="reacts_count_num">{total > 0 && total}</div>
         </div>
@@ -203,21 +191,22 @@ export default function Post({ post, user, profile }) {
         />
         <div
           className="post_action hover1"
-          onMouseOver={() =>
+          onMouseOver={() => {
             setTimeout(() => {
               setVisible(true);
-            }, 500)
-          }
-          onMouseLeave={() =>
+            }, 500);
+          }}
+          onMouseLeave={() => {
             setTimeout(() => {
               setVisible(false);
-            }, 500)
-          }
+            }, 500);
+          }}
           onClick={() => reactHandler(check ? check : "like")}
         >
           {check ? (
             <img
               src={`../../../reacts/${check}.svg`}
+              alt=""
               className="small_react"
               style={{ width: "18px" }}
             />
@@ -226,21 +215,24 @@ export default function Post({ post, user, profile }) {
           )}
           <span
             style={{
-              color: `${
-                check === "like"
-                  ? "#4267b2"
-                  : check === "love"
-                  ? "#f63459"
-                  : check === "haha"
-                  ? "#f7b125"
-                  : check === "sad"
-                  ? "#f7b125"
-                  : check === "wow"
-                  ? "#f7b125"
-                  : check === "angry"
-                  ? "#e4605a"
-                  : ""
-              }`,
+              color: `
+          
+          ${
+            check === "like"
+              ? "#4267b2"
+              : check === "love"
+              ? "#f63459"
+              : check === "haha"
+              ? "#f7b125"
+              : check === "sad"
+              ? "#f7b125"
+              : check === "wow"
+              ? "#f7b125"
+              : check === "angry"
+              ? "#e4605a"
+              : ""
+          }
+          `,
             }}
           >
             {check ? check : "Like"}
@@ -256,39 +248,32 @@ export default function Post({ post, user, profile }) {
         </div>
       </div>
       <div className="comments_wrap">
-        <div className="comments_order">
-          <CreateComment
-            user={user}
-            postId={post._id}
-            setComments={setComments}
-            setCount={setCount}
-          />
-          {comments &&
-            comments
-              .sort((a, b) => {
-                return new Date(b.commentAt) - new Date(a.commentAt);
-              })
-              .slice(0, count)
-              .map((comment, i) => {
-                return (
-                  <Fragment key={i}>
-                    <Comment comment={comment} />
-                  </Fragment>
-                );
-              })}
-          {count < comments.length && (
-            <div className="view_comments" onClick={() => showMore()}>
-              View more comments
-            </div>
-          )}
-        </div>
+        <div className="comments_order"></div>
+        <CreateComment
+          user={user}
+          postId={post._id}
+          setComments={setComments}
+          setCount={setCount}
+        />
+        {comments &&
+          comments
+            .sort((a, b) => {
+              return new Date(b.commentAt) - new Date(a.commentAt);
+            })
+            .slice(0, count)
+            .map((comment, i) => <Comment comment={comment} key={i} />)}
+        {count < comments.length && (
+          <div className="view_comments" onClick={() => showMore()}>
+            View more comments
+          </div>
+        )}
       </div>
-      {showPostMenu && (
+      {showMenu && (
         <PostMenu
           userId={user.id}
           postUserId={post.user._id}
-          imagesLength={post && post.images && post.images.length > 0}
-          setShowPostMenu={setShowPostMenu}
+          imagesLength={post?.images?.length}
+          setShowMenu={setShowMenu}
           postId={post._id}
           token={user.token}
           checkSaved={checkSaved}

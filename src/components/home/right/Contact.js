@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function Contact({ user }) {
   return (
     <div className="contact hover3">

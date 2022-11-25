@@ -1,37 +1,32 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Bio from "./Bio";
 import "./style.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import EditDetails from "./EditDetails";
-
-export default function Intro({ detailsProp, visitor, setOtherName }) {
+export default function Intro({ detailss, visitor, setOthername }) {
   const { user } = useSelector((state) => ({ ...state }));
   const [details, setDetails] = useState();
   const [visible, setVisible] = useState(false);
-
   useEffect(() => {
-    setDetails(detailsProp);
-    setInfos(detailsProp);
-  }, [detailsProp]);
-
+    setDetails(detailss);
+    setInfos(detailss);
+  }, [detailss]);
   const initial = {
-    bio: details && details.bio ? details.bio : "",
-    otherName: details && details.otherName ? details.otherName : "",
-    job: details && details.job ? details.job : "",
-    workplace: details && details.workplace ? details.workplace : "",
-    highSchool: details && details.highSchool ? details.highSchool : "",
-    college: details && details.college ? details.college : "",
-    currentCity: details && details.currentCity ? details.currentCity : "",
-    hometown: details && details.hometown ? details.hometown : "",
-    relationship: details && details.relationship ? details.relationship : "",
-    instagram: details && details.instagram ? details.instagram : "",
+    bio: details?.bio ? details.bio : "",
+    otherName: details?.otherName ? details.otherName : "",
+    job: details?.job ? details.job : "",
+    workplace: details?.workplace ? details.workplace : "",
+    highSchool: details?.highSchool ? details.highSchool : "",
+    college: details?.college ? details.college : "",
+    currentCity: details?.currentCity ? details.currentCity : "",
+    hometown: details?.hometown ? details.hometown : "",
+    relationship: details?.relationship ? details.relationship : "",
+    instagram: details?.instagram ? details.instagram : "",
   };
   const [infos, setInfos] = useState(initial);
   const [showBio, setShowBio] = useState(false);
-  const [max, setMax] = useState(
-    infos && infos.bio ? 100 - infos.bio.length : 100
-  );
+  const [max, setMax] = useState(infos?.bio ? 100 - infos?.bio.length : 100);
 
   const updateDetails = async () => {
     try {
@@ -49,24 +44,22 @@ export default function Intro({ detailsProp, visitor, setOtherName }) {
       );
       setShowBio(false);
       setDetails(data);
-      setOtherName(data.otherName);
+      setOthername(data.otherName);
     } catch (error) {
       console.log(error.response.data.message);
     }
   };
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setInfos({ ...infos, [name]: value });
     setMax(100 - e.target.value.length);
   };
-
   return (
     <div className="profile_card">
       <div className="profile_card_header">Intro</div>
-      {details && details.bio && !showBio && (
+      {details?.bio && !showBio && (
         <div className="info_col">
-          <span className="info_text">{details && details.bio}</span>
+          <span className="info_text">{details?.bio}</span>
           {!visitor && (
             <button
               className="gray_btn hover1"
@@ -77,7 +70,7 @@ export default function Intro({ detailsProp, visitor, setOtherName }) {
           )}
         </div>
       )}
-      {details && !details.bio && !showBio && !visitor && (
+      {!details?.bio && !showBio && !visitor && (
         <button
           className="gray_btn hover1 w100"
           onClick={() => setShowBio(true)}
@@ -96,66 +89,63 @@ export default function Intro({ detailsProp, visitor, setOtherName }) {
           name="bio"
         />
       )}
-      {details && details.job && details && details.workplace ? (
+      {details?.job && details?.workplace ? (
         <div className="info_profile">
           <img src="../../../icons/job.png" alt="" />
-          works as {details && details.job} at{" "}
-          <b>{details && details.workplace}</b>
+          works as {details?.job} at <b>{details?.workplace}</b>
         </div>
-      ) : details && details.job && details && !details.workplace ? (
+      ) : details?.job && !details?.workplace ? (
         <div className="info_profile">
           <img src="../../../icons/job.png" alt="" />
-          works as {details && details.job}
+          works as {details?.job}
         </div>
       ) : (
-        details &&
-        details.workplace &&
-        details &&
-        !details.job && (
+        details?.workplace &&
+        !details?.job && (
           <div className="info_profile">
             <img src="../../../icons/job.png" alt="" />
-            works at {details && details.workplace}
+            works at {details?.workplace}
           </div>
         )
       )}
-      {details && details.relationship && (
+      {details?.relationship && (
         <div className="info_profile">
           <img src="../../../icons/relationship.png" alt="" />
-          {details && details.relationship}
+          {details?.relationship}
         </div>
       )}
-      {details && details.college && (
+      {details?.college && (
         <div className="info_profile">
           <img src="../../../icons/studies.png" alt="" />
-          studied at {details && details.college}
+          studied at {details?.college}
         </div>
       )}
-      {details && details.highSchool && (
+      {details?.highSchool && (
         <div className="info_profile">
           <img src="../../../icons/studies.png" alt="" />
-          studied at {details && details.highSchool}
+          studied at {details?.highSchool}
         </div>
       )}
-      {details && details.currentCity && (
+      {details?.currentCity && (
         <div className="info_profile">
           <img src="../../../icons/home.png" alt="" />
-          Lives in {details && details.currentCity}
+          Lives in {details?.currentCity}
         </div>
       )}
-      {details && details.hometown && (
+      {details?.hometown && (
         <div className="info_profile">
           <img src="../../../icons/home.png" alt="" />
-          From {details && details.hometown}
+          From {details?.hometown}
         </div>
       )}
-      {details && details.hometown && (
+      {details?.hometown && (
         <div className="info_profile">
           <img src="../../../icons/instagram.png" alt="" />
           <a
-            href={`https://www.instagram.com/${details && details.instagram}`}
+            href={`https://www.instagram.com/${details?.instagram}`}
             target="_blank"
           >
-            {details && details.instagram}
+            {details?.instagram}
           </a>
         </div>
       )}
@@ -176,6 +166,7 @@ export default function Intro({ detailsProp, visitor, setOtherName }) {
           setVisible={setVisible}
         />
       )}
+
       {!visitor && (
         <button className="gray_btn hover1 w100">Add Hobbies</button>
       )}

@@ -13,9 +13,6 @@
   width: 360px;
   height: 100%;
 }
-.friends_left .menu_item {
-  cursor: pointer;
-}
 .friends_right {
   background: var(--bg-secondary);
   padding: 2rem;
@@ -33,6 +30,9 @@
 }
 .friends_left_header h3 {
   font-size: 21px;
+}
+.friends_left .mmenu_item {
+  cursor: pointer;
 }
 .active_friends {
   background: var(--bg-secondary);
@@ -61,7 +61,6 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 15px;
-  margin-bottom: 10px;
 }
 .req_card {
   background: var(--bg-primary);
@@ -97,18 +96,19 @@
   .friends_left .friends_left_header .small_circle {
     display: none;
   }
-  .friends_left .menu_item span {
+  .friends_left .mmenu_item span {
     display: none;
   }
 }
 @media (max-width: 400px) {
   .friends_left_header h3 {
-    font-size: 14px;
+    font-size: 16px;
   }
   .see_link {
     font-size: 12px;
     width: 50px;
   }
+
   .friends_right {
     padding: 10px;
   }

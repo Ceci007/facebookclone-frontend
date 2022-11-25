@@ -4,6 +4,7 @@ export function themeReducer(
   state = Cookies.get("darkTheme")
     ? JSON.parse(Cookies.get("darkTheme"))
     : false,
+
   action
 ) {
   switch (action.type) {

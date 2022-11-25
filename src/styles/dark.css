@@ -1,13 +1,11 @@
 .dark {
-  --bg-primary: #18191a;
-  --bg-secondary: #242526;
+  --bg-primary: #242526;
+  --bg-secondary: #18191a;
   --bg-third: #3a3b3c;
-  --bg-forth: #000;
+  --bg-forth: #3a3b3c;
   --bg-fifth: #888888;
-  --color-primary: #f1f1f1;
+  --color-primary: #e4e6eb;
   --color-secondary: #b0b3b8;
-  --shadow-2: rgba(0, 0, 0, 0.65);
-  --shadow-inset: rgba(0, 0, 0, 0.3);
 }
 .dark .blur {
   background: rgba(1, 1, 1, 0.53);
@@ -16,7 +14,7 @@
 .dark .hover2:hover {
   background: var(--bg-third);
 }
-/* --------- Header ---------- */
+/* ----Header -----*/
 .dark .header_right svg {
   fill: #fff;
 }
@@ -36,14 +34,17 @@
   color: var(--color-primary);
 }
 .dark .small_circle i,
-.dark .circle i,
-.dark .small_circle svg {
+.dark .small_circle svg,
+.dark .white_circle svg,
+.dark .circle i {
   filter: invert(100%) !important;
 }
-/* --------- Header ---------- */
-/* --------- Home ---------- */
+/* ----Header -----*/
 .dark .left_home .small_circle {
   background: var(--bg-fifth);
+}
+.dark .open_post:hover {
+  background: #333;
 }
 .dark .post_action i {
   filter: invert(90%);
@@ -53,11 +54,14 @@
   filter: invert(100%);
 }
 .dark .comment_circle_icon i {
-  filter: invert(90%);
+  filter: invert(95%);
+}
+.dark .comment_circle_icon:hover {
+  background: #555;
 }
 .dark .box_privacy i,
 .dark .box_privacy img {
-  filter: invert(90%);
+  filter: invert(95%);
 }
 .dark .emoji_icon_large:hover {
   filter: invert(0);
@@ -65,13 +69,14 @@
 .dark .add_pics_wrap i {
   filter: invert(100%);
 }
-/* --------- Home ---------- */
-/* --------- Profile ---------- */
+/*----profile---*/
 .dark .active_link:hover {
   background: var(--light-blue-color);
 }
 .dark .open_cover_menu i,
-.dark .open_cover_menu img,
+.dark .open_cover_menu img {
+  filter: invert(100%);
+}
 .dark .profile_circle i {
   filter: invert(100%);
 }
@@ -86,10 +91,13 @@
   filter: invert(100%);
 }
 .dark .profile_container svg {
-  filter: invert(90%);
+  filter: invert(88%);
 }
 .dark .grid_icon {
-  filter: invert(85%);
+  filter: invert(80%);
+}
+.dark .pictureBox i {
+  filter: invert(100%) !important;
 }
 .dark .slider i {
   filter: invert(100%);
@@ -97,4 +105,4 @@
 .dark .flex_p_t i {
   filter: invert(100%);
 }
-/* --------- Profile ---------- */
+/*----profile---*/

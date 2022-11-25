@@ -1,17 +1,16 @@
-import React, { useRef } from "react";
+import "./style.css";
 import LoginForm from "../../components/login/LoginForm";
 import Footer from "../../components/login/Footer";
 import RegisterForm from "../../components/login/RegisterForm";
-import "./style.css";
+import { useState } from "react";
 
 export default function Login() {
-  const registerFormRef = useRef();
-
+  const [visible, setVisible] = useState(false);
   return (
     <div className="login">
       <div className="login_wrapper">
-        <LoginForm registerFormRef={registerFormRef} />
-        <RegisterForm ref={registerFormRef} />
+        <LoginForm setVisible={setVisible} />
+        {visible && <RegisterForm setVisible={setVisible} />}
         <Footer />
       </div>
     </div>

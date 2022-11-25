@@ -6,10 +6,8 @@ export default function useClickOutside(ref, fun) {
       if (!ref.current || ref.current.contains(e.target)) {
         return;
       }
-
       fun();
     };
-
     document.addEventListener("mousedown", listener);
     document.addEventListener("touchstart", listener);
 

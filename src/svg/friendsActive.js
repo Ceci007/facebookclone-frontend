@@ -1,5 +1,3 @@
-import React from "react";
-
 function FriendsActive() {
   return (
     <svg fill="#1b74e4" width="28" height="28" viewBox="0 0 28 28">

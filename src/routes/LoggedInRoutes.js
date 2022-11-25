@@ -1,9 +1,8 @@
-import React from "react";
 import { useSelector } from "react-redux";
-import { Outlet, Navigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import Login from "../pages/login";
 
 export default function LoggedInRoutes() {
   const { user } = useSelector((state) => ({ ...state }));
-
-  return <>{user ? <Outlet /> : <Navigate to="/login" />}</>;
+  return user ? <Outlet /> : <Login />;
 }

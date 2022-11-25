@@ -1,27 +1,20 @@
-import React, { useState } from "react";
 import LeftLink from "./LeftLink";
 import "./style.css";
 import { left } from "../../../data/home";
 import { Link } from "react-router-dom";
 import { ArrowDown1 } from "../../../svg";
+import { useState } from "react";
 import Shortcut from "./Shortcut";
-
 export default function LeftHome({ user }) {
   const [visible, setVisible] = useState(false);
-
   return (
     <div className="left_home scrollbar">
-      {user ? (
-        <Link to="/profile" className="left_link hover2">
-          <img
-            src={user.picture}
-            alt={`${user.first_name} ${user.last_name}`}
-          />
-          <span>
-            {user.first_name} {user.last_name}
-          </span>
-        </Link>
-      ) : null}
+      <Link to="/profile" className="left_link hover2">
+        <img src={user?.picture} alt="" />
+        <span>
+          {user?.first_name} {user.last_name}
+        </span>
+      </Link>
       {left.slice(0, 8).map((link, i) => (
         <LeftLink
           key={i}
@@ -54,7 +47,7 @@ export default function LeftHome({ user }) {
             />
           ))}
           <div
-            className="left_link hover2"
+            className="left_link hover2 "
             onClick={() => {
               setVisible(false);
             }}

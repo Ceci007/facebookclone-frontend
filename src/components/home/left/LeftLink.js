@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function LeftLink({ img, text, notification }) {
   return (
     <div className="left_link hover2">
