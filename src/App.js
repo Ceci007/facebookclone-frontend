@@ -14,7 +14,7 @@ import Reset from "./pages/reset";
 import CreatePostPopup from "./components/createPostPopup";
 
 function App() {
-  const { user } = useSelector((state) => ({ ...state }));
+  const { user, darkTheme } = useSelector((state) => ({ ...state }));
   const [visible, setVisible] = useState(false);
   const [{ loading, error, posts }, dispatch] = useReducer(postsReducer, {
     loading: false,
@@ -57,7 +57,7 @@ function App() {
   };
 
   return (
-    <div className="dark">
+    <div className={darkTheme && "dark"}>
       {visible && (
         <CreatePostPopup
           user={user}

@@ -15,7 +15,7 @@ export default function PostMenu({
   images,
   postRef,
 }) {
-  const [test, setTest] = useState(userId === postUserId);
+  const [test, setTest] = useState(postUserId === userId ? true : false);
   const postMenuRef = useRef(null);
 
   useClickOutside(postMenuRef, () => {

@@ -122,15 +122,15 @@ const SearchMenu = forwardRef(({ color, token }, ref) => {
               </div>
             </div>
             <>
-              {searchHistory && results == "" && (
+              {searchHistory && results === "" && (
                 <div className="search_history_header">
                   <span>Recent searches</span>
-                  <a>Edit</a>
+                  <a href="#">Edit</a>
                 </div>
               )}
               <div className="search_history scrollbar">
                 {searchHistory &&
-                  results == "" &&
+                  results === "" &&
                   searchHistory
                     .sort((a, b) => {
                       return new Date(b.createdAt) - new Date(a.createdAt);
