@@ -66,16 +66,12 @@ export default function LeftHome({ user }) {
       </div>
       <div className="shortcut_list">
         <Shortcut
-          link="https://www.youtube.com/c/MohamedHaJJi1/featured"
+          link=""
           img="../../images/ytb.png"
           name="My Youtube channel"
         />
 
-        <Shortcut
-          link="https://www.instagram.com/med_hajji7/"
-          img="../../images/insta.png"
-          name="My Instagram "
-        />
+        <Shortcut link="" img="../../images/insta.png" name="My Instagram " />
       </div>
       <div className={`fb_copyright ${visible && "relative_fb_copyright"}`}>
         <Link to="/">Privacy </Link>
